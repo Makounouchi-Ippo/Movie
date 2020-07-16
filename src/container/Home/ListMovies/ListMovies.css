@@ -1,0 +1,9 @@
+.listmovie{
+    margin: 0;
+    color: bisque;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 3rem;
+}
+

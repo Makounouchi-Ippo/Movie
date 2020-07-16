@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Caveat+Brush&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Anton|Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Changa&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Viaoda+Libre&display=swap');
+
+
+
+.page{
+    margin: 0px;
+    /* position: fixed; */
+    /* height: 100%; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    background-color: rgb(26, 24, 24); 
+}
+.font {
+    font-family: 'Viaoda Libre', cursive;
+    font-size: xx-large;
+}
