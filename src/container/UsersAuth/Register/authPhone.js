@@ -52,7 +52,7 @@ class Phone extends Component {
         switch(name_input){
             case 'phone': value_input.match(regex.phoneNumber)  ? error[name_input]='' : error[name_input] = "*votre numero nest pas valid";
                 break;
-            case 'codeVerification':value_input.match(regex.codeVerification) && value_input.length>5 ? error1[name_input]='' : error1[name_input] = "*mauvais format 5chiffre sont attendues";
+            case 'codeVerification':value_input.match(regex.codeVerification) && value_input.length==6 ? error1[name_input]='' : error1[name_input] = "*mauvais format 5chiffre sont attendues";
                  break;
             default:
                 console.log("NUMBER NOT FOUND");
