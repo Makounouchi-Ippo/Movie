@@ -31,7 +31,7 @@ const Genre = [
   ];
   const Years = [];
     for (let i = 1960; i <= 2020; i++)
-      Years.push({ value: i, label: i });
+       Years.push({ value: i, label: i });
 
 
 
@@ -39,16 +39,12 @@ const Genre = [
 export default class ButtonSelect extends Component{
 
     state={
-        selectedOption: null,
-        Genre: []
+        selectedOption: []
     }
 
 
-    handleInput = (e) => {
-        console.log(e)
-        // this.setState({selectedOption:e.target.value}, ()=>{
-        //     console.log('state',this.state.selectedOption)
-        // })
+    handleInput = (selectedOption) => {
+        this.setState({selectedOption})    
     }
 
 
@@ -56,22 +52,31 @@ export default class ButtonSelect extends Component{
         return (
 
             <div style={{marginTop:'50px'}}> 
-                <div className="row d-flex justify-content-center"  autoFocus={true}>
+                <div className="row d-flex justify-content-center">
                     <div className="col-sm-2">
-                    <Select options={Genre} 
-                        isSearchable={false}
-                        onSelect={(e)=>this.handleInput(e)}
-                    />
-                    </div> 
-                    {/* <div className="col-sm-2">
-                        <Select options={Countries} />
-                    </div> 
-                    <div className="col-sm-2">
-                        <Select options={Countries} />
+                        <Select options={Genre} 
+                            isSearchable={false}
+                            value={this.state.selectedOption}
+                            placeholder='Genre'
+                            onChange={this.handleInput}
+                        />
                     </div> 
                     <div className="col-sm-2">
-                        <Select options={Countries} />
-                    </div> */}
+                        <Select options={SortBy} 
+                            isSearchable={false}
+                            value={this.state.selectedOption}
+                            placeholder='Trier par'
+                            onChange={this.handleInput}
+                        />
+                    </div> 
+                    <div className="col-sm-2">
+                        <Select options={Years} 
+                            isSearchable={false}
+                            value={this.state.selectedOption}
+                            placeholder='Annees'
+                            onChange={this.handleInput}
+                        />
+                    </div> 
                 </div>
                 <p> recherche en cours....</p>
           </div>
