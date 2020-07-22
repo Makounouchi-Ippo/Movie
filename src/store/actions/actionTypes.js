@@ -11,5 +11,7 @@ export const SOCIAL_AUTH = 'SOCIAL_AUTH'
 /////////////////MOVIEEE-SEARCHH/////////////////////
 
 
-export const MOVIE_SUCCESS = 'MOVIE_SUCCESS'
+export const MOVIE_BEGIN = 'MOVIE_BEGIN'
+export const MOVIE_POPULAR = 'MOVIE_POPULAR'
+export const MOVIE_SEARCH_INPUT = 'MOVIE_SEARCH_INPUT'
 export const MOVIE_FAIL = 'MOVIE_FAIL'

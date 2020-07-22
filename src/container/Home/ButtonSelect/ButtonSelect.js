@@ -34,8 +34,6 @@ const Genre = [
        Years.push({ value: i, label: i });
 
 
-
-
 export default class ButtonSelect extends Component{
 
     state={
@@ -43,14 +41,16 @@ export default class ButtonSelect extends Component{
     }
 
 
-    handleInput = (selectedOption) => {
-        this.setState({selectedOption})    
+    handleInput = (selectedOption, genre) => {
+        console.log(genre)
+       this.setState({selectedOption})
+      
     }
 
 
     render() {
+    
         return (
-
             <div style={{marginTop:'50px'}}> 
                 <div className="row d-flex justify-content-center">
                     <div className="col-sm-2">
@@ -58,7 +58,7 @@ export default class ButtonSelect extends Component{
                             isSearchable={false}
                             value={this.state.selectedOption}
                             placeholder='Genre'
-                            onChange={this.handleInput}
+                            onChange={(value) => this.handleInput(value, 'genre')}
                         />
                     </div> 
                     <div className="col-sm-2">
@@ -66,7 +66,7 @@ export default class ButtonSelect extends Component{
                             isSearchable={false}
                             value={this.state.selectedOption}
                             placeholder='Trier par'
-                            onChange={this.handleInput}
+                            onChange={(value) => this.handleInput(value, 'SortBy')}
                         />
                     </div> 
                     <div className="col-sm-2">
@@ -74,11 +74,10 @@ export default class ButtonSelect extends Component{
                             isSearchable={false}
                             value={this.state.selectedOption}
                             placeholder='Annees'
-                            onChange={this.handleInput}
+                            onChange={(value) => this.handleInput(value, 'Years')}
                         />
                     </div> 
                 </div>
-                <p> recherche en cours....</p>
           </div>
 
         )

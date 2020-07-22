@@ -3,10 +3,7 @@ import {Card , Button} from 'react-bootstrap'
 import classes from './Movie.css'
 
  const Movie = (props) => {
-    
-   
-    
-    
+
     return (
         <div className={classes.MovieCard}>
             <Card style={{ width: '15rem', height: '26rem' }}>

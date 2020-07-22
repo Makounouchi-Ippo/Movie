@@ -2,13 +2,15 @@ import React from 'react';
 
 import classes from './Spinner.css';
 
-const spinner = () => (
+const spinner = (props) => {
+return (
     <div className={classes.position}>
-             <div className={classes.Loader}>Loading...</div>
-
+         <p style={{color:"white",textAlign:'center'}}>  {props.text} </p>        
+        <div className={classes.Loader} >     
+       
+        </div>
     </div>
-   
-
-);
+    )
+}
 
 export default spinner;
