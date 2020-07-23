@@ -14,5 +14,6 @@ export {
 export { 
     movieFail,
     movieSuccess,
-    movieSearch
+    movieSearch,
+    movieFiltres
 }from './movieSearch'

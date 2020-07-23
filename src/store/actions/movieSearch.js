@@ -25,6 +25,12 @@ export const moviePopular = (value) => {
     };
 };
 
+export const movieFiltre = (value) => {
+    return {
+        type: actionTypes.MOVIE_FILTRE,
+        movie: value
+    };
+};
 
 export const movieFail = (error) => {
     return {
@@ -42,7 +48,7 @@ export const movieSearch = (inputValue) => {
             if (inputValue === "fetchData"){
                 axios.get('https://api.themoviedb.org/3/movie/popular?api_key=1e32f5c452c2267d5367589e9864ab1c&language=en-US&page=1')
                     .then(response => {
-                        console.log('resssssponse====',response)
+                        //console.log(response.data)
                         dispatch(moviePopular(response.data.results))
                     })
                     .catch(err => {
@@ -51,7 +57,6 @@ export const movieSearch = (inputValue) => {
                     })
             }
             else {
-                    console.log(111111111111111)
                     axios.get(`${PATH_BASE}${PATH_SEARCH}${PATH_MOVIE}${API_KEY}${PATH_PAGE}1${PATH_LANGUE}fr${PATH_ADULT}"&query=${inputValue}`)
                     .then(response => {
                         dispatch(movieSearchInput(response.data.results))
@@ -65,3 +70,41 @@ export const movieSearch = (inputValue) => {
         }
         
 };
+
+
+export const movieFiltres = (filtreValue) => {
+    console.log('filtre',filtreValue)
+    let Genre = '&with_genres='
+    let SortBy = '&sort_by=' 
+    // let Years = '&primary_release_year'
+
+
+    if (filtreValue.Genre.value !== null)
+    {
+        Genre += filtreValue.Genre.value   
+    }
+
+    if (filtreValue.SortBy.value !== null)
+    {
+        SortBy += filtreValue.SortBy.value
+    }
+
+    // if (filtreValue.Years.value !== null)
+    // {
+    //     Years = filtreValue.Genres.value
+    // }
+
+    return dispatch => {
+        dispatch(movieBegin());
+         axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=1e32f5c452c2267d5367589e9864ab1c${Genre}${SortBy}`)
+                    .then(response => {
+                        console.log('rposne', response)
+                        dispatch(movieFiltre(response.data.results))
+                    })
+                    .catch(err => {
+                        dispatch(movieFail(err))
+                        console.log(err.response)
+                    })
+        }      
+};
+

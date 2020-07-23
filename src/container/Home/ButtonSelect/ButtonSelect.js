@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import Select from 'react-select';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../../../store/actions/index'
 //import classes from './Button.css'
 
 const Genre = [
@@ -34,17 +37,19 @@ const Genre = [
        Years.push({ value: i, label: i });
 
 
-export default class ButtonSelect extends Component{
+class ButtonSelect extends Component{
 
     state={
-        selectedOption: []
+        selectedOption: {}
     }
 
 
-    handleInput = (selectedOption, genre) => {
-        console.log(genre)
-       this.setState({selectedOption})
-      
+    handleInput = (value,id) => {
+        let copy = {...this.state.selectedOption}
+        copy[id] = value 
+       this.setState({selectedOption:copy}, () => {
+           this.props.movieFiltre(this.state.selectedOption)
+       }) 
     }
 
 
@@ -58,7 +63,7 @@ export default class ButtonSelect extends Component{
                             isSearchable={false}
                             value={this.state.selectedOption}
                             placeholder='Genre'
-                            onChange={(value) => this.handleInput(value, 'genre')}
+                            onChange={(value) => this.handleInput(value, 'Genre')}
                         />
                     </div> 
                     <div className="col-sm-2">
@@ -69,30 +74,29 @@ export default class ButtonSelect extends Component{
                             onChange={(value) => this.handleInput(value, 'SortBy')}
                         />
                     </div> 
-                    <div className="col-sm-2">
+                    {/* <div className="col-sm-2">
                         <Select options={Years} 
                             isSearchable={false}
                             value={this.state.selectedOption}
                             placeholder='Annees'
                             onChange={(value) => this.handleInput(value, 'Years')}
                         />
-                    </div> 
+                    </div>  */}
                 </div>
           </div>
 
         )
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+      movieFiltre: (value) => dispatch(actions.movieFiltres(value)) 
+    };
+  };
+  
+
+export default withRouter(connect(null, mapDispatchToProps) (ButtonSelect));

@@ -23,13 +23,18 @@ const initialState = {
   };
 
   const moviePopular = (state, action) => {
-    console.log(state)
     return updateObject( state, {
         loading: false,
         movie: action.movie
      } );
   };
 
+  const movieFiltre = (state, action) => {
+    return updateObject( state, {
+        loading: false,
+        movie: action.movie
+     } );
+  };
 
   const movieFail = (state, action) => {
     return updateObject( state, {
@@ -43,6 +48,7 @@ const initialState = {
         case actionTypes.MOVIE_BEGIN: return movieBegin(state,action);
         case actionTypes.MOVIE_SEARCH_INPUT: return movieSearchInput(state, action);
         case actionTypes.MOVIE_POPULAR: return moviePopular(state, action);
+        case actionTypes.MOVIE_FILTRE: return movieFiltre(state, action);
         case actionTypes.MOVIE_FAIL: return movieFail(state, action);
         default:
             return state;
