@@ -40,7 +40,11 @@ const Genre = [
 class ButtonSelect extends Component{
 
     state={
-        selectedOption: {}
+        selectedOption: {
+            Genre: {value: null, label: 'Genre'}, 
+            Years: {value: null , label: 'SortBy'},
+            SortBy: {value: null, label: 'Years'}
+        }
     }
 
 
@@ -48,20 +52,20 @@ class ButtonSelect extends Component{
         let copy = {...this.state.selectedOption}
         copy[id] = value 
        this.setState({selectedOption:copy}, () => {
-           this.props.movieFiltre(this.state.selectedOption)
+           this.props.movieFiltres(this.state.selectedOption)
        }) 
     }
 
 
     render() {
     
+ 
         return (
             <div style={{marginTop:'50px'}}> 
                 <div className="row d-flex justify-content-center">
                     <div className="col-sm-2">
                         <Select options={Genre} 
                             isSearchable={false}
-                            value={this.state.selectedOption}
                             placeholder='Genre'
                             onChange={(value) => this.handleInput(value, 'Genre')}
                         />
@@ -69,19 +73,17 @@ class ButtonSelect extends Component{
                     <div className="col-sm-2">
                         <Select options={SortBy} 
                             isSearchable={false}
-                            value={this.state.selectedOption}
                             placeholder='Trier par'
                             onChange={(value) => this.handleInput(value, 'SortBy')}
                         />
                     </div> 
-                    {/* <div className="col-sm-2">
+                    { <div className="col-sm-2">
                         <Select options={Years} 
                             isSearchable={false}
-                            value={this.state.selectedOption}
                             placeholder='Annees'
                             onChange={(value) => this.handleInput(value, 'Years')}
                         />
-                    </div>  */}
+                    </div>  }
                 </div>
           </div>
 
@@ -94,7 +96,7 @@ class ButtonSelect extends Component{
 
 const mapDispatchToProps = dispatch => {
     return {
-      movieFiltre: (value) => dispatch(actions.movieFiltres(value)) 
+      movieFiltres: (value) => dispatch(actions.movieFiltres(value)) 
     };
   };
   

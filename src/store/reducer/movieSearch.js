@@ -2,9 +2,12 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
 
 const initialState = {
-    movie: null,
+    movie: [],
     loading: false,
-    error: null
+    error: null,
+    page: 1,
+    loadMovie: true,
+    searchBarNoResult:1
   };
   
 
@@ -16,13 +19,16 @@ const initialState = {
   };
 
   const movieSearchInput = (state, action) => {
+    console.log(action)
     return updateObject( state, {
         loading: false,
-        movie: action.movie
+        movie: action.movie,
+        searchBarNoResult: action.data
      } );
   };
 
   const moviePopular = (state, action) => {
+    localStorage.setItem('movie',JSON.stringify(action.movie))
     return updateObject( state, {
         loading: false,
         movie: action.movie
