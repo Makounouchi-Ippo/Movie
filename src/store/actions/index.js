@@ -16,5 +16,7 @@ export {
     movieSuccess,
     movieSearch,
     movieFiltres,
-    ConcatMoviePopular
+    InfiniteScroll,
+    clearMovie,
+    pageInitial
 }from './movieSearch'

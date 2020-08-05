@@ -9,8 +9,16 @@ import * as actions from '../../../../store/actions/index'
 class SearchButton extends Component {
 
   inputValue = (e) => {
-    e.target.value === '' ? this.props.fetchData():this.props.valueInput(e.target.value)
+    if (e.target.value === ''){
+      this.props.clearMovie();
+      this.props.fetchData()
   }
+    else {
+      this.props.pageInitial()
+      this.props.valueInput(e.target.value)
+    }
+      
+}
   
   render(){
     return(
@@ -27,7 +35,9 @@ class SearchButton extends Component {
 const mapDispatchToProps = dispatch => {
     return {
       valueInput: (value) => dispatch(actions.movieSearch(value)),
-      fetchData: () => dispatch(actions.movieSearch('fetchDataPopular'))
+      fetchData: () => dispatch(actions.movieSearch('fetchDataPopular')),
+      clearMovie: () => dispatch(actions.clearMovie()),
+      pageInitial:() =>  dispatch(actions.pageInitial())
     };
   };
   

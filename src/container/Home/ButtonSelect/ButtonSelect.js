@@ -52,6 +52,8 @@ class ButtonSelect extends Component{
         let copy = {...this.state.selectedOption}
         copy[id] = value 
        this.setState({selectedOption:copy}, () => {
+        this.props.clearMovie();
+        this.props.pageInitial()
            this.props.movieFiltres(this.state.selectedOption)
        }) 
     }
@@ -96,7 +98,9 @@ class ButtonSelect extends Component{
 
 const mapDispatchToProps = dispatch => {
     return {
-      movieFiltres: (value) => dispatch(actions.movieFiltres(value)) 
+      movieFiltres: (value) => dispatch(actions.movieFiltres(value)), 
+      clearMovie: () => dispatch(actions.clearMovie()),
+      pageInitial:() =>  dispatch(actions.pageInitial())
     };
   };
   

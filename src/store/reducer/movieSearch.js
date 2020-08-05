@@ -6,8 +6,16 @@ const initialState = {
     loading: false,
     error: null,
     page: 1,
-    loadMovie: true,
-    searchBarNoResult:1
+    hasmore: true,
+    inputValue:'',
+    selectedOption: {
+      Genre: {value: null, label: 'Genre'}, 
+      Years: {value: null , label: 'SortBy'},
+      SortBy: {value: null, label: 'Years'}
+  },
+    searchBarNoResult:1,
+    nameScrolling: '',
+    setButton: false
   };
   
 
@@ -19,26 +27,50 @@ const initialState = {
   };
 
   const movieSearchInput = (state, action) => {
-    console.log(action)
-    return updateObject( state, {
+       return updateObject( state, {
         loading: false,
         movie: action.movie,
-        searchBarNoResult: action.data
+        searchBarNoResult: action.data,
+        nameScrolling: 'searchInput',
+        inputValue:action.inputValue
      } );
   };
 
   const moviePopular = (state, action) => {
-    localStorage.setItem('movie',JSON.stringify(action.movie))
     return updateObject( state, {
         loading: false,
-        movie: action.movie
+        movie: [...state.movie,...action.movie],
+        nameScrolling: 'popular'
      } );
   };
 
   const movieFiltre = (state, action) => {
     return updateObject( state, {
         loading: false,
-        movie: action.movie
+        movie: action.movie,
+        selectedOption: action.filtreValue,
+        nameScrolling: 'filtre'
+     } );
+  };
+
+  const InfiniteScrollMovie = (state, action) => {
+    return updateObject( state, {
+      loading: false,
+      movie: [...state.movie,...action.movie],
+      page: state.page+1,
+     } );
+  };
+
+  const clearMovie = (state, action) => {
+    return updateObject( state, {
+      movie: [],
+      page:1
+     } );
+  };
+
+  const pageInitial = (state, action) => {
+    return updateObject( state, {
+      page:1
      } );
   };
 
@@ -49,6 +81,7 @@ const initialState = {
   }
 
 
+
   const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.MOVIE_BEGIN: return movieBegin(state,action);
@@ -56,6 +89,9 @@ const initialState = {
         case actionTypes.MOVIE_POPULAR: return moviePopular(state, action);
         case actionTypes.MOVIE_FILTRE: return movieFiltre(state, action);
         case actionTypes.MOVIE_FAIL: return movieFail(state, action);
+        case actionTypes.INFINITE_SCROLL: return InfiniteScrollMovie(state,action);
+        case actionTypes.CLEAR_MOVIE: return clearMovie(state,action);
+        case actionTypes.PAGE_INITIAL: return pageInitial(state,action);
         default:
             return state;
     }
