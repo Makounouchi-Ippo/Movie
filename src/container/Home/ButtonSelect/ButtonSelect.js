@@ -42,16 +42,24 @@ class ButtonSelect extends Component{
     state={
         selectedOption: {
             Genre: {value: null, label: 'Genre'}, 
-            Years: {value: null , label: 'SortBy'},
-            SortBy: {value: null, label: 'Years'}
+            Years: {value: null , label:'Years'},
+            SortBy: {value: null, label: 'SortBy'}
         }
     }
+
+    componentDidUpdate (prevProps) {
+        console.log(11111111)
+        if (this.props.inputValue !== prevProps.inputValue)
+         
+
+        {this.setState({selectedOption:{ Genre: {value: null, label: 'Genre'}, Years: {value: null , label: 'Years'},SortBy: {value: null, label: 'SortBy'}}})}}
 
 
     handleInput = (value,id) => {
         let copy = {...this.state.selectedOption}
         copy[id] = value 
        this.setState({selectedOption:copy}, () => {
+           
         this.props.clearMovie();
         this.props.pageInitial()
            this.props.movieFiltres(this.state.selectedOption)
@@ -69,6 +77,7 @@ class ButtonSelect extends Component{
                         <Select options={Genre} 
                             isSearchable={false}
                             placeholder='Genre'
+                            value={this.state.selectedOption.Genre}
                             onChange={(value) => this.handleInput(value, 'Genre')}
                         />
                     </div> 
@@ -76,6 +85,7 @@ class ButtonSelect extends Component{
                         <Select options={SortBy} 
                             isSearchable={false}
                             placeholder='Trier par'
+                            value={this.state.selectedOption.SortBy}
                             onChange={(value) => this.handleInput(value, 'SortBy')}
                         />
                     </div> 
@@ -83,6 +93,7 @@ class ButtonSelect extends Component{
                         <Select options={Years} 
                             isSearchable={false}
                             placeholder='Annees'
+                            value={this.state.selectedOption.Years}
                             onChange={(value) => this.handleInput(value, 'Years')}
                         />
                     </div>  }
@@ -94,6 +105,11 @@ class ButtonSelect extends Component{
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        inputValue: state.movie.inputValue
+    };
+  };
 
 
 const mapDispatchToProps = dispatch => {
@@ -105,4 +121,4 @@ const mapDispatchToProps = dispatch => {
   };
   
 
-export default withRouter(connect(null, mapDispatchToProps) (ButtonSelect));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps) (ButtonSelect));

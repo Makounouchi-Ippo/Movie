@@ -29,6 +29,7 @@ export const moviePopular = (value) => {
 };
 
 
+
 export const InfiniteScrollMovie = (value, page ) => {
     return {
         type: actionTypes.INFINITE_SCROLL,

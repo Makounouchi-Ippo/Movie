@@ -18,5 +18,6 @@ export {
     movieFiltres,
     InfiniteScroll,
     clearMovie,
-    pageInitial
+    pageInitial,
+
 }from './movieSearch'

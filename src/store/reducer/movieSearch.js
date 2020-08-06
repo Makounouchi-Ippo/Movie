@@ -1,5 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
+import { clearSearchMovie } from '../actions/movieSearch';
 
 const initialState = {
     movie: [],
@@ -10,8 +11,8 @@ const initialState = {
     inputValue:'',
     selectedOption: {
       Genre: {value: null, label: 'Genre'}, 
-      Years: {value: null , label: 'SortBy'},
-      SortBy: {value: null, label: 'Years'}
+      Years: {value: null , label: 'Years'},
+      SortBy: {value: null, label: 'SortBy'}
   },
     searchBarNoResult:1,
     nameScrolling: '',
@@ -73,6 +74,8 @@ const initialState = {
       page:1
      } );
   };
+
+
 
   const movieFail = (state, action) => {
     return updateObject( state, {

@@ -20,3 +20,4 @@ export const INFINITE_SCROLL = 'INFINITE_SCROLL'
 export const CLEAR_MOVIE = 'CLEAR_MOVIE'
 export const PAGE_INITIAL = 'PAGE_INITIAL'
 
+
