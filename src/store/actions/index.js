@@ -19,5 +19,6 @@ export {
     InfiniteScroll,
     clearMovie,
     pageInitial,
+    movieDetail
 
 }from './movieSearch'

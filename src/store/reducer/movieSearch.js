@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
-import { clearSearchMovie } from '../actions/movieSearch';
+
 
 const initialState = {
     movie: [],
@@ -16,7 +16,8 @@ const initialState = {
   },
     searchBarNoResult:1,
     nameScrolling: '',
-    setButton: false
+    setButton: false,
+    movieDetail: []
   };
   
 
@@ -38,26 +39,32 @@ const initialState = {
   };
 
   const moviePopular = (state, action) => {
+    let a = [...state.movie, ...action.movie];
+  const tab = a.filter(movie => movie.poster_path !== null)
     return updateObject( state, {
         loading: false,
-        movie: [...state.movie,...action.movie],
+        movie: tab,
         nameScrolling: 'popular'
      } );
   };
 
   const movieFiltre = (state, action) => {
+    let a = [...state.movie, ...action.movie];
+    const tab = a.filter(movie => movie.poster_path !== null)
     return updateObject( state, {
         loading: false,
-        movie: action.movie,
+        movie: tab,
         selectedOption: action.filtreValue,
         nameScrolling: 'filtre'
      } );
   };
 
   const InfiniteScrollMovie = (state, action) => {
+    let a = [...state.movie, ...action.movie];
+    const tab = a.filter(movie => movie.poster_path !== null)
     return updateObject( state, {
       loading: false,
-      movie: [...state.movie,...action.movie],
+      movie: tab,
       page: state.page+1,
      } );
   };
@@ -74,6 +81,14 @@ const initialState = {
       page:1
      } );
   };
+
+  const movieDetail = (state, action) => {
+    return updateObject( state, {
+      loading: false,
+      movieDetail:action.movieDetail
+     } );
+  };
+
 
 
 
@@ -95,6 +110,7 @@ const initialState = {
         case actionTypes.INFINITE_SCROLL: return InfiniteScrollMovie(state,action);
         case actionTypes.CLEAR_MOVIE: return clearMovie(state,action);
         case actionTypes.PAGE_INITIAL: return pageInitial(state,action);
+        case actionTypes.MOVIE_DETAIL: return movieDetail(state,action);
         default:
             return state;
     }

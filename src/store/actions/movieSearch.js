@@ -59,6 +59,15 @@ export const pageInitial = (error) => {
 };
 
 
+
+export const movieShowDetail = (data) => {
+    return {
+        type: actionTypes.MOVIE_DETAIL,
+        movieDetail: data
+    };
+};
+
+
 export const movieFail = (error) => {
     return {
         type: actionTypes.MOVIE_FAIL,
@@ -69,8 +78,7 @@ export const movieFail = (error) => {
 
 
 
-export const  movieSearch = (inputValue) => {
-  
+export const  movieSearch = (inputValue,idMovie) => {
     return dispatch => {
         dispatch(movieBegin());
             if (inputValue === "fetchDataPopular"){
@@ -78,6 +86,17 @@ export const  movieSearch = (inputValue) => {
                     .then(response => {
                         //console.log('serchBUttun',response.data)
                         dispatch(moviePopular(response.data.results))
+                    })
+                    .catch(err => {
+                        dispatch(movieFail(err))
+                        console.log(err.response)
+                    })
+            }
+            else if (inputValue === "showMovieDetail"){
+                axios.get(`https://api.themoviedb.org/3/movie/${idMovie}?api_key=1e32f5c452c2267d5367589e9864ab1c&append_to_response=credits&language=fr`)
+                    .then(response => {
+                        console.log('MovieDetail',response.data)
+                        dispatch(movieShowDetail(response.data))
                     })
                     .catch(err => {
                         dispatch(movieFail(err))

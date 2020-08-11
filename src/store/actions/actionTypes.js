@@ -19,5 +19,6 @@ export const MOVIE_FAIL = 'MOVIE_FAIL'
 export const INFINITE_SCROLL = 'INFINITE_SCROLL'
 export const CLEAR_MOVIE = 'CLEAR_MOVIE'
 export const PAGE_INITIAL = 'PAGE_INITIAL'
+export const MOVIE_DETAIL = 'MOVIE_DETAIL'
 
 

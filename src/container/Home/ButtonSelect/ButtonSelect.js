@@ -48,12 +48,8 @@ class ButtonSelect extends Component{
     }
 
     componentDidUpdate (prevProps) {
-        console.log(11111111)
         if (this.props.inputValue !== prevProps.inputValue)
-         
-
         {this.setState({selectedOption:{ Genre: {value: null, label: 'Genre'}, Years: {value: null , label: 'Years'},SortBy: {value: null, label: 'SortBy'}}})}}
-
 
     handleInput = (value,id) => {
         let copy = {...this.state.selectedOption}

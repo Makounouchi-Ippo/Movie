@@ -1,17 +1,19 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import Movie from './Movie/Movie';
+import MovieCard from './Movie/MovieCard';
 import classes from './ListMovies.css'
 import * as actions from '../../../store/actions/index'
 import Spinner from '../../../component/UI/Spinner/Spinner'
-import { useEffect,useCallback,useState} from 'react';
+import { useEffect,useCallback} from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component'
+import { useHistory } from 'react-router-dom';
 
 
 
 const Movielist = () => {
 
+  const history = useHistory();
 
 const dispatch = useDispatch();
 
@@ -44,6 +46,13 @@ const fetchInfiniteScroll =  () => dispatch(actions.InfiniteScroll(nameScrolling
       fetchInfiniteScroll()   
     }
 
+    const clickShowMovieDetail = (id) => {
+      history.push(`/movie/${id}`);
+      console.log(history)
+      console.log(id)
+    
+    }
+    
     return (
             
               <InfiniteScroll
@@ -53,7 +62,7 @@ const fetchInfiniteScroll =  () => dispatch(actions.InfiniteScroll(nameScrolling
               >
                 <div className={classes.listmovie}>
                   {movie && movie.map((data,index) => (
-                          <Movie key={index} image={data.poster_path} data={data.original_title}  />
+                          <MovieCard key={index} image={data.poster_path} data={data.original_title} id={data.id} click={() => clickShowMovieDetail(data.id)} />
                       ))
                     }
                     {loading? <Spinner text="Chargement des film populaire veuillez patientez !"/> : null}
