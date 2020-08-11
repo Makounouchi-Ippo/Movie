@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import Select from 'react-select';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../../../store/actions/index'
 //import classes from './Button.css'
 
 const Genre = [
@@ -31,64 +34,87 @@ const Genre = [
   ];
   const Years = [];
     for (let i = 1960; i <= 2020; i++)
-      Years.push({ value: i, label: i });
+       Years.push({ value: i, label: i });
 
 
-
-
-export default class ButtonSelect extends Component{
+class ButtonSelect extends Component{
 
     state={
-        selectedOption: null,
-        Genre: []
+        selectedOption: {
+            Genre: {value: null, label: 'Genre'}, 
+            Years: {value: null , label:'Years'},
+            SortBy: {value: null, label: 'SortBy'}
+        }
     }
 
+    componentDidUpdate (prevProps) {
+        if (this.props.inputValue !== prevProps.inputValue)
+        {this.setState({selectedOption:{ Genre: {value: null, label: 'Genre'}, Years: {value: null , label: 'Years'},SortBy: {value: null, label: 'SortBy'}}})}}
 
-    handleInput = (e) => {
-        console.log(e)
-        // this.setState({selectedOption:e.target.value}, ()=>{
-        //     console.log('state',this.state.selectedOption)
-        // })
+    handleInput = (value,id) => {
+        let copy = {...this.state.selectedOption}
+        copy[id] = value 
+       this.setState({selectedOption:copy}, () => {
+           
+        this.props.clearMovie();
+        this.props.pageInitial()
+           this.props.movieFiltres(this.state.selectedOption)
+       }) 
     }
 
 
     render() {
+    
+ 
         return (
-
             <div style={{marginTop:'50px'}}> 
-                <div className="row d-flex justify-content-center"  autoFocus={true}>
+                <div className="row d-flex justify-content-center">
                     <div className="col-sm-2">
-                    <Select options={Genre} 
-                        isSearchable={false}
-                        onSelect={(e)=>this.handleInput(e)}
-                    />
-                    </div> 
-                    {/* <div className="col-sm-2">
-                        <Select options={Countries} />
-                    </div> 
-                    <div className="col-sm-2">
-                        <Select options={Countries} />
+                        <Select options={Genre} 
+                            isSearchable={false}
+                            placeholder='Genre'
+                            value={this.state.selectedOption.Genre}
+                            onChange={(value) => this.handleInput(value, 'Genre')}
+                        />
                     </div> 
                     <div className="col-sm-2">
-                        <Select options={Countries} />
-                    </div> */}
+                        <Select options={SortBy} 
+                            isSearchable={false}
+                            placeholder='Trier par'
+                            value={this.state.selectedOption.SortBy}
+                            onChange={(value) => this.handleInput(value, 'SortBy')}
+                        />
+                    </div> 
+                    { <div className="col-sm-2">
+                        <Select options={Years} 
+                            isSearchable={false}
+                            placeholder='Annees'
+                            value={this.state.selectedOption.Years}
+                            onChange={(value) => this.handleInput(value, 'Years')}
+                        />
+                    </div>  }
                 </div>
-                <p> recherche en cours....</p>
           </div>
 
         )
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+const mapStateToProps = state => {
+    return {
+        inputValue: state.movie.inputValue
+    };
+  };
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+      movieFiltres: (value) => dispatch(actions.movieFiltres(value)), 
+      clearMovie: () => dispatch(actions.clearMovie()),
+      pageInitial:() =>  dispatch(actions.pageInitial())
+    };
+  };
+  
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps) (ButtonSelect));

@@ -1,66 +1,76 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import axios from 'axios'
-import Movie from './Movie/Movie';
+import {useDispatch, useSelector} from 'react-redux';
+import MovieCard from './Movie/MovieCard';
 import classes from './ListMovies.css'
-//import { API_KEY, PATH_DISCOVER ,PATH_BASE, PATH_MOVIE, PATH_POPULAR ,PATH_SEARCH, PATH_PAGE, PATH_ADULT, PATH_LANGUE } from '../../../component/Utility/api'
+import * as actions from '../../../store/actions/index'
+import Spinner from '../../../component/UI/Spinner/Spinner'
+import { useEffect,useCallback} from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { useHistory } from 'react-router-dom';
 
 
 
-class Movielist extends Component{
+const Movielist = () => {
 
-    state = {
-        data: [],
-        index: null
+  const history = useHistory();
+
+const dispatch = useDispatch();
+
+
+const movie = useSelector(state => state.movie.movie)
+const hasmore = useSelector(state => state.movie.hasmore)
+const page = useSelector(state => state.movie.page)
+const loading = useSelector(state =>  state.movie.loading)
+const searchBarNoResult = useSelector(state =>  state.movie.searchBarNoResult)
+const nameScrolling = useSelector(state =>  state.movie.nameScrolling)
+const valueInput = useSelector(state =>  state.movie.inputValue)
+const optionSelect = useSelector(state =>  state.movie.selectedOption)
+
+
+
+const fetchData = useCallback(() => dispatch(actions.movieSearch("fetchDataPopular")),[dispatch])
+const fetchInfiniteScroll =  () => dispatch(actions.InfiniteScroll(nameScrolling,page+1,valueInput,optionSelect))
+
+
+ 
+
+    useEffect(() => {
+      fetchData()
+  
+    },
+    [fetchData])
+    
+
+    const fetchImages = () => {
+      fetchInfiniteScroll()   
     }
 
-
-    componentDidMount () {
-        axios.get('https://api.themoviedb.org/3/movie/popular?api_key=1e32f5c452c2267d5367589e9864ab1c&language=en-US&page=1')
-        .then(response => {
-            this.setState({data:response.data.results},() => {
+    const clickShowMovieDetail = (id) => {
+      history.push(`/movie/${id}`);
+      console.log(history)
+      console.log(id)
+    
+    }
+    
+    return (
             
-            }) 
-        })
-        .catch(err => {
-            console.log(err.response)
-        })
-    }
-
-
-    render() {
-        
-        let aff=null;
-        if (this.props.movie){
-            aff=this.props.movie.map((data,index) => (
-            <Movie key={index} image={data.poster_path}  data={data.original_title}/>
-        ))}
-        if (this.state.data !== null && this.props.movie === null){
-            aff=this.state.data.map((data,index) => (
-            <Movie key={index} image={data.poster_path}  data={data.original_title}/>
-        ))}
-
-       
-
-        return (
-            <div className={classes.listmovie}>
-                   {aff}
-            </div>
-
+              <InfiniteScroll
+                 dataLength={movie.length}
+                 next={fetchImages}
+                 hasMore={hasmore}
+              >
+                <div className={classes.listmovie}>
+                  {movie && movie.map((data,index) => (
+                          <MovieCard key={index} image={data.poster_path} data={data.original_title} id={data.id} click={() => clickShowMovieDetail(data.id)} />
+                      ))
+                    }
+                    {loading? <Spinner text="Chargement des film populaire veuillez patientez !"/> : null}
+                    {searchBarNoResult=== 0 ? <p style={{textAlign:'center',width:'100%', color:'white'}}> Aucun resultat ne correspond a votre recherche</p>: null}
+                </div>
+                </InfiniteScroll>
+            
         )
-
-    }
-
-
 }
 
-const mapStateToProps = state => {
-    return {
-         movie: state.movie.movie
-    };
-  };
-   
-
-  
-export default withRouter(connect(mapStateToProps) (Movielist));
+export default withRouter((Movielist));

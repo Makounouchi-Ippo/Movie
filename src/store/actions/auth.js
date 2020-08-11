@@ -58,8 +58,8 @@ export const socialTwitter = (provider,history) => {
         dispatch(authStart());
         firebase.auth().signInWithPopup(provider)
         .then(response => {
-            console.log('socailllAUUUUTHHHHH',response)
-            console.log('33',response.user)
+            //console.log('socailllAUUUUTHHHHH',response)
+            //console.log('33',response.user)
             localStorage.setItem('id', response.user.uid)
             localStorage.setItem('token', response.credential.accessToken)
             localStorage.setItem('name', response.user.displayName)

@@ -14,5 +14,11 @@ export {
 export { 
     movieFail,
     movieSuccess,
-    movieSearch
+    movieSearch,
+    movieFiltres,
+    InfiniteScroll,
+    clearMovie,
+    pageInitial,
+    movieDetail
+
 }from './movieSearch'

@@ -1,41 +1,64 @@
 import React, {Component} from 'react'
-import {Form,FormControl,Button} from 'react-bootstrap'
+import {Form,FormControl} from 'react-bootstrap'
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../../../store/actions/index'
 
 
+
 class SearchButton extends Component {
 
-    state={
-      input:null
-    }
+  state={
+    inputValuee:''
+  }
 
-    inputValue = (e) => {
-      this.setState({input:e.target.value})
+  inputValue = (e) => {
+    this.setState({inputValuee:e.target.value})
+    if (e.target.value === ''){
+      this.props.clearMovie();
+      this.props.fetchData()
+  }
+    else {
+      this.props.pageInitial()
+      this.props.valueInput(e.target.value)
     }
+      
+}
 
-    buttonSearch = (e) => {
-      e.preventDefault();
-      this.props.valueInput(this.state.input)
-    }
-    
-    render(){
-      return(
-        <Form inline>
-          <FormControl type="text" placeholder="Movies" className="mr-lg-8" onChange={this.inputValue} />
-          <Button variant="outline-danger" onClick={this.buttonSearch}>Search</Button>
-        </Form>
-        )
-    }
+componentDidUpdate(prevProps){
+  if (this.props.selectedOption.Genre.value !== prevProps.selectedOption.Genre.value || this.props.selectedOption.Years.value !== prevProps.selectedOption.Years.value  || this.props.selectedOption.SortBy.value!== prevProps.selectedOption.SortBy.value) {
+    this.setState({inputValuee:''})
+  }
+}
+
+  
+  render(){
+    return(
+      <Form inline>
+      <FormControl  type="text" placeholder="search Movies" value={this.state.inputValuee} className="mr-lg-8" onChange={this.inputValue}
+       />
+
+      </Form>
+      )
+  }
 }
  
+const mapStateToProps = state => {
+  return {
+    selectedOption: state.movie.selectedOption,
+    inputValue: state.movie.inputValue
+  };
+};
+
 
 const mapDispatchToProps = dispatch => {
     return {
-      valueInput: (value) => dispatch(actions.movieSearch(value)) 
+      valueInput: (value) => dispatch(actions.movieSearch(value)),
+      fetchData: () => dispatch(actions.movieSearch('fetchDataPopular')),
+      clearMovie: () => dispatch(actions.clearMovie()),
+      pageInitial:() =>  dispatch(actions.pageInitial())
     };
   };
   
 
-export default withRouter(connect(null, mapDispatchToProps) (SearchButton));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps) (SearchButton));

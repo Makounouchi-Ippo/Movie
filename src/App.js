@@ -12,11 +12,9 @@ import Logout from './container/Logout/Logout'
 import ForgetPwd from './container/UsersAuth/ForgetPwd/ForgetPwd'
 import Home from './container/Home/Home'
 import Profil from './container/Profil/EditProfil'
+import MovieDetail from './container/MovieDetail/MovieDetail'
 //import NotFound from './component/Errror/Error'
 import * as actions from './store/actions/index'
-
-
-
 
 
 class App extends Component {
@@ -49,7 +47,7 @@ class App extends Component {
       <Switch>
       <Route  path="/register"  component={Register} /> 
       <Route  path="/login" component={Login} /> 
-       <Route path="/forget-password"  component={ForgetPwd} />   
+       <Route path="/forget-password" exact component={ForgetPwd} />   
        <Redirect to="/register"/>
       </Switch>
     )
@@ -61,18 +59,15 @@ class App extends Component {
         <Route path="/home" component={Home}/>
         <Route path="/profil" component={Profil}/>
         <Route path="/logout" component={Logout}/>
+        <Route  path="/movie/:id"  component={MovieDetail}/>
         <Redirect to="/home"/>
-      
      </Switch>
        ) 
       }
     return (
       <div>
         <Layout>
-
-       
-          {routes}
-         
+          {routes}      
         </Layout>
       </div>
     );
