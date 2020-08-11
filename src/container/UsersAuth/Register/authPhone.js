@@ -52,7 +52,7 @@ class Phone extends Component {
         switch(name_input){
             case 'phone': value_input.match(regex.phoneNumber)  ? error[name_input]='' : error[name_input] = "*votre numero nest pas valid";
                 break;
-            case 'codeVerification':value_input.match(regex.codeVerification) && value_input.length === 6 ? error1[name_input]='' : error1[name_input] = "*mauvais format 5chiffre sont attendues";
+            case 'codeVerification':value_input.match(regex.codeVerification) && value_input.length==6 ? error1[name_input]='' : error1[name_input] = "*mauvais format 5chiffre sont attendues";
                  break;
             default:
                 console.log("NUMBER NOT FOUND");
@@ -165,26 +165,34 @@ class Phone extends Component {
                  </Alert>)
         }
         
+
+
         if (this.state.show===false){
-                formphone= (  
+                formphone= (
+                    
                     <Form.Group bg="light" variant="light" className=" d-flex flex-column ">
                        <h2> <Form.Label  className=' pt-3 pb-1' style={{fontFamily: 'Roboto',color:'#c71414',fontWeight: 'bold',fontSize:'25px',textShadow: '2px 4px 5px rgba(0,0,0,0.3)'}}>Connexion via Smarthpone</Form.Label>  </h2> 
-                        <Form.Control  id="phone" style={{borderRadius: '3rem',fontFamily: 'Sulphur Point'}} className="w-90" type="tel" placeholder="Enter Phone-number ex :+33625145895"   onChange={(e)=>this.handleInput(e)}  minLength="12" maxLength="12" />
+                        <Form.Control  id="phone" style={{borderRadius: '3rem',fontFamily: 'Sulphur Point'}} className="w-90" type="tel" placeholder="Enter Phone-number ex :+33625145895"   onChange={(e)=>this.handleInput(e)}/>
                         <Form.Text className="text-muted"  style={{ marginTop: '4px',fontFamily: 'Roboto',marginBottom:'9px'}}>         
                          {this.state.error.phone ? msg : "Don't worry, votre numero sera bien gardé" }     
                         </Form.Text>
                         <Button  style={{borderRadius:'6rem',width:'140px', margin:'auto'}}  id="recaptcha-container"  variant="danger" type="danger" disabled={this.state.disable} onClick={(e)=>this.sendCode(e)}>
                         Envoyer code
                         </Button>
-                    </Form.Group>  
+                    </Form.Group>
+              
+    
                 )
+    
             }
-            
+        
+
         if (this.state.show ){
           formcode= ( 
+         
             <Form.Group bg="light" variant="light" className=" d-flex flex-column ">
             <h2> <Form.Label  className=' pt-3 pb-1' style={{fontFamily: 'Roboto',color:'#c71414',fontWeight: 'bold',fontSize:'25px',textShadow: '2px 4px 5px rgba(0,0,0,0.3)'}}>Connexion via Smarthpone</Form.Label>  </h2> 
-               <Form.Control  id="codeVerification" style={{borderRadius: '3rem',fontFamily: 'Sulphur Point'}} className="w-90" type="tel" placeholder="Enter the code verification "  minLength="6" maxLength="6"  onChange={(e)=>this.handleInput(e)} />
+               <Form.Control  id="codeVerification" style={{borderRadius: '3rem',fontFamily: 'Sulphur Point'}} className="w-90" type="tel" placeholder="Enter the code verification "    onChange={(e)=>this.handleInput(e)} />
                 <Form.Text className="text-muted"  style={{ marginTop: '4px',fontFamily: 'Roboto'}}>         
                 <p className={classes.error}> {this.state.error1.codeVerification}</p>   
                 </Form.Text>
@@ -195,11 +203,15 @@ class Phone extends Component {
             )
         }
 
+   
+
         return (
+            
             <Form style={{ width:'350px', opacity:'0.7',boxShadow:'5px 5px rgb(8, 7, 7)',borderRadius:'20px', display:'flex',flexDirection:'inherit',alignItems:'center'}} className=' bg-white mt-5' onSubmit={this.onSubmit}>
                  {msgCatch}
                  {formcode}
                  {formphone}
+
             </Form>
            
         )
