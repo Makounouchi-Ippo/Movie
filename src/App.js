@@ -17,6 +17,9 @@ import MovieDetail from './container/MovieDetail/MovieDetail'
 import * as actions from './store/actions/index'
 
 
+
+
+
 class App extends Component {
 
   state = {
@@ -47,7 +50,7 @@ class App extends Component {
       <Switch>
       <Route  path="/register"  component={Register} /> 
       <Route  path="/login" component={Login} /> 
-       <Route path="/forget-password" exact component={ForgetPwd} />   
+       <Route path="/forget-password"  component={ForgetPwd} />   
        <Redirect to="/register"/>
       </Switch>
     )
@@ -61,13 +64,17 @@ class App extends Component {
         <Route path="/logout" component={Logout}/>
         <Route  path="/movie/:id"  component={MovieDetail}/>
         <Redirect to="/home"/>
+      
      </Switch>
        ) 
       }
     return (
       <div>
         <Layout>
-          {routes}      
+
+       
+          {routes}
+         
         </Layout>
       </div>
     );

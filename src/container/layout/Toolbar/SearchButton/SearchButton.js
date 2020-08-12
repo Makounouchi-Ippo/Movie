@@ -13,9 +13,9 @@ class SearchButton extends Component {
   }
 
   inputValue = (e) => {
+    this.props.clearMovie();
     this.setState({inputValuee:e.target.value})
     if (e.target.value === ''){
-      this.props.clearMovie();
       this.props.fetchData()
   }
     else {
@@ -33,6 +33,9 @@ componentDidUpdate(prevProps){
 
   
   render(){
+    // console.log('genre',this.props.selectedOption.Genre.value)
+    // console.log('years',this.props.selectedOption.Years.value)
+    // console.log('sortby',this.props.selectedOption.SortBy.value)
     return(
       <Form inline>
       <FormControl  type="text" placeholder="search Movies" value={this.state.inputValuee} className="mr-lg-8" onChange={this.inputValue}

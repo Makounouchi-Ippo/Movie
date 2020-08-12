@@ -30,7 +30,7 @@ export const moviePopular = (value) => {
 
 
 
-export const InfiniteScrollMovie = (value, page ) => {
+export const InfiniteScrollMovie = (value, page) => {
     return {
         type: actionTypes.INFINITE_SCROLL,
         movie: value,
@@ -52,12 +52,11 @@ export const clearMovie = (error) => {
     };
 };
 
-export const pageInitial = (error) => {
+export const pageInitial = () => {
     return {
         type: actionTypes.PAGE_INITIAL,
     };
 };
-
 
 
 export const movieShowDetail = (data) => {
@@ -66,7 +65,6 @@ export const movieShowDetail = (data) => {
         movieDetail: data
     };
 };
-
 
 export const movieFail = (error) => {
     return {
@@ -142,7 +140,7 @@ export const movieFiltres = (filtreValue) => {
 }
 
 export const InfiniteScroll = (nameScrolling,index,valueInput,filtreValue) => {
-    console.log('filtreValue===>',filtreValue)
+    //   console.log('filtreValue===>',filtreValue)
      //console.log('iindex',index)
     // console.log('value',valueInput)
      console.log('nameScrolling',nameScrolling);

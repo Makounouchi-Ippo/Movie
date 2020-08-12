@@ -1,9 +1,9 @@
 .listmovie{
     margin: 0;
+    color: bisque;
     display: flex;
-    width: 100%;
-    justify-content: center;
     flex-direction: row;
+    justify-content: center;
     flex-wrap: wrap;
     padding: 3rem;
 }

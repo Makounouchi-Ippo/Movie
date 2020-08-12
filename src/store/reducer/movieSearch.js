@@ -1,7 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
 
-
 const initialState = {
     movie: [],
     loading: false,
@@ -39,32 +38,26 @@ const initialState = {
   };
 
   const moviePopular = (state, action) => {
-    let a = [...state.movie, ...action.movie];
-  const tab = a.filter(movie => movie.poster_path !== null)
     return updateObject( state, {
         loading: false,
-        movie: tab,
+        movie: [...state.movie,...action.movie],
         nameScrolling: 'popular'
      } );
   };
 
   const movieFiltre = (state, action) => {
-    let a = [...state.movie, ...action.movie];
-    const tab = a.filter(movie => movie.poster_path !== null)
     return updateObject( state, {
         loading: false,
-        movie: tab,
+        movie: action.movie,
         selectedOption: action.filtreValue,
         nameScrolling: 'filtre'
      } );
   };
 
   const InfiniteScrollMovie = (state, action) => {
-    let a = [...state.movie, ...action.movie];
-    const tab = a.filter(movie => movie.poster_path !== null)
     return updateObject( state, {
       loading: false,
-      movie: tab,
+      movie: [...state.movie,...action.movie],
       page: state.page+1,
      } );
   };
@@ -82,14 +75,13 @@ const initialState = {
      } );
   };
 
+
   const movieDetail = (state, action) => {
     return updateObject( state, {
       loading: false,
       movieDetail:action.movieDetail
      } );
   };
-
-
 
 
   const movieFail = (state, action) => {
