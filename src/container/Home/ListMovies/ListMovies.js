@@ -56,7 +56,7 @@ const fetchInfiniteScroll =  () => dispatch(actions.InfiniteScroll(nameScrolling
               >
                 <div className={classes.listmovie}>
                   {movie && movie.map((data,index) => (
-                          <Movie key={index} image={data.poster_path} data={data.original_title} id={data.id} click={() => clickShowMovieDetail(data.id)} />
+                          <Movie key={index} image={data.poster_path} data={data.original_title} id={data.id}  title={data.title} click={() => clickShowMovieDetail(data.id)} />
                       ))
                     }
                     {loading? <Spinner text="Chargement des film populaire veuillez patientez !"/> : null}

@@ -33,7 +33,7 @@ const Genre = [
     { value: 'vote_average.asc', label: 'Note ascendante' },
   ];
   const Years = [];
-    for (let i = 1960; i <= 2020; i++)
+    for (let i = 1950; i <= 2020; i++)
        Years.push({ value: i, label: i });
 
 
