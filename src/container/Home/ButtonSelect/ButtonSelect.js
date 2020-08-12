@@ -47,6 +47,11 @@ class ButtonSelect extends Component{
         }
     }
 
+    componentDidMount () {
+        this.setState({selectedOption : this.props.selectedOption})
+        
+    }
+
     componentDidUpdate (prevProps) {
         if (this.props.inputValue !== prevProps.inputValue)
          
@@ -106,7 +111,8 @@ class ButtonSelect extends Component{
 
 const mapStateToProps = state => {
     return {
-        inputValue: state.movie.inputValue
+        inputValue: state.movie.inputValue,
+        selectedOption: state.movie.selectedOption
     };
   };
 

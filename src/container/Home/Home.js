@@ -75,7 +75,7 @@ componentDidMount () {
                 {alert} 
                 <Carousel/> 
                    <Button/>
-                   <ListMovies/>
+                   <ListMovies />
               
                
 

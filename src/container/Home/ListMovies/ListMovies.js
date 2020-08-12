@@ -17,7 +17,6 @@ const history = useHistory();
 
 const dispatch = useDispatch();
 
-
 const movie = useSelector(state => state.movie.movie)
 const hasmore = useSelector(state => state.movie.hasmore)
 const page = useSelector(state => state.movie.page)
@@ -27,19 +26,13 @@ const nameScrolling = useSelector(state =>  state.movie.nameScrolling)
 const valueInput = useSelector(state =>  state.movie.inputValue)
 const optionSelect = useSelector(state =>  state.movie.selectedOption)
 
-
-
 const fetchData = useCallback(() => dispatch(actions.movieSearch("fetchDataPopular")),[dispatch])
 const fetchInfiniteScroll =  () => dispatch(actions.InfiniteScroll(nameScrolling,page+1,valueInput,optionSelect))
 
-
- 
-
     useEffect(() => {
-      fetchData()
-  
-    },
-    [fetchData])
+      if (movie.length === 0)
+        fetchData()
+    }, [])
     
 
     const fetchImages = () => {
