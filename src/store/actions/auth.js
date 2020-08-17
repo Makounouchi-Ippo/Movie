@@ -71,7 +71,7 @@ export const socialTwitter = (provider,history) => {
             
         })
         .catch(err => {
-            console.log('eerrrr msg = ', err.message)
+            //console.log('eerrrr msg = ', err.message)
             dispatch(authFail(err.message));
         })
 

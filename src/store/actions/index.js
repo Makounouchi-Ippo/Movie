@@ -19,6 +19,7 @@ export {
     InfiniteScroll,
     clearMovie,
     pageInitial,
-    movieShowDetail
+    movieShowDetail,
+    youtubeKey
 
 }from './movieSearch'

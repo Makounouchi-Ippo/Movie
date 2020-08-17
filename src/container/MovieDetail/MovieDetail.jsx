@@ -4,14 +4,16 @@ import {useDispatch, useSelector} from 'react-redux';
 import * as actions from '../../store/actions/index'
 import { useEffect} from 'react';
 import classes from './MovieDetail.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPlayCircle } from '@fortawesome/free-solid-svg-icons'
+import ImagePlay from './ImagePlay/ImagePLay'
+import InfoMovie from './InfoMovie/InfoMovie'
+
 
 
 const MovieDetail = (props) => {
 
   const dispatch = useDispatch();
   const moviedetail = useSelector(state => state.movie.movieDetail);
+  const youtubeKey_release = useSelector(state => state.movie.youtubeKey_release);
   const fetchMovieDetail =  () => dispatch(actions.movieSearch('showMovieDetail',props.match.params.id))
   
   useEffect(() => {
@@ -20,14 +22,14 @@ const MovieDetail = (props) => {
   [])
 
 
- 
 
+   console.log('movieeeDetail==',moviedetail)
+   console.log('youtube==',youtubeKey_release)
     return (
-         <div className={classes.images} >
-              <img className={classes.image} src={`https://image.tmdb.org/t/p/original/${moviedetail.backdrop_path}`} alt={moviedetail.id}/>
-               <FontAwesomeIcon style ={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} icon={faPlayCircle} />
-          </div> 
-             
+      <div className={classes.MovieDetail}>
+        {moviedetail && youtubeKey_release && <ImagePlay afficheFilm={moviedetail.backdrop_path} bandeAnnonce={youtubeKey_release.youtube} date={youtubeKey_release.date} titre={moviedetail.original_title} afficheFilm2={moviedetail.poster_path} id={moviedetail.id}/> } 
+        {moviedetail && <InfoMovie duree={moviedetail.runtime} popularite={moviedetail.popularity} genre= {moviedetail.genres} vote={moviedetail.vote_average}/> }
+      </div>  
             
         )
 }

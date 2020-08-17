@@ -5,11 +5,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Carousel from './Carrousel/Carrousel'
 import Button from './ButtonSelect/ButtonSelect'
 import ListMovies from './ListMovies/ListMovies'
-import {
-    CSSTransition,
-    SwitchTransition, TransitionGroup, CSSTransitionGroup
-  } from 'react-transition-group';
-import test from "../../assets/images/Affiche_non_disponible.png"
 import {Toast,} from 'react-bootstrap';
 import './Home.css'
 

@@ -16,7 +16,8 @@ const initialState = {
     searchBarNoResult:1,
     nameScrolling: '',
     setButton: false,
-    movieDetail: []
+    movieDetail: null,
+    youtubeKey_release: null
   };
   
 
@@ -79,7 +80,8 @@ const initialState = {
   const movieDetail = (state, action) => {
     return updateObject( state, {
       loading: false,
-      movieDetail:action.movieDetail
+      movieDetail:action.movieDetail,
+       youtubeKey_release: action.youtubeKey_release
      } );
   };
 

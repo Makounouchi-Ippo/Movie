@@ -12,8 +12,11 @@ class toolbar extends Component {
     state= {
         user: {}
     }
+
     
     render () {
+        let location = this.props.location.pathname
+        const atHome = location === "/home";
         let photo;
 
         if (localStorage.getItem('photo'))
@@ -59,7 +62,7 @@ class toolbar extends Component {
 
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto" />
-                        <SearchButton/>
+                       {atHome && <SearchButton/>} 
                         <Navbar.Brand href="/home"> 
                             <img className="thumbnail-image" alt='ddd'
                                 src= '  https://www.numerama.com/content/uploads/2018/10/netflix-logo.jpg'

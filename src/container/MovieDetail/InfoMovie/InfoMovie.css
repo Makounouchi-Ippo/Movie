@@ -1,0 +1,43 @@
+.InfoMovie{
+    width: 68%;
+    margin: auto;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.infoList {
+    justify-content: flex-end;
+}
+
+/* ###### c'est pour les deux ele;emt a droite de la ;ligne ou ya les info sur le film ########### */
+
+.infoList2 {
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+}
+.genre{
+    flex-direction: row;
+    background-color: rgb(45, 45, 49);
+    color: azure;
+    cursor: pointer;
+    /* margin: 10px; */
+    /* padding: 1em; */
+    margin: 2px;
+    width: 130px;
+    border-radius: 10px;
+    border: none;
+    padding: 5px;
+}
+
+@media (max-width : 700px){
+    .InfoMovie{
+     flex-direction: column;
+     text-align: center;
+     width: 100%;
+    }
+    .infoList,.infoList2{
+        margin: 5px;
+    }
+}

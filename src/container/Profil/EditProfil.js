@@ -60,7 +60,7 @@ componentDidMount () {
 
 
   displayInAvatar = (img, i) => {
-    console.log('eeeeeee',i)
+    //console.log('eeeeeee',i)
     this.setState({avatar:img})
   }
 

@@ -12,6 +12,8 @@ class SearchButton extends Component {
     inputValuee:''
   }
 
+ 
+
   inputValue = (e) => {
     this.props.clearMovie();
     this.setState({inputValuee:e.target.value})
@@ -30,6 +32,7 @@ componentDidUpdate(prevProps){
     this.setState({inputValuee:''})
   }
 }
+
 
   
   render(){
