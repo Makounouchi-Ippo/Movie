@@ -3,12 +3,17 @@
     margin: auto;
     padding-top: 40px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
 }
 
 .infoList {
     justify-content: flex-end;
+}
+.listInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 /* ###### c'est pour les deux ele;emt a droite de la ;ligne ou ya les info sur le film ########### */
@@ -24,20 +29,40 @@
     cursor: pointer;
     /* margin: 10px; */
     /* padding: 1em; */
-    margin: 2px;
+    margin: 5px;
     width: 130px;
     border-radius: 10px;
     border: none;
     padding: 5px;
 }
 
+.Psynopsys {
+    font-size: larger;
+}
+.synopsys {
+    width: 100%;
+    margin: auto;
+    color: rgb(85, 85, 85);
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+
+
+}
+
 @media (max-width : 700px){
-    .InfoMovie{
+    .listInfo{
      flex-direction: column;
      text-align: center;
      width: 100%;
     }
     .infoList,.infoList2{
-        margin: 5px;
+        margin: 10px;
+    }
+}
+
+@media (max-width : 1250px){
+    .InfoMovie{
+     width: 90%;
     }
 }

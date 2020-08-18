@@ -1,0 +1,47 @@
+.images{
+    border-radius: 90%;
+    width: 100px;
+    height: 130px;
+}
+
+.titreActeur {
+    width: 68%;
+    margin: auto;
+    color: white;
+}
+
+.blockActeur {
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 68%;
+    margin: auto;
+    margin-top: 25px;
+}
+
+.blockActeurIndividiel {
+    width: 250px;
+    margin-top: 0px;
+    text-align: center;
+}
+
+@media (max-width : 760px){
+    .blockActeur{
+     display: flex;
+     flex-direction: column;
+     text-align: center;
+    }}
+    .blockActeurIndividiel {
+        margin: auto;
+    }
+  
+
+@media (max-width : 1250px){
+        .blockActeurIndividiel {
+            margin-top:0px;
+        }
+        .blockActeur,  .titreActeur  {
+            width: 90%;
+        }
+     }

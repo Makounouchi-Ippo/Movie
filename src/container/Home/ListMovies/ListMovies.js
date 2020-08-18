@@ -41,8 +41,8 @@ const fetchInfiniteScroll =  () => dispatch(actions.InfiniteScroll(nameScrolling
 
     const clickShowMovieDetail = (id) => {
       history.push(`/movie/${id}`);
-      console.log(history)
-      console.log(id)
+      // console.log(history)
+      // console.log(id)
     
     }
     
