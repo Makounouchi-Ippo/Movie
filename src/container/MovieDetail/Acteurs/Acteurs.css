@@ -1,12 +1,12 @@
 .images{
-    border-radius: 90%;
-    width: 100px;
-    height: 130px;
+    width: 180px;
+    height: 230px;
 }
 
 .titreActeur {
     width: 68%;
     margin: auto;
+    margin-top: 20px;
     color: white;
 }
 
@@ -14,27 +14,75 @@
     display: flex;
     -ms-flex-direction: row;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     width: 68%;
     margin: auto;
     margin-top: 25px;
 }
 
 .blockActeurIndividiel {
-    width: 250px;
+    margin: 0;
+    width: 180px;
+    margin: 5px;
     margin-top: 0px;
-    text-align: center;
+    /* text-align: center; } */}
+
+
+.Card {
+    height:auto; 
+    border-radius:5%;
+    overflow:hidden;
+    border:'1px solid white';
+  
+
 }
 
+.body{
+    height:80px;
+    padding-top:9px;
+    background-color: currentcolor;
+}
+.title{
+    color:grey;
+    text-align: center;
+    margin-bottom:0;
+}
+
+@media (max-width : 1600px){
+    .blockActeurIndividiel{
+        width: 150px;
+    }
+    .body{
+        height:100px
+
+    }
+    .images{
+        width: 150px;
+        height: 200px;
+
+    }
+
+}
+
+
+.Card:hover {
+    transform: scale(1.1);
+    transition-duration: 0.5s;
+    -webkit-filter: brightness(1);
+ 
+}
 @media (max-width : 760px){
     .blockActeur{
      display: flex;
      flex-direction: column;
+     align-items: center;
      text-align: center;
-    }}
-    .blockActeurIndividiel {
-        margin: auto;
+     margin-top: 10px;
     }
+    .blockActeurIndividiel {
+        margin-bottom:15px;
+    }}
+
   
 
 @media (max-width : 1250px){

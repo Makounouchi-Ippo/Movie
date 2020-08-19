@@ -53,10 +53,11 @@
 @media (max-width : 700px){
     .listInfo{
      flex-direction: column;
-     text-align: center;
+     align-items: center;
      width: 100%;
     }
     .infoList,.infoList2{
+        text-align: center;
         margin: 10px;
     }
 }
