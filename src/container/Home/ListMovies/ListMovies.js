@@ -8,6 +8,8 @@ import Spinner from '../../../component/UI/Spinner/Spinner'
 import { useEffect,useCallback} from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useHistory } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css'
 
 
 
@@ -26,12 +28,15 @@ const nameScrolling = useSelector(state =>  state.movie.nameScrolling)
 const valueInput = useSelector(state =>  state.movie.inputValue)
 const optionSelect = useSelector(state =>  state.movie.selectedOption)
 
+
 const fetchData = useCallback(() => dispatch(actions.movieSearch("fetchDataPopular")),[dispatch])
 const fetchInfiniteScroll =  () => dispatch(actions.InfiniteScroll(nameScrolling,page+1,valueInput,optionSelect))
 
     useEffect(() => {
+      AOS.init()
       if (movie.length === 0)
         fetchData()
+       
     }, [])
     
 
@@ -56,10 +61,12 @@ const fetchInfiniteScroll =  () => dispatch(actions.InfiniteScroll(nameScrolling
               >
                 <div className={classes.listmovie}>
                   {movie && movie.map((data,index) => (
+                    <div data-aos='zoom-in-down' data-aos-duration='2000' >
                           <Movie key={index} image={data.poster_path} data={data.original_title} id={data.id}  title={data.title} click={() => clickShowMovieDetail(data.id)} />
+                          </div>
                       ))
                     }
-                    {loading? <Spinner text="Chargement des film populaire veuillez patientez !"/> : null}
+                    {loading? <Spinner text="Chargement en cours veuillez patientez ..."/> : null}
                     {searchBarNoResult=== 0 ? <p style={{textAlign:'center',width:'100%', color:'white'}}> Aucun resultat ne correspond a votre recherche</p>: null}
                 </div>
                 </InfiniteScroll>

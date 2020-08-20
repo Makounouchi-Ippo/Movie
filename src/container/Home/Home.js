@@ -9,6 +9,7 @@ import {Toast,} from 'react-bootstrap';
 import './Home.css'
 
 
+
 class Home extends Component {
     state ={
         user: {},
@@ -18,8 +19,8 @@ class Home extends Component {
     }
 
 
+componentDidMount () {   
 
-componentDidMount () {    
     var user = {}, 
     keys = Object.keys(localStorage),
     i = keys.length;
@@ -28,10 +29,8 @@ componentDidMount () {
         user[ keys[i] ] = localStorage.getItem( keys[i] );
 }
     this.setState({user})
-  
-  
+    
 }
-
 
     setShow = () =>{
         this.setState({show:false})
@@ -42,18 +41,6 @@ componentDidMount () {
     
         let alert;
      
-
-        // let Transition;
-
-        // Transition = ( <CSSTransition in={this.state.inProp} timeout={200} classNames="my-node">
-        //    <div>
-        //    <img src={test} alt="images"></img>
-        //    </div>
-        //     </CSSTransition> )
-
-
-
-
         if (this.state.user.name && this.state.user.photo && localStorage.getItem('show') ){
            alert= (
                 <Toast onClose={() => this.setShow(false)}  style={{position:'absolute',top:'10',right:'0',zIndex:'600'}} show={this.state.show} delay={5000} autohide>
@@ -86,7 +73,8 @@ componentDidMount () {
                 {/* //{Transition} */}
                 <Carousel/> 
                 <Button/>
-                <ListMovies />
+               <ListMovies />
+                
             </div>
         )
     }
