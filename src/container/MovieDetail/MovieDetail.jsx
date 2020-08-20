@@ -7,6 +7,7 @@ import classes from './MovieDetail.css'
 import ImagePlay from './ImagePlay/ImagePLay'
 import InfoMovie from './InfoMovie/InfoMovie'
 import Acteurs from './Acteurs/Acteurs'
+import SimilarMovie from './SimilarMovie/SimilarMovie'
 
 
 
@@ -30,6 +31,7 @@ const MovieDetail = (props) => {
         {moviedetail && <InfoMovie duree={moviedetail.runtime} popularite={moviedetail.popularity} genre= {moviedetail.genres} vote={moviedetail.vote_average*10} synopsys={moviedetail.overview} pays ={moviedetail.production_countries} /> }
         {moviedetail && <Acteurs data={moviedetail.credits.cast} title="Acteurs" /> }
         {moviedetail && <Acteurs data={moviedetail.credits.crew} title="Equipe Technique" /> }
+        {moviedetail &&  <SimilarMovie/>}
       </div>  
             
         )

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card} from 'react-bootstrap'
-import affiche from '../../../../assets/images/Affiche_non_disponible.png'
+import affiche from '../../../../assets/images/affiche_non_disponible.png'
 import classes from './Movie.css'
 
  const Movie = (props) => {

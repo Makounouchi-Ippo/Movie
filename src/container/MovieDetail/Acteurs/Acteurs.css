@@ -24,6 +24,7 @@
     margin: 0;
     width: 180px;
     margin: 5px;
+    border:black;
     margin-top: 0px;
     /* text-align: center; } */}
 
@@ -32,7 +33,7 @@
     height:auto; 
     border-radius:5%;
     overflow:hidden;
-    border:'1px solid white';
+    background-color: black;
   
 
 }

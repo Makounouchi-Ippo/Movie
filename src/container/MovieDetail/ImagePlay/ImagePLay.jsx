@@ -3,7 +3,7 @@ import classes from './ImagePlay.css'
 import {useState}from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPlayCircle,faShoppingCart} from '@fortawesome/free-solid-svg-icons'
-import affiche from '../../../assets/images/Affiche_non_disponible.png'
+import affiche from '../../../assets/images/affiche_non_disponible.png'
 import {Modal} from 'react-bootstrap'
 import {FaPlay} from 'react-icons/fa'
 import BandeAnnonceNonDisponible from '../../../assets/images/bande-annonce_non_disponibe.jpg'
@@ -33,8 +33,7 @@ const ImagePlay = (props) => {
                     backdrop="static"
                     keyboard={true}
                 >
-                    <Modal.Header  style={{backgroundColor:'black'}} closeButton>
-                    <Modal.Title style={{color:'white'}}>{props.titre}</Modal.Title>
+                    <Modal.Header  style={{backgroundColor:'black',border:'none'}} closeButton>
                     </Modal.Header>
                     <Modal.Body style={{backgroundColor:'black'}}>
                     <img style={{width:'100%'}}src={BandeAnnonceNonDisponible} alt={props.id}/>
@@ -61,8 +60,7 @@ const ImagePlay = (props) => {
                     backdrop="static"
                     keyboard={true}
                 >
-                    <Modal.Header  style={{backgroundColor:'black'}} closeButton>
-                    <Modal.Title style={{color:'white'}}>{props.titre}</Modal.Title>
+                    <Modal.Header  style={{backgroundColor:'black',border:'none'}} closeButton>
                     </Modal.Header>
                     <Modal.Body style={{backgroundColor:'black'}}>
                     <img style={{width:'100%'}}src={BandeAnnonceNonDisponible} alt={props.id}/>
@@ -89,11 +87,10 @@ const ImagePlay = (props) => {
                     backdrop="static"
                     keyboard={true}
                 >
-                    <Modal.Header  style={{backgroundColor:'black'}}  closeButton>
-                    <Modal.Title style={{color:'white'}}>{props.titre} </Modal.Title>
+                    <Modal.Header  style={{backgroundColor:'black',border:'none',bordeTopLeftRadius:'black', borderTopRightRadius: 'black'}}  closeButton>
                     </Modal.Header>
                     <Modal.Body style={{backgroundColor:'black'}}>
-                    <iframe width="100%" height="700px" src={`https://www.youtube.com/embed/${props.bandeAnnonce}?autoplay=1?fs=0`} title='youtube'/>   
+                    <iframe width="100%" height="700px" src={`https://www.youtube.com/embed/${props.bandeAnnonce}?autoplay=1`} frameborder="0" allowfullscreen  allow='autoplay' title='youtube'/>   
                     </Modal.Body>
          </Modal>
         </div>
@@ -117,8 +114,7 @@ const ImagePlay = (props) => {
                     backdrop="static"
                     keyboard={true}
                 >
-                    <Modal.Header  style={{backgroundColor:'black'}}  closeButton>
-                    <Modal.Title style={{color:'white'}}>{props.titre} </Modal.Title>
+                    <Modal.Header  style={{backgroundColor:'black',border:'none',bordeTopLeftRadius:'black', borderTopRightRadius: 'black'}}  closeButton>
                     </Modal.Header>
                     <Modal.Body style={{backgroundColor:'black'}}>
                     <img style={{width:'100%'}}src={BandeAnnonceNonDisponible} alt={props.id}/>

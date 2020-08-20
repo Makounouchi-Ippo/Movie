@@ -27,7 +27,7 @@ const InfoMovie = (props) => {
                         {pays} 
                 </div>
                 <div className={classes.infoList2} >
-                        <Progress progress={props.vote} reduction={0} strokeWidth={6} ballStrokeWidth={0} transitionDuration={0,4} background={'white'} subtitle='Note' style={{width:'190px',fontStyle:'italic', fontSize:'20px',display:'flex',justifyContent:'center',fontWeight:'bold',fontSize:'20px'}}/>
+                        <Progress progress={props.vote} reduction={0} strokeWidth={6} ballStrokeWidth={0} transitionDuration={0.8} background={'white'} subtitle='Note' style={{width:'190px',fontStyle:'italic', fontSize:'20px',display:'flex',justifyContent:'center',fontWeight:'bold'}}/>
                 </div>
             </div>
             <div className={classes.synopsys}>
