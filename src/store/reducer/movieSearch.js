@@ -50,6 +50,7 @@ const initialState = {
     return updateObject( state, {
         loading: false,
         movie: action.movie,
+        searchBarNoResult: action.data,
         selectedOption: action.filtreValue,
         nameScrolling: 'filtre'
      } );

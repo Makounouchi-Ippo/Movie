@@ -1,0 +1,16 @@
+.blockSimilarMovie{
+    width:69%;
+    margin:auto;
+    margin-top:50px;
+    padding-bottom:15px;
+    height:700px;
+    margin-bottom:10px;
+}
+
+@media (max-width : 1250px){
+    .blockSimilarMovie {
+        margin-top:10px;
+        height: 500px;
+        width: 90%;
+    }
+ }

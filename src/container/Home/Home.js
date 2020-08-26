@@ -14,23 +14,21 @@ class Home extends Component {
     state ={
         user: {},
         show:true,
-        mountToast: true,
-        inProp: false
+        netflix: false
     }
 
 
-componentDidMount () {   
+componentDidMount () { 
 
     var user = {}, 
     keys = Object.keys(localStorage),
     i = keys.length;
-
     while ( i-- ) {
         user[ keys[i] ] = localStorage.getItem( keys[i] );
 }
-    this.setState({user})
-    
+    this.setState({user})   
 }
+
 
     setShow = () =>{
         this.setState({show:false})
@@ -38,20 +36,20 @@ componentDidMount () {
     }
 
     render () {
-    
         let alert;
-     
+        let displayComponent;
+
+       
         if (this.state.user.name && this.state.user.photo && localStorage.getItem('show') ){
            alert= (
-                <Toast onClose={() => this.setShow(false)}  style={{position:'absolute',top:'10',right:'0',zIndex:'600'}} show={this.state.show} delay={5000} autohide>
+                <Toast onClose={() => this.setShow()}  style={{position:'absolute',top:'10',right:'0',zIndex:'600'}} show={this.state.show} delay={5000} autohide>
                     <Toast.Header>
                         <img style={{width:'50px', height:'45px',borderRadius:'100px'}} src={this.state.user.photo} className="rounded mr-2" alt="" />
                         <strong className="mr-auto"> Team Netflix</strong>
                     </Toast.Header>
                     <Toast.Body>Hello, {this.state.user.name}, have fun;)</Toast.Body>
                  </Toast>
-           )
-    
+           )   
         }
         else if (localStorage.getItem('show'))
         { 
@@ -64,17 +62,31 @@ componentDidMount () {
                         <Toast.Body>Hello, jeune netflixeur, have fun;)</Toast.Body>
                     </Toast>
                 )
-        }
-    
-
-        return (
-            <div className={classes.page}>
+        }  
+    if (localStorage.hasOwnProperty('animation') === true){
+        displayComponent = (<video className={classes.video} src={process.env.PUBLIC_URL + '/netflix.mp4'} autoPlay={true} type="video/mp4"/>) 
+       setTimeout(() => {
+        localStorage.removeItem('animation');
+        this.setState({netflix:true})    
+        localStorage.setItem('toolbar',true)
+       }, 6000);  
+    }   
+   if (this.state.netflix === true || localStorage.hasOwnProperty('animation') === false)
+    {
+        displayComponent = (
+            <div>       
                 {alert} 
-                {/* //{Transition} */}
                 <Carousel/> 
                 <Button/>
                <ListMovies />
-                
+            </div>
+        )
+            }
+
+
+        return (
+            <div className={classes.page}>
+               {displayComponent}
             </div>
         )
     }

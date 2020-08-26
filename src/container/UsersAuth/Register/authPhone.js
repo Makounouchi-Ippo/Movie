@@ -109,6 +109,7 @@ class Phone extends Component {
             localStorage.setItem('id',result.user.uid)
             localStorage.setItem('token', result.user.ma)
             localStorage.setItem('show', true)
+            localStorage.setItem('animation', true)
             this.props.onPhone(result.user.ma,result.user.uid);
             this.props.history.push('/home')
           })

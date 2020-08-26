@@ -66,6 +66,9 @@ export const socialTwitter = (provider,history) => {
             localStorage.setItem('photo', response.additionalUserInfo.profile.profile_image_url)
             localStorage.setItem('email', response.user.email)
             localStorage.setItem('show', true)
+            localStorage.setItem('animation', true)
+            //localStorage.setItem('toolbar', true)
+           
             dispatch(authSuccess(response.credential.idToken, response.user.uid));
            history.push('/home');
             
@@ -95,6 +98,9 @@ export const socialAuth = (provider,history) => {
             localStorage.setItem('photo', response.user.photoURL)
             localStorage.setItem('email', response.user.email)
             localStorage.setItem('show', true)
+            localStorage.setItem('animation', true)
+            //localStorage.setItem('toolbar', true)
+    
             dispatch(authSuccess(response.credential.idToken, response.user.uid));
            history.push('/home');
 
@@ -124,6 +130,9 @@ export const auth = (email, password) => {
             console.log('tokkkennnnnn',response);
             localStorage.setItem('id', response.data.localId)
             localStorage.setItem('show', true)
+            localStorage.setItem('animation', true)
+            //localStorage.setItem('toolbar', true)
+            
 
 
             
@@ -155,6 +164,8 @@ export const  authLog = (email, password, history) => {
             localStorage.setItem('token', response.data.idToken)
             localStorage.setItem('id', response.data.localId)
             localStorage.setItem('show', true)
+            localStorage.setItem('animation', true)
+            //localStorage.setItem('toolbar', true)
             dispatch(authSuccess(response.data.idToken, response.data.localId));
             dispatch(checkAuthTimeout(response.data.expiresIn))   
             history.push('/home');
@@ -181,6 +192,9 @@ export const  authLog = (email, password, history) => {
 export const authCheckState = () => {
     return (dispatch) => {
         localStorage.removeItem('show')
+        // localStorage.removeItem('animation');
+       // localStorage.removeItem('toolbar')
+       
         const token = localStorage.getItem('token');
         const id = localStorage.getItem('id')
         if (!token) {

@@ -1,0 +1,90 @@
+.MonCompte{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 100vh;
+}
+
+
+.BlockGauche{
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: distribute;
+    width: 170px;
+    z-index: 100;
+    background-color: rgb(255, 255, 255);
+    -webkit-box-shadow: 4px 3px 12px 0 rgba(0,0,0,.16);
+    box-shadow: 4px -3px 12px 0 rgba(0,0,0,.16);
+}
+
+.BlockDroite{
+    width: 100%;
+    background-color: #eff0f1
+}
+
+.blockButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 30%;
+  
+}
+
+.Button{
+    cursor: pointer;
+    top: 0;
+    text-align: center;
+
+}
+
+.titre {
+    margin-top:-25px;
+}
+
+.titleMonCompte {
+    margin-top: 25px;
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    font-family: sans-serif;
+    font-weight: bolder;
+}
+
+@media (max-width : 600px){
+    .titleMonCompte{
+        display: none;
+    }
+    .MonCompte{
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        margin: auto;
+    }
+    .BlockGauche{
+        background-color: rgb(254, 254, 255);
+        width: 100%;
+        z-index: 100;
+        box-shadow: -3px 5px 5px 6px red;
+    }
+    .blockButton{
+        margin-top: -45px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    .Button{
+        padding-top: 45px;
+        padding-right: 35px;
+    
+     
+    }
+    .titre{
+        width: 100%;
+        display: none;
+
+        
+    }
+}
+  

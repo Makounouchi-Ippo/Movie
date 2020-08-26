@@ -90,7 +90,7 @@ const ImagePlay = (props) => {
                     <Modal.Header  style={{backgroundColor:'black',border:'none',bordeTopLeftRadius:'black', borderTopRightRadius: 'black'}}  closeButton>
                     </Modal.Header>
                     <Modal.Body style={{backgroundColor:'black'}}>
-                    <iframe width="100%" height="700px" src={`https://www.youtube.com/embed/${props.bandeAnnonce}?autoplay=1`} frameborder="0" allowfullscreen  allow='autoplay' title='youtube'/>   
+                    <iframe width="100%" height="700px" src={`https://www.youtube.com/embed/${props.bandeAnnonce}?autoplay=1`} frameBorder="0" allowFullScreen  allow='autoplay' title='youtube'/>   
                     </Modal.Body>
          </Modal>
         </div>

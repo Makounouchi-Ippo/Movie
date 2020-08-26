@@ -1,0 +1,62 @@
+.InfoPersos {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+}
+
+.blockimage2{
+    position: relative;
+    margin: auto;
+    margin-top: 45px;
+    background-color: rgb(165, 153, 153);
+    width: 140px;
+    height: 140px;
+    border-radius: 50%; 
+}
+
+.blockButtonPhoto {
+    position: relative;
+    border-radius: 50%;
+    background-color: white;
+    width: 35px;
+    height: 35px;
+    bottom: 36px;
+    right: -92px;
+}
+
+.ButtonPhoto {
+    width: 35px;
+    height: 35px;
+    /* bottom: -100px;
+    right: -100px; */
+}
+
+.blockImage1 {
+    background-color: white;
+     box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
+     border-radius: 10px;
+     height: 300px;
+     margin-top: 45px;
+}
+
+.TitreContainer {
+    background-image: radial-gradient(circle at 50% 50%, #ae0000, #000000);
+    height: 35%;
+    display: flex;
+    flex-direction: column;
+}
+
+.titreInContainer{
+    width: 80%;
+    padding: 25px;
+    color: white;
+}
+
+
+@media (max-width : 690px){
+    .blockimage2{
+        margin-top: 15px;
+    }
+}

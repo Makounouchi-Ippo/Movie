@@ -6,7 +6,6 @@ import logo from '../../../assets/images/acteur_non_disponible.png'
 const Acteurs = (props) => {   
   let content;
 
-  console.log('9999999999',props.data)
   if (props.data.length === 0)
    content = <p style={{fontSize:'xx-large', color: "rgb(85, 85, 85)"}}> Informations indiponibles</p>
     

@@ -1,44 +1,35 @@
 import React from 'react';
 import Coverflow from 'react-coverflow';
-import photo from '../../../assets/images/film.jpg'
-
+import { withRouter } from 'react-router-dom';
+import classes from './SimilarMovie.css'
 
 const SimilarMovie = (props) => {
+    console.log('similar',props.similarMovie.results.length)
+    let image;
 
-   
-  
+    if (props.similarMovie.results.length === 0){
+      return(0)
+    }
 
-      return (
-      <div style={{width:'69%',margin:'auto',marginTop:'20px',paddingBottom:'15px',height:'600px',marginBottom:'15px'}} >
-          <h5 style={{color:'white'}}> Films similaires: </h5>
-        <Coverflow width="300" height="400"
-            displayQuantityOfSide={3}
-            navigation={false}
-            enableScroll={true}
-            clickable={true}
-            active={2}
-            infiniteScroll={true}>
-                 <img
-        src={photo}
-        alt='title or description'
-        style={{
-          display: 'block',
-          width: '100%',
-        }}
-      />
-            <img src={photo} alt='title or description' />
-            <img src={photo} alt='title or description' />
-            <img src={photo} alt='title or description'/>
-            <img src={photo} alt='title or description' />
-            <img src={photo} alt='title or description' />
-            <img src={photo} alt='title or description' />
-            <img src={photo} alt='title or description' />
-            <img src={photo} alt='title or description' />
-
-        </Coverflow>
-      
+   else {
+    image =  props.similarMovie.results.slice(0,5).map((movie,index)=>( 
+         <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt='' key={index} onClick={(e) => {e.preventDefault(); props.history.push(`/movie/${movie.id}`)}}/> 
+      ))}
+    
+    return (
+      <div className={classes.blockSimilarMovie} >
+        <h5 style={{color:'white'}}> Films similaires: </h5>
+        <Coverflow width="350" height="850" marginTop="80px"
+              className={classes.coverflow}
+              displayQuantityOfSide={2}
+              navigation
+              infiniteScroll
+              enableHeadingg
+              >
+            {image}
+        </Coverflow> 
       </div>
-          )
+     )
   }
   
-  export default (SimilarMovie);
+  export default withRouter((SimilarMovie));

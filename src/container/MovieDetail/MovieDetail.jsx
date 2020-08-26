@@ -8,10 +8,7 @@ import ImagePlay from './ImagePlay/ImagePLay'
 import InfoMovie from './InfoMovie/InfoMovie'
 import Acteurs from './Acteurs/Acteurs'
 import SimilarMovie from './SimilarMovie/SimilarMovie'
-import AOS from 'aos';
-import 'aos/dist/aos.css'
-
-
+import AOS from 'aos'
 
 const MovieDetail = (props) => {
 
@@ -25,20 +22,18 @@ const MovieDetail = (props) => {
     window.scrollTo(0,0)
     fetchMovieDetail()
   },
-  [])
-
+  [props.match.params.id])
 
    console.log('movieeeDetail==',moviedetail)
     return (
-      <div data-aos='fade-up' data-aos-duration='2000' className={classes.MovieDetail}>
+      <div data-aos="zoom-out-up" data-aos-duration='2000' className={classes.MovieDetail}>
         {moviedetail && youtubeKey_release && <ImagePlay afficheFilm={moviedetail.backdrop_path} bandeAnnonce={youtubeKey_release.youtube} date={youtubeKey_release.date} titre={moviedetail.original_title} afficheFilm2={moviedetail.poster_path} id={moviedetail.id}/> } 
         {moviedetail && <InfoMovie duree={moviedetail.runtime} popularite={moviedetail.popularity} genre= {moviedetail.genres} vote={moviedetail.vote_average*10} synopsys={moviedetail.overview} pays ={moviedetail.production_countries} /> }
         {moviedetail && <Acteurs data={moviedetail.credits.cast} title="Acteurs" /> }
         {moviedetail && <Acteurs data={moviedetail.credits.crew} title="Equipe Technique" /> }
-        {moviedetail &&  <SimilarMovie/>}
-      </div>  
-            
-        )
+        {moviedetail &&  <SimilarMovie similarMovie={moviedetail.similar}/>}
+      </div>
+      )
 }
 
-export default withRouter((MovieDetail));
+export default  withRouter((MovieDetail));

@@ -37,10 +37,11 @@ export const InfiniteScrollMovie = (value, page) => {
         page: page};
 }
 
-export const movieFiltre = (value,filtreValue) => {
+export const movieFiltre = (value,filtreValue,data) => {
     return {
         type: actionTypes.MOVIE_FILTRE,
         movie: value,
+        data: data,
         filtreValue:filtreValue
     };
 };
@@ -82,7 +83,7 @@ export const  movieSearch = (inputValue,idMovie) => {
     return dispatch => {
         dispatch(movieBegin());
             if (inputValue === "fetchDataPopular"){
-                axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=1e32f5c452c2267d5367589e9864ab1c&language=en-US&page=1`)
+                axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=1e32f5c452c2267d5367589e9864ab1c&language=fr&page=1&include_adult=false&vote_count.gte=200`)
                     .then(response => {
                         //console.log('serchBUttun',response.data)
                         dispatch(moviePopular(response.data.results))
@@ -93,7 +94,7 @@ export const  movieSearch = (inputValue,idMovie) => {
                     })
             }
             else if (inputValue === "showMovieDetail"){
-                axios.get(`https://api.themoviedb.org/3/movie/${idMovie}?api_key=1e32f5c452c2267d5367589e9864ab1c&append_to_response=credits,videos&language=fr`)
+                axios.get(`https://api.themoviedb.org/3/movie/${idMovie}?api_key=1e32f5c452c2267d5367589e9864ab1c&append_to_response=credits,videos,similar&language=fr&include_adult=false&vote_count.gte=200`)
                     .then(response => {
                         let date = { date: response.data.release_date.substr(0,4)}
                         let youtube 
@@ -108,7 +109,7 @@ export const  movieSearch = (inputValue,idMovie) => {
                     })
             }
             else {
-                    axios.get(`${PATH_BASE}${PATH_SEARCH}${PATH_MOVIE}${API_KEY}${PATH_PAGE}1${PATH_LANGUE}fr${PATH_ADULT}"&query=${inputValue}`)
+                    axios.get(`${PATH_BASE}${PATH_SEARCH}${PATH_MOVIE}${API_KEY}${PATH_PAGE}1${PATH_LANGUE}fr${PATH_ADULT}"&query=${inputValue}&vote_count.gte=200`)
                     .then(response => {
                        // console.log('MovieSearchInput',response)
     
@@ -126,7 +127,7 @@ export const  movieSearch = (inputValue,idMovie) => {
 
 export const movieFiltres = (filtreValue) => {
     //conso le.log(filtreValue)
-    let fetchApi=`https://api.themoviedb.org/3/discover/movie?api_key=1e32f5c452c2267d5367589e9864ab1c`
+    let fetchApi=`https://api.themoviedb.org/3/discover/movie?api_key=1e32f5c452c2267d5367589e9864ab1c&language=fr&include_adult=false&vote_count.gte=200`
 
     if (filtreValue.Genre.value) {fetchApi = fetchApi +`&with_genres=${filtreValue.Genre.value}`}
    if  (filtreValue.SortBy.value) {fetchApi = fetchApi +`&sort_by=${filtreValue.SortBy.value}`}
@@ -136,12 +137,12 @@ export const movieFiltres = (filtreValue) => {
         dispatch(movieBegin());
          axios.get(fetchApi)
                     .then(response => {
-                        //console.log('resposne', response)
-                        dispatch(movieFiltre(response.data.results,filtreValue))
+                        console.log('resposneFILTREEE', response)
+                        dispatch(movieFiltre(response.data.results,filtreValue,response.data.total_results))
                     })
                     .catch(err => {
                         dispatch(movieFail(err))
-                       // console.log(err.response)
+                        console.log('111',err.response)
                     })
         }      
 }
@@ -152,7 +153,7 @@ export const InfiniteScroll = (nameScrolling,index,valueInput,filtreValue) => {
     // console.log('value',valueInput)
     // console.log('nameScrolling',nameScrolling);
 
-    let fetchApi=`https://api.themoviedb.org/3/discover/movie?api_key=1e32f5c452c2267d5367589e9864ab1c&page=${index}`
+    let fetchApi=`https://api.themoviedb.org/3/discover/movie?api_key=1e32f5c452c2267d5367589e9864ab1c&language=fr&page=${index}&include_adult=false&vote_count.gte=200`
 
     if (filtreValue.Genre.value) {fetchApi = fetchApi +`&with_genres=${filtreValue.Genre.value}`}
    if  (filtreValue.SortBy.value) {fetchApi = fetchApi +`&sort_by=${filtreValue.SortBy.value}`}
@@ -163,7 +164,7 @@ export const InfiniteScroll = (nameScrolling,index,valueInput,filtreValue) => {
         dispatch(movieBegin());
         switch(nameScrolling){
 
-            case 'popular': axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=1e32f5c452c2267d5367589e9864ab1c&language=en-US&page=${index}`)
+            case 'popular': axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=1e32f5c452c2267d5367589e9864ab1c&language=fr&page=${index}&include_adult=false&vote_count.gte=200`)
                 .then(response => {
                     // console.log('page ====',index)
                     // console.log('reponse page',response)
@@ -175,7 +176,7 @@ export const InfiniteScroll = (nameScrolling,index,valueInput,filtreValue) => {
                 })
                 break;
 
-            case 'searchInput': axios.get(`${PATH_BASE}${PATH_SEARCH}${PATH_MOVIE}${API_KEY}${PATH_PAGE}${index}${PATH_LANGUE}fr${PATH_ADULT}"&query=${valueInput}`)
+            case 'searchInput': axios.get(`${PATH_BASE}${PATH_SEARCH}${PATH_MOVIE}${API_KEY}${PATH_PAGE}${index}${PATH_LANGUE}fr${PATH_ADULT}"&query=${valueInput}&include_adult=false&vote_count.gte=200`)
                 .then(response => {
                     // console.log('page ====',index)
                     // console.log('reponse page',response)

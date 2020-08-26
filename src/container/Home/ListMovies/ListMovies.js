@@ -8,9 +8,7 @@ import Spinner from '../../../component/UI/Spinner/Spinner'
 import { useEffect,useCallback} from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useHistory } from 'react-router-dom';
-import AOS from 'aos';
-import 'aos/dist/aos.css'
-
+import AOS from 'aos'
 
 
 const Movielist = () => {
@@ -61,8 +59,8 @@ const fetchInfiniteScroll =  () => dispatch(actions.InfiniteScroll(nameScrolling
               >
                 <div className={classes.listmovie}>
                   {movie && movie.map((data,index) => (
-                    <div data-aos='zoom-in-down' data-aos-duration='2000' >
-                          <Movie key={index} image={data.poster_path} data={data.original_title} id={data.id}  title={data.title} click={() => clickShowMovieDetail(data.id)} />
+                    <div data-aos="zoom-in" data-aos-duration='2000' key={index}>
+                          <Movie  image={data.poster_path} data={data.original_title} id={data.id}  title={data.title} click={() => clickShowMovieDetail(data.id)} />
                           </div>
                       ))
                     }

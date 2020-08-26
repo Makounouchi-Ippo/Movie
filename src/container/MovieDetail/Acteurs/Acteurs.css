@@ -34,6 +34,7 @@
     border-radius:5%;
     overflow:hidden;
     background-color: black;
+    filter: brightness(0,5);
   
 
 }
@@ -69,7 +70,7 @@
 .Card:hover {
     transform: scale(1.1);
     transition-duration: 0.5s;
-    -webkit-filter: brightness(1);
+    filter: brightness(1);
  
 }
 @media (max-width : 760px){
