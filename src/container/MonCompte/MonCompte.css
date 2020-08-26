@@ -5,7 +5,6 @@
     min-height: 100vh;
 }
 
-
 .BlockGauche{
     display: flex;
     -ms-flex-direction: column;
@@ -29,7 +28,6 @@
     align-items: center;
     justify-content: space-between;
     height: 30%;
-  
 }
 
 .Button{
@@ -59,7 +57,6 @@
     .MonCompte{
         display: flex;
         flex-direction: column;
-        position: fixed;
         margin: auto;
     }
     .BlockGauche{
@@ -72,11 +69,12 @@
         margin-top: -45px;
         display: flex;
         flex-direction: row;
+
         justify-content: space-evenly;
     }
     .Button{
         padding-top: 45px;
-        padding-right: 35px;
+       
     
      
     }

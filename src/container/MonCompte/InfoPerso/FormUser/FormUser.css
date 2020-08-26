@@ -1,0 +1,74 @@
+.blockimage2{
+    position: relative;
+    margin: auto;
+    margin-top: 45px;
+    background-color: rgb(165, 153, 153);
+    width: 140px;
+    height: 26%;
+    border-radius: 50%; 
+}
+
+.blockImage1 {
+    background-color: white;
+     box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
+     border-radius: 10px;
+     height: 600px;
+     margin-top: 45px;
+}
+
+.TitreContainer {
+    background-image: radial-gradient(circle at 50% 50%, #ae0000, #000000);
+    border-radius: 10px 10px 0px 0px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+}
+
+.titreInContainer{
+    width: 80%;
+    padding: 25px;
+    color: white;
+}
+
+.Form{
+    width: 50%;
+    margin:auto;
+    margin-top: 40px;
+}
+.Form button {
+    background-image: radial-gradient(circle at 50% 50%, #ae0000, #000000);
+    color: beige;
+    border-radius: 5px;
+    text-align: center;
+    width: 150px ;
+    height: 40px;
+}
+
+.Form button input {
+    font-weight: 800px;
+    background-color: blueviolet;
+}
+
+
+.button{
+    width: 100%;
+    margin-top: 40px;
+    text-align: center;
+}
+
+@media (max-width : 690px){
+    .blockimage2{
+        margin-top: 15px;
+    }
+}
+
+@media (max-width : 450px){
+.titreInContainer{
+    font-size: 25px;
+}
+}
+
+@media (max-width : 350px){
+    .titreInContainer{
+       font-size: 17px;
+} }

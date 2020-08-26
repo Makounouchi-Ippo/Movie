@@ -3,7 +3,7 @@ import Select from 'react-select';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/index'
-//import classes from './Button.css'
+import classes from './ButtonSelect.css'
 
 const Genre = [
     { value: '28', label: 'Action'},
@@ -76,8 +76,8 @@ class ButtonSelect extends Component{
  
         return (
             <div style={{marginTop:'50px'}}> 
-                <div className="row d-flex justify-content-center">
-                    <div className="col-sm-2">
+                <div className={classes.blockButton}>
+                    <div style={{width:'230px', margin:'20px'}}>
                         <Select options={Genre} 
                             isSearchable={false}
                             placeholder='Genre'
@@ -85,7 +85,7 @@ class ButtonSelect extends Component{
                             onChange={(value) => this.handleInput(value, 'Genre')}
                         />
                     </div> 
-                    <div className="col-sm-2">
+                    <div style={{width:'230px', margin:'20px'}}>
                         <Select options={SortBy} 
                             isSearchable={false}
                             placeholder='Trier par'
@@ -93,14 +93,14 @@ class ButtonSelect extends Component{
                             onChange={(value) => this.handleInput(value, 'SortBy')}
                         />
                     </div> 
-                    { <div className="col-sm-2">
+                    <div style={{width:'230px', margin:'20px'}}>
                         <Select options={Years} 
                             isSearchable={false}
                             placeholder='Annees'
                             value={this.state.selectedOption.Years}
                             onChange={(value) => this.handleInput(value, 'Years')}
                         />
-                    </div>  }
+                    </div>
                 </div>
           </div>
 
