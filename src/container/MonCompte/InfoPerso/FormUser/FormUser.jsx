@@ -13,10 +13,10 @@ const FormUser = () => {
                         <div className={classes.Form}>
                             <Form>
                                 <Input label="Nom" type="name" floatingLabel={true}  />
-                                <Input label="Prenom" type="lastName"  floatingLabel={true} required={true} />
-                                <Input label="Login" type="login"  floatingLabel={true} required={true} />
-                                <Input label="E-mail" type="email"   floatingLabel={true} required={true} />
-                                <Input label="Address" type="address"  floatingLabel={true} required={true} />
+                                <Input label="Prenom" type="lastName"  floatingLabel={true}  />
+                                <Input label="Login" type="login"  floatingLabel={true}  />
+                                <Input label="E-mail" type="email"   floatingLabel={true}  />
+                                <Input label="Address" type="address"  floatingLabel={true}  />
                                 <div className={classes.button}>
                                   <Button variant="raised" style={{textAlign:'center'}}>Submit</Button>
                                 </div> 

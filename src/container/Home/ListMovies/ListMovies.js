@@ -51,7 +51,7 @@ const fetchInfiniteScroll =  () => dispatch(actions.InfiniteScroll(nameScrolling
     
 
     return (
-            
+     
               <InfiniteScroll
                  dataLength={movie.length}
                  next={fetchImages}
