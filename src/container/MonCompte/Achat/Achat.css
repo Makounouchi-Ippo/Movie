@@ -1,0 +1,94 @@
+.Achat {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    width: 890px;
+    margin: auto;
+    margin-top: 75px;
+}
+
+.blockAchat{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 600px;
+    margin-top: 25px;
+}
+
+.blockTitre{
+    width: 100%;
+    background-image: radial-gradient(circle at 50% 50%, #ae0000, #000000);
+    border-radius: 10px 10px 0px 0px;
+    height: 80px;
+}
+
+.titreInBlock{
+    font-weight: normal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* margin-top: 40px; */
+    color: white;
+    width: 150px;
+    height: 100%;
+    padding-left: 16px;
+}
+
+.blockCarteAchat{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    height: 100%;
+    border-radius: 0px 0px 10px 10px;
+
+}
+
+.blockCarte{
+    margin-top: 30px;
+    overflow-x: scroll;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 80%;
+   
+}
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    width: 2px;
+    background-color: rgba(7, 7, 7, 0.5);
+  }
+
+.card{
+    width: 300px;
+    padding: 20px;
+    border-radius: 29px;
+}
+
+@media (max-width : 966px){
+    .Achat{
+        width: 69%;
+    }
+}
+
+@media (max-width : 600px){
+    .Achat{
+        width: 80%;
+        margin-top: 10px
+    }
+    .blockCarte{
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .card{
+        width: 250px;
+        padding: 20px;
+        height: 300px;
+    }
+    .blockAchat{
+        height: 350px;
+    }
+}

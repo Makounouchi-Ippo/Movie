@@ -14,6 +14,7 @@ import MovieDetail from './container/MovieDetail/MovieDetail'
 import * as actions from './store/actions/index'
 import Achat from './container/MonCompte/Achat/Achat'
 import InfoPerso from './container/MonCompte/InfoPerso/InfoPerso'
+import Social from './container/MonCompte/Social/Social'
 
 class App extends Component {
   
@@ -44,7 +45,7 @@ class App extends Component {
                 <Route path={`${url}/`} component={MonCompte} exact />
                 <Route path={`${url}/InfoPerso`} render={()=> <MonCompte child={<InfoPerso/>}/>}  />
                 <Route path={`${url}/achats`} render={()=> <MonCompte child={<Achat/>}/>}  />
-                <Route path={`${url}/social`} render={()=> <MonCompte child={<Achat/>}/>} />
+                <Route path={`${url}/social`} render={()=> <MonCompte child={<Social/>}/>} />
               </div>
             )}
           />

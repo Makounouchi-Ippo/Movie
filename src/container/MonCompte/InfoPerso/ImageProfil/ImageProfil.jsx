@@ -6,6 +6,7 @@ const ImageProfil = () => {
     return (
         <div>
             <h1 style={{fontWeight:'normal',marginTop:'25px'}}> Info persos </h1>
+            <p className={classes.titleMonCompte}> Renseignez vos coordonnées pour pouvoir passez commandes </p>
                 <div className={classes.blockImage1}>
                     <div className={classes.TitreContainer}>
                         <h2 className={classes.titreInContainer}> Image Profil </h2>

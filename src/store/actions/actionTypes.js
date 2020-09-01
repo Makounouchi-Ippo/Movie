@@ -22,3 +22,6 @@ export const PAGE_INITIAL = 'PAGE_INITIAL'
 export const MOVIE_DETAIL = 'MOVIE_DETAIL'
 
 
+/////////////////DATA--USER////////////////////
+
+

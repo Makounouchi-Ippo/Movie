@@ -2,8 +2,6 @@ import * as actionTypes from './actionTypes';
 import axios from 'axios';
 import firebase from '../../fire'
 
-
-
 export const authStart = () => {
     return {
         type: actionTypes.AUTH_START
@@ -16,6 +14,7 @@ export const authSuccess = (token, userId) => {
         userId: userId
     };
 };
+
 export const authFail = (error) => {
     return {
         type: actionTypes.AUTH_FAIL,
@@ -24,11 +23,9 @@ export const authFail = (error) => {
 };
 
 export const modalFalse = () =>{
-
     return {
         type: actionTypes.MODAL_FALSE,
     }
-
 }
 
 export const authLogout = () => {
@@ -37,7 +34,6 @@ export const authLogout = () => {
     localStorage.removeItem('name')
     localStorage.removeItem('photo')
     localStorage.removeItem('email')
-
     return {
         type: actionTypes.AUTH_LOGOUT,
 
@@ -51,7 +47,6 @@ export const checkAuthTimeout = (expirationTime) => {
         },expirationTime*100000000000)
     }
 }
-
 
 export const socialTwitter = (provider,history) => {
     return dispatch => {
@@ -68,22 +63,15 @@ export const socialTwitter = (provider,history) => {
             localStorage.setItem('show', true)
             localStorage.setItem('animation', true)
             //localStorage.setItem('toolbar', true)
-           
             dispatch(authSuccess(response.credential.idToken, response.user.uid));
-           history.push('/home');
-            
+            history.push('/home');
         })
         .catch(err => {
             //console.log('eerrrr msg = ', err.message)
             dispatch(authFail(err.message));
         })
-
-        
     };
 }
-
-
-
 
 export const socialAuth = (provider,history) => {
     return dispatch => {
@@ -100,24 +88,17 @@ export const socialAuth = (provider,history) => {
             localStorage.setItem('show', true)
             localStorage.setItem('animation', true)
             //localStorage.setItem('toolbar', true)
-    
             dispatch(authSuccess(response.credential.idToken, response.user.uid));
-           history.push('/home');
-
-
-            
+           history.push('/home'); 
         })
         .catch(err => {
             console.log('eerrrr msg = ', err.message)
             dispatch(authFail(err.message));
         })
-
-        
     };
 }
 
 export const auth = (email, password) => {
-
     return dispatch => {
         dispatch(authStart());
         const authData = {
@@ -131,25 +112,17 @@ export const auth = (email, password) => {
             localStorage.setItem('id', response.data.localId)
             localStorage.setItem('show', true)
             localStorage.setItem('animation', true)
-            //localStorage.setItem('toolbar', true)
-            
-
-
-            
+            //localStorage.setItem('toolbar', true) 
             dispatch(authSuccess(null, response.data.localId));
-            
         })
         .catch(err => {
             console.log(err.response)
             dispatch(authFail(err.response.data.error.message));
         })
-
-        
     };
 };
 
 export const  authLog = (email, password, history) => {
-
     return dispatch => {
         dispatch(authStart());
         const authData = {
@@ -178,32 +151,23 @@ export const  authLog = (email, password, history) => {
             requestType:"VERIFY_EMAIL",
             idToken:localStorage.getItem('token')
         }
-
-       console.log('verifier',verify)
-
+        console.log('verifier',verify)
         axios.post('https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDJQ2C-WHsJXu5xVCG5Z98XQ31gRJrSV_E',verify)
         .then(e=>{ console.log(e)})
         .catch(e=>{console.log(e)})
-       
     };
 };
-
 
 export const authCheckState = () => {
     return (dispatch) => {
         localStorage.removeItem('show')
         // localStorage.removeItem('animation');
        // localStorage.removeItem('toolbar')
-       
         const token = localStorage.getItem('token');
         const id = localStorage.getItem('id')
-        if (!token) {
-       
+        if (!token)
             dispatch(authLogout());
-        }
-        else {
-             dispatch(authSuccess(token,id)); 
-             }
-               
-        }
-    }
+        else
+            dispatch(authSuccess(token,id));        
+    };
+};

@@ -70,10 +70,16 @@ class ButtonSelect extends Component{
        }) 
     }
 
+    
 
     render() {
-    
- 
+
+        // let text;
+        
+        // if (this.props.selectedOption.Genre.value !==null || this.props.selectedOption.SortBy.value !==null  || this.props.selectedOption.Years.value !==null ){
+        //     text =(<p> tttttttt </p>)
+        // }
+
         return (
             <div style={{marginTop:'50px'}}> 
                 <div className={classes.blockButton}>
@@ -102,6 +108,9 @@ class ButtonSelect extends Component{
                         />
                     </div>
                 </div>
+                {/* <div>
+                    {text}
+                </div> */}
           </div>
 
         )

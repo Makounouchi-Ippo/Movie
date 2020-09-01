@@ -16,7 +16,7 @@ const MonCompte = (props) =>{
                      <div className={classes.Button}>
                         <Link style={{color:'inherit',textDecoration:'none'}} to='/home'>
                             <AiOutlineHome style={{height:'100px',width:'40px'}}/>     
-                        <p className={classes.titre}> Acceuil </p>
+                        <p className={classes.titre}> Netflix </p>
                         </Link>
                     </div>
                     <div className={classes.Button}>

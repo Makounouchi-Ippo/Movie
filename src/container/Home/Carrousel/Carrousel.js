@@ -10,7 +10,7 @@ class DemoCarousel extends Component {
     
       return (
   
-            <Carousel indicators={false} pauseOnHover={false} controls={false} style={{width:'100%',height:'500px',margin:'auto'}}>
+            <Carousel indicators={false}  controls={false} style={{width:'100%',height:'500px',margin:'auto'}}>
 
               <Carousel.Item style={{ height:'520px'}}>
               <Carousel.Caption style={{top:'0',right:'0px'}}>
@@ -18,7 +18,7 @@ class DemoCarousel extends Component {
                 </Carousel.Caption>
                 <img style={{ height:'520px'}}
                   className="d-block w-100"
-                  src="https://wallpapermemory.com/uploads/818/iron-man-background-hd-1080p-30.jpg"
+                  src="https://images3.alphacoders.com/837/thumb-1920-837671.jpg"
                   alt="Third slide"
                 />
 

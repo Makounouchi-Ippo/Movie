@@ -10,10 +10,18 @@
 
 .blockImage1 {
     background-color: white;
-     box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
-     border-radius: 10px;
-     height: 600px;
-     margin-top: 45px;
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    height: 550px;
+    margin-top: 45px;
+}
+
+.blockImage3 {
+    background-color: white;
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    height: 300px;
+    margin-top: 45px;
 }
 
 .TitreContainer {

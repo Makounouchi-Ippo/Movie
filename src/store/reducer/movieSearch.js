@@ -20,7 +20,6 @@ const initialState = {
     youtubeKey_release: null
   };
   
-
   const movieBegin = (state) => {
     return updateObject( state, {
         loading: true,

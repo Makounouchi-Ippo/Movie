@@ -183,9 +183,7 @@ class UsersAuth extends Component {
         return (
             <div className={classes.page}>
                {form}
-               
                {modal} 
-               
             </div>
         )
     }
