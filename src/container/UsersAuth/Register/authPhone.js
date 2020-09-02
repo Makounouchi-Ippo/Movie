@@ -106,6 +106,7 @@ class Phone extends Component {
           .confirm(verificationId)
           .then(result => {
             // User signed in successfully.
+            localStorage.setItem('social',false)
             localStorage.setItem('id',result.user.uid)
             localStorage.setItem('token', result.user.ma)
             localStorage.setItem('show', true)

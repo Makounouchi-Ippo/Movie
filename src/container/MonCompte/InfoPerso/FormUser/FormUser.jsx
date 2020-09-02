@@ -9,21 +9,42 @@ import Button from 'muicss/lib/react/button';
 const FormUser = () => {
 
     const [id, setId] = useState('');
+    const [idToken, setIdToken] = useState('');
+    const [name, setName] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [login, setLogin] = useState('');
+    const [address, setAddress] = useState('');
+    const [mail, setMail] = useState('');
 
     useEffect(() => {
-       setId(localStorage.getItem('token'))
-      },[])
-      console.log('fffff',id)
+       setIdToken(localStorage.getItem('token'))
+       setId(localStorage.getItem('id'))
+       let idLocal = localStorage.getItem('id')
+       axios.get(`https://movies-27cd5.firebaseio.com/${idLocal}/user.json/`).then(response => {
+        console.log('userrr//////',response.data)  
+        let info = response.data;
+        let name;
+        name = Object.keys(info).map((ele) => info[ele]['name']);
+        console.log(name)
+     
+    //      let data = Object.values(info)[1]
+    //      setName(data.name);
+    //      setLastname(data.lastname); 
+    //      setLogin(data.login); 
+    //      setAddress(data.address);            
+    //       console.log('dataaaaaa--->',data)
+       })
+       .catch(err => {
+        console.log('DIDMOUNT',err)
+       })
+      },[]) 
 
-     const handleInput = () => {
-
-     }
-
-    const handleSubmit =(event) => {
+     
+    const handleSubmitMail =(event) => {
         event.preventDefault(); 
         const authData = {
-            idToken:id,
-            email: 'mehdi_934000@hotmail.fr',
+            idToken:idToken,
+            email: mail,
             returnSecureToken: true
         };
         axios.post('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDJQ2C-WHsJXu5xVCG5Z98XQ31gRJrSV_E',authData)
@@ -35,6 +56,41 @@ const FormUser = () => {
         })      
     }
 
+    const handleSubmit =(event) => {
+        event.preventDefault(); 
+        console.log('STATE===',name,lastname,login,address)
+        const data = {
+            name:name,
+            lastname: lastname,
+            login: login,
+            address: address
+        };
+        axios.post(`https://movies-27cd5.firebaseio.com/${id}/user.json/`,data)
+        .then(response => {
+            console.log('data',response);           
+        })
+        .catch(err => {
+            console.log('data',err.response)
+        })    
+    }
+    
+   let inputMail = null;
+
+   localStorage.getItem('social') ? inputMail = (
+            <div className={classes.blockImage3}>
+                <div className={classes.TitreContainer}>
+                    <h2 className={classes.titreInContainer}>Mail </h2>
+                    <div className={classes.Form}>
+                        <Form onSubmit={handleSubmitMail}>
+                            <Input label="E-mail" minLength="6" type="email" floatingLabel={true} value={mail} pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required title="email incorrect ex: netflix@gmail.com"  onChange={(e)=> setMail(e.target.value)}  />
+                            <div className={classes.button}>
+                            <Button variant="raised" style={{textAlign:'center'}}>Submit</Button>
+                            </div> 
+                        </Form>
+                    </div>     
+                </div>
+            </div>) : inputMail = null;
+
     return (
         <div>
             <div className={classes.blockImage1}>
@@ -42,10 +98,10 @@ const FormUser = () => {
                         <h2 className={classes.titreInContainer}>Infos Utilisateurs </h2>
                         <div className={classes.Form}>
                             <Form onSubmit={handleSubmit}>
-                                <Input label="Nom" type="name" floatingLabel={true} minLength="7" maxLength="30" onChange={handleInput} required />
-                                <Input label="Prenom" type="lastName"  floatingLabel={true}  />
-                                <Input label="Login" type="login"  floatingLabel={true}  />
-                                <Input label="Address" type="address"  floatingLabel={true}  />
+                                <Input label="Nom" type="name" floatingLabel={true} minLength="3" maxLength="30" pattern="[A-Za-z]{1,32}" value={name} required title="Nom incorrect" onChange={(e)=> setName(e.target.value)} />
+                                <Input label="Prenom" type="lastName"  floatingLabel={true} minLength="3" maxLength="30" pattern="[A-Za-z]{1,32}" value={lastname} required title="Prenom incorrect" onChange={(e)=> setLastname(e.target.value)} />
+                                <Input label="Login" type="login"  floatingLabel={true} required  pattern="[A-Za-z0-9]+" value={login} title= "lettres et chiffre seulement, pas de ponctuation et caracteres speciaux" onChange={(e)=> setLogin(e.target.value)}/>
+                                <Input label="Address" type="address"  floatingLabel={true}  required pattern="([a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ_-]| |/|\\|@|#|\$|%|&)+" value={address} title= "pas de caracteres speciaux"  onChange={(e)=> setAddress(e.target.value)}/>
                                 <div className={classes.button}>
                                   <Button variant="raised" style={{textAlign:'center'}}>Submit</Button>
                                 </div> 
@@ -53,19 +109,8 @@ const FormUser = () => {
                         </div>     
                     </div>
              </div>
-
-             <div className={classes.blockImage3}>
-                    <div className={classes.TitreContainer}>
-                        <h2 className={classes.titreInContainer}>Mail </h2>
-                        <div className={classes.Form}>
-                            <Form onSubmit={handleSubmit}>
-                                <Input label="E-mail" minLength="12" type="email" floatingLabel={true}  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required  />
-                                <div className={classes.button}>
-                                  <Button variant="raised" style={{textAlign:'center'}}>Submit</Button>
-                                </div> 
-                            </Form>
-                        </div>     
-                    </div>
+             <div>
+                   {inputMail}
              </div>
         </div>
     )

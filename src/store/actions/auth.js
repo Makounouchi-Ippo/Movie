@@ -34,6 +34,7 @@ export const authLogout = () => {
     localStorage.removeItem('name')
     localStorage.removeItem('photo')
     localStorage.removeItem('email')
+    localStorage.removeItem('social')
     return {
         type: actionTypes.AUTH_LOGOUT,
 
@@ -134,6 +135,7 @@ export const  authLog = (email, password, history) => {
        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDJQ2C-WHsJXu5xVCG5Z98XQ31gRJrSV_E', authData)
         .then(response => {
             console.log('authlogAction',response);
+            localStorage.setItem('social',false)
             localStorage.setItem('token', response.data.idToken)
             localStorage.setItem('id', response.data.localId)
             localStorage.setItem('show', true)
@@ -161,12 +163,14 @@ export const  authLog = (email, password, history) => {
 export const authCheckState = () => {
     return (dispatch) => {
         localStorage.removeItem('show')
+       
         // localStorage.removeItem('animation');
        // localStorage.removeItem('toolbar')
         const token = localStorage.getItem('token');
         const id = localStorage.getItem('id')
         if (!token)
             dispatch(authLogout());
+           
         else
             dispatch(authSuccess(token,id));        
     };

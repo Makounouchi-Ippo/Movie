@@ -44,7 +44,7 @@ const Achat = () => {
                             </div>
                             <div className={classes.BasDroiteblockHaut}>
                                  <div className={classes.switch}>
-                                    <Switch  onColor="#DC143C"/>
+                                    <Switch/>
                                 </div>
                             </div>
                         </div>
