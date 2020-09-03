@@ -10,13 +10,14 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import authreducer from './store/reducer/auth'
 import moviereducer from './store/reducer/movieSearch'
+import infoUserreducer from './store/reducer/infoUser'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; 
 
 
 const rootReducer = combineReducers({
     auth:authreducer,
     movie:moviereducer,
-    // infoUser:infoUserreducer
+    infoUser:infoUserreducer
 });
 
 const store = createStore(rootReducer,composeEnhancers(

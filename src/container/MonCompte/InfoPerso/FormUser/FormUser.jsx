@@ -2,14 +2,12 @@ import React from 'react'
 import { useEffect,useState} from 'react';
 import axios from 'axios'
 import classes from './FormUser.css'
-import {toast} from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
+// import {toast} from 'react-toastify'
+// import 'react-toastify/dist/ReactToastify.css';
 import Form from 'muicss/lib/react/form';
 import Input from 'muicss/lib/react/input';
+import {Alert} from 'react-bootstrap';
 import Button from 'muicss/lib/react/button';
-
-
-toast.configure();
 
 const FormUser = () => {
 
@@ -21,6 +19,8 @@ const FormUser = () => {
     const [address, setAddress] = useState('');
     const [mail, setMail] = useState('');
     const [alert, setAlert] = useState(false);
+    const [alert1, setAlert1] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
        setIdToken(localStorage.getItem('token'))
@@ -35,11 +35,10 @@ const FormUser = () => {
             setLogin(response.data.login)  
        })
        .catch(err => {
-            console.log('DIDMOUNT',err)
+            //console.log('DIDMOUNT',err)
        })
       },[]) 
 
-     
     const handleSubmitMail =(event) => {
         event.preventDefault(); 
         const authData = {
@@ -49,10 +48,17 @@ const FormUser = () => {
         };
         axios.post('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDJQ2C-WHsJXu5xVCG5Z98XQ31gRJrSV_E',authData)
         .then(response => {
-            console.log('maillllllllll',response);           
+            setAlert1(false)
+            setAlert(true)   
+            console.log('maillllllllll',response.data.email); 
+            setMail(response.data.email)     
+                   
         })
         .catch(err => {
-            console.log('maillllll',err.response)
+            console.log('maillllll',err.response.data.error.message)
+            setError('Mail deja utilisé veuilleur le modifier')
+            setAlert1(true)
+            setAlert(false)   
         })      
     }
 
@@ -63,9 +69,10 @@ const FormUser = () => {
             name:name,
             lastname: lastname,
             login: login,
-            address: address
+            address: address,
+            //mail: mail
         };
-        setAlert(false)
+        //setAlert(false)
         axios.put(`https://movies-27cd5.firebaseio.com/${id}/user.json/`,data)
         .then(response => {
             console.log('data',response);  
@@ -76,9 +83,11 @@ const FormUser = () => {
             setAlert(false)
         })    
     }
-    
+
+  
    let inputMail = null;
-   let msg= null;
+   let msgError= null;
+   let msgSuccess = null;
 
    localStorage.getItem('social') ? inputMail = (
             <div className={classes.blockImage3}>
@@ -95,18 +104,17 @@ const FormUser = () => {
                 </div>
             </div>) : inputMail = null;
 
-  msg = alert ? toast.success('dddddd',{
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,}):null
+  msgSuccess = alert ?  <Alert variant="success"  style={{width:'auto',height:'auto',textAlign:'center',top:'-450px'}} onClose={() => setAlert(false)} dismissible>
+                      <Alert.Heading style={{width:'auto'}}>Votre profil a bien été mis a jour</Alert.Heading>
+                </Alert>:null
+  msgError = alert1 ?  <Alert variant="danger"  style={{width:'auto',height:'auto',textAlign:'center',top:'-450px'}} onClose={() => setAlert1(false)} dismissible>
+  <Alert.Heading style={{width:'auto'}}>Trop d'essaie , veuillez essayer ulterieurement</Alert.Heading>
+</Alert>:null
 
     return (
-        <div>
-           
+        <div> 
+            {msgSuccess}
+            {msgError}
             <div className={classes.blockImage1}>
                     <div className={classes.TitreContainer}>
                         <h2 className={classes.titreInContainer}>Infos Utilisateurs </h2>
@@ -121,10 +129,8 @@ const FormUser = () => {
                                 </div> 
                             </Form>
                         </div>     
-                    </div>
-                    
+                    </div>    
              </div>
-             {msg}
              <div>
                    {inputMail}
                    

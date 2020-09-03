@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Carousel from './Carrousel/Carrousel'
 import Button from './ButtonSelect/ButtonSelect'
 import ListMovies from './ListMovies/ListMovies'
-import {Toast,} from 'react-bootstrap';
+import {Toast} from 'react-bootstrap';
 import './Home.css'
 
 

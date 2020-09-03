@@ -25,6 +25,8 @@ export {
 }from './movieSearch'
 
 
-// export { 
-//   formUser,
-// }from './dataUser'
+export { 
+    infoUserSuccess,
+    infoUserFail,
+    formUser
+}from './infoUser'
