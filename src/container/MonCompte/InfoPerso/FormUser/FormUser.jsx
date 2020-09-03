@@ -2,9 +2,14 @@ import React from 'react'
 import { useEffect,useState} from 'react';
 import axios from 'axios'
 import classes from './FormUser.css'
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 import Form from 'muicss/lib/react/form';
 import Input from 'muicss/lib/react/input';
 import Button from 'muicss/lib/react/button';
+
+
+toast.configure();
 
 const FormUser = () => {
 
@@ -15,27 +20,22 @@ const FormUser = () => {
     const [login, setLogin] = useState('');
     const [address, setAddress] = useState('');
     const [mail, setMail] = useState('');
+    const [alert, setAlert] = useState(false);
 
     useEffect(() => {
        setIdToken(localStorage.getItem('token'))
        setId(localStorage.getItem('id'))
        let idLocal = localStorage.getItem('id')
-       axios.get(`https://movies-27cd5.firebaseio.com/${idLocal}/user.json/`).then(response => {
-        console.log('userrr//////',response.data)  
-        let info = response.data;
-        let name;
-        name = Object.keys(info).map((ele) => info[ele]['name']);
-        console.log(name)
-     
-    //      let data = Object.values(info)[1]
-    //      setName(data.name);
-    //      setLastname(data.lastname); 
-    //      setLogin(data.login); 
-    //      setAddress(data.address);            
-    //       console.log('dataaaaaa--->',data)
+       axios.get(`https://movies-27cd5.firebaseio.com/${idLocal}/user.json/`)
+       .then(response => {
+            console.log('userrr//////',response.data)
+            setAddress(response.data.address) 
+            setName(response.data.name)   
+            setLastname(response.data.lastname)  
+            setLogin(response.data.login)  
        })
        .catch(err => {
-        console.log('DIDMOUNT',err)
+            console.log('DIDMOUNT',err)
        })
       },[]) 
 
@@ -65,16 +65,20 @@ const FormUser = () => {
             login: login,
             address: address
         };
-        axios.post(`https://movies-27cd5.firebaseio.com/${id}/user.json/`,data)
+        setAlert(false)
+        axios.put(`https://movies-27cd5.firebaseio.com/${id}/user.json/`,data)
         .then(response => {
-            console.log('data',response);           
+            console.log('data',response);  
+            setAlert(true)         
         })
         .catch(err => {
             console.log('data',err.response)
+            setAlert(false)
         })    
     }
     
    let inputMail = null;
+   let msg= null;
 
    localStorage.getItem('social') ? inputMail = (
             <div className={classes.blockImage3}>
@@ -91,8 +95,18 @@ const FormUser = () => {
                 </div>
             </div>) : inputMail = null;
 
+  msg = alert ? toast.success('dddddd',{
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,}):null
+
     return (
         <div>
+           
             <div className={classes.blockImage1}>
                     <div className={classes.TitreContainer}>
                         <h2 className={classes.titreInContainer}>Infos Utilisateurs </h2>
@@ -108,9 +122,12 @@ const FormUser = () => {
                             </Form>
                         </div>     
                     </div>
+                    
              </div>
+             {msg}
              <div>
                    {inputMail}
+                   
              </div>
         </div>
     )
