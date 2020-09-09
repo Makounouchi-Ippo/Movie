@@ -135,6 +135,7 @@ export const  authLog = (email, password, history) => {
        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDJQ2C-WHsJXu5xVCG5Z98XQ31gRJrSV_E', authData)
         .then(response => {
             console.log('authlogAction',response);
+            localStorage.setItem('mail',response.data.email);
             localStorage.setItem('social',false)
             localStorage.setItem('token', response.data.idToken)
             localStorage.setItem('id', response.data.localId)
@@ -142,21 +143,22 @@ export const  authLog = (email, password, history) => {
             localStorage.setItem('animation', true)
             //localStorage.setItem('toolbar', true)
             dispatch(authSuccess(response.data.idToken, response.data.localId));
-            dispatch(checkAuthTimeout(response.data.expiresIn))   
+            dispatch(checkAuthTimeout(response.data.expiresIn))  
+             
             history.push('/home');
         })
         .catch(err => {
             dispatch(authFail(err.response.data.error.message));
         })
 
-        const verify = {
-            requestType:"VERIFY_EMAIL",
-            idToken:localStorage.getItem('token')
-        }
-        console.log('verifier',verify)
-        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDJQ2C-WHsJXu5xVCG5Z98XQ31gRJrSV_E',verify)
-        .then(e=>{ console.log(e)})
-        .catch(e=>{console.log(e)})
+        // const verify = {
+        //     requestType:"VERIFY_EMAIL",
+        //     idToken:localStorage.getItem('token')
+        // }
+        // console.log('verifier',verify)
+        // axios.post('https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDJQ2C-WHsJXu5xVCG5Z98XQ31gRJrSV_E',verify)
+        // .then(e=>{ console.log(e)})
+        // .catch(e=>{console.log(e)})
     };
 };
 

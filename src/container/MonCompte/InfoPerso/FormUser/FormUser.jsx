@@ -26,6 +26,9 @@ const FormUser = () => {
        setIdToken(localStorage.getItem('token'))
        setId(localStorage.getItem('id'))
        let idLocal = localStorage.getItem('id')
+       const mail ={
+           mail:localStorage.getItem('mail')
+       }
        axios.get(`https://movies-27cd5.firebaseio.com/${idLocal}/user.json/`)
        .then(response => {
             console.log('userrr//////',response.data)
@@ -37,6 +40,13 @@ const FormUser = () => {
        .catch(err => {
             //console.log('DIDMOUNT',err)
        })
+     axios.put(`https://movies-27cd5.firebaseio.com/${idLocal}/mail.json/`,mail)
+        .then(response => {
+         console.log('MAIL//////',response.data)
+         setMail(response.data.mail);
+        }).catch(error => {
+            console.log('MAILL//',error)
+        })
       },[]) 
 
     const handleSubmitMail =(event) => {
@@ -50,9 +60,10 @@ const FormUser = () => {
         .then(response => {
             setAlert1(false)
             setAlert(true)   
-            console.log('maillllllllll',response.data.email); 
-            setMail(response.data.email)     
-                   
+            const mail = { mail:response.data.email };
+            axios.put(`https://movies-27cd5.firebaseio.com/${id}/mail.json/`,mail)
+            .then(response =>{ console.log('MailResponse',response) })
+            .catch(error => { console.log('MailResponse',error) })
         })
         .catch(err => {
             console.log('maillllll',err.response.data.error.message)

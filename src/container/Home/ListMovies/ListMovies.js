@@ -58,8 +58,8 @@ const fetchInfiniteScroll =  () => dispatch(actions.InfiniteScroll(nameScrolling
                  hasMore={hasmore}
               >
                 <div className={classes.listmovie}>
-                  {movie && movie.map((data,index) => (
-                    <div data-aos="zoom-in" data-aos-duration='2000' key={index}>
+                  {movie && movie.map((data) => (
+                    <div data-aos="zoom-in" data-aos-duration='2000' key={data.id}>
                           <Movie  image={data.poster_path} data={data.original_title} id={data.id}  title={data.title} click={() => clickShowMovieDetail(data.id)} />
                           </div>
                       ))

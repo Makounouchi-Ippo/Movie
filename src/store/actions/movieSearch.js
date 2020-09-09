@@ -83,7 +83,7 @@ export const  movieSearch = (inputValue,idMovie) => {
     return dispatch => {
         dispatch(movieBegin());
             if (inputValue === "fetchDataPopular"){
-                axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=1e32f5c452c2267d5367589e9864ab1c&language=fr&page=1&include_adult=false&vote_count.gte=200`)
+                axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=1e32f5c452c2267d5367589e9864ab1c&language=fr&page=1&include_adult=false`)
                     .then(response => {
                         //console.log('serchBUttun',response.data)
                         dispatch(moviePopular(response.data.results))
@@ -164,7 +164,7 @@ export const InfiniteScroll = (nameScrolling,index,valueInput,filtreValue) => {
         dispatch(movieBegin());
         switch(nameScrolling){
 
-            case 'popular': axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=1e32f5c452c2267d5367589e9864ab1c&language=fr&page=${index}&include_adult=false&vote_count.gte=200`)
+            case 'popular': axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=1e32f5c452c2267d5367589e9864ab1c&language=fr&page=${index}&include_adult=false`)
                 .then(response => {
                     // console.log('page ====',index)
                     // console.log('reponse page',response)
