@@ -1,53 +1,69 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import classes from './ImageProfil.css'
 // import {FaPlusCircle} from 'react-icons/fa'
 import { CgProfile } from 'react-icons/cg'
-import {storage} from '../../../../fire'
+import firebase from '../../../../fire'
+
 
 const ImageProfil = () => {
 
     const [image, setImage] = useState(null);
-    const [url, setUrl] = useState("");
-    const [progress, setProgress] = useState(0);
-  
+    const [ good, setGood ] = useState(false);
+    const [photoSocial,setPhotosocial] = useState(false)
+    const [noPhoto,setNoPhoto] = useState(false)
 
-    let imageProfil = localStorage.getItem('photo');
-    let imageee = imageProfil === null ?  <CgProfile style={{height:'140px', width:'140px'}}/> : <img src={url} alt='' style={{height:'140px', width:'140px',borderRadius:'10px'}}/>
+    useEffect(() => {
+        let id = localStorage.getItem('id');
+        let fileName = 'image';
+        let newDirectory = id;
+        let fetchApi = localStorage.getItem('didmount')
+        if (fetchApi !== null && localStorage.getItem('photo') === null){
+            firebase.storage().ref(`images/${newDirectory}/${fileName}`).getDownloadURL()
+                    .then(function(url) {
+                        if(url) {
+                            setImage(url);
+                        }
+                    })
+                    .catch(err => {
+                        console.log('333')
+                    })
+            console.log(1111111);
+        }
+        if (localStorage.getItem('photo'))
+        {
+           setImage(localStorage.getItem('photo'))
+        } 
+    },[])
     
     const handleChange = e => {
         if (e.target.files[0]) {
-          setImage(e.target.files[0]);
-        }
+            if (e.target.files[0] !== image ) {
+                setImage(e.target.files[0]);
+                setGood(true);
+            }            
+        } 
       };
     
-      const handleUpload = () => {
-        let id = localStorage.getItem('id')
-        const uploadTask = storage.ref('images/').put(image);
-        console.log('========',uploadTask)
-        uploadTask.on(
-          "state_changed",
-          snapshot => {
-            const progress = Math.round(
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            );
-            setProgress(progress);
-          },
-          error => {
-            console.log(error);
-          },
-          () => {
-            storage
-              .ref("images")
-              .child(image.name)
-              .getDownloadURL()
-              .then(url => {
-                setUrl(url);
-              });
-          }
-        );
-      };
-    console.log("image :", image)
+      const handleUpload = async (e) => {
+        e.preventDefault(); 
+        if (image !== null && good){
+            let newDirectory = localStorage.getItem('id')
+            let fileName = 'image'
+            let file = image
+            let db =  firebase.storage().ref(`images/${newDirectory}/${fileName}`)
+                await db.put(file)
+                  .then( d =>  d.state === 'success'?localStorage.setItem('didmount',true) : null)
+                  .catch( d => console.log("do something"))
+            firebase.storage().ref(`images/${newDirectory}/${fileName}`).getDownloadURL().then(function(url) {
+              setImage(url)})
+              setGood(false);  
+             
+        }
+        else 
+            return
+       
+    }
 
     return (
         <React.Fragment>
@@ -56,14 +72,16 @@ const ImageProfil = () => {
             <div className={classes.blockImage1}>
                 <div className={classes.TitreContainer}>
                     <h2 className={classes.titreInContainer}> Image Profil </h2>
+                      <form> 
                         <div className={classes.blockimage2}>
-                            {imageee}
-                            {!imageProfil && <div className={classes.blockButtonPhoto}>
-                                <input type ='file' onChange={handleChange} />
+                            <img src={image} alt=''/>
+                            {!localStorage.getItem('photo') && <div className={classes.blockButtonPhoto}>
+                                <input type ='file' required  accept="image/*" onChange={handleChange} />
                                  <button onClick={handleUpload}>Upload</button>
                                 {/* <FaPlusCircle className={classes.ButtonPhoto} onClick={addPhoto}/> */}
-                        </div>  }    
-                    </div>
+                            </div>  }    
+                         </div>
+                    </form>
                 </div>
             </div>
         </React.Fragment>

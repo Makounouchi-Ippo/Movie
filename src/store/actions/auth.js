@@ -168,6 +168,7 @@ export const authCheckState = () => {
        
         // localStorage.removeItem('animation');
        // localStorage.removeItem('toolbar')
+       localStorage.removeItem('mail')
         const token = localStorage.getItem('token');
         const id = localStorage.getItem('id')
         if (!token)

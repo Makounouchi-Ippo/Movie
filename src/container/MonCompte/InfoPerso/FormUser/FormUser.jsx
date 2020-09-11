@@ -31,7 +31,7 @@ const FormUser = () => {
        }
        axios.get(`https://movies-27cd5.firebaseio.com/${idLocal}/user.json/`)
        .then(response => {
-            console.log('userrr//////',response.data)
+            //console.log('userrr//////',response.data)
             setAddress(response.data.address) 
             setName(response.data.name)   
             setLastname(response.data.lastname)  
@@ -42,10 +42,10 @@ const FormUser = () => {
        })
      axios.put(`https://movies-27cd5.firebaseio.com/${idLocal}/mail.json/`,mail)
         .then(response => {
-         console.log('MAIL//////',response.data)
+         //console.log('MAIL//////',response.data)
          setMail(response.data.mail);
         }).catch(error => {
-            console.log('MAILL//',error)
+            //console.log('MAILL//',error)
         })
       },[]) 
 

@@ -7,10 +7,38 @@ import {Link} from 'react-router-dom';
 import { connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {Nav, NavDropdown, Navbar} from 'react-bootstrap';
+import firebase from '../../../fire'
 
 class toolbar extends Component {
     state= {
         toolbar: true,
+        imageMail: null,
+        defaultImage: false
+    }
+
+    componentDidMount () {
+        let that = this; 
+        let id = localStorage.getItem('id');
+        let fileName = 'image';
+        let newDirectory = id;
+        let fetchApi = localStorage.getItem('didmount')
+        if (fetchApi !== null && localStorage.getItem('photo') === null){
+            firebase.storage().ref(`images/${newDirectory}/${fileName}`).getDownloadURL()
+                    .then(function(url) {
+                            console.log('fklggOOOOOOOOOOOOOO=====')
+                            that.setState({imageMail:url}, ()=> console.log('stateeeee====',that.state.imageMail))
+                    })
+                    .catch(err => {
+                        console.log('333',err)
+                    })
+        }
+        if (localStorage.getItem('photo')===null && fetchApi===null)
+        {
+            console.log('DEFAULT IMAGGGGGEEEEE')
+           this.setState({defaultImage:true})
+        } 
+
+        
     }
 
     render () {
@@ -18,10 +46,13 @@ class toolbar extends Component {
         const atHome = location === "/home";
         let photo;
 
-        if (localStorage.getItem('photo'))
+        if (this.state.imageMail)
+            photo = this.state.imageMail
+        else if  (localStorage.getItem('photo'))
             photo= localStorage.getItem('photo')
-        else 
+        else if (this.state.defaultImage === true)
             photo='https://lebackyard.fr/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png'
+      
        
          let items;
          if (this.props.isAuth){
@@ -36,7 +67,7 @@ class toolbar extends Component {
                                 />
                             </div>}>
                             <div >
-                                <NavDropdown.Item  href="/compte">Mon compte</NavDropdown.Item>
+                                <NavDropdown.Item  href="/compte/InfoPerso">Mon compte</NavDropdown.Item>
                                 <NavDropdown.Item  href="#action/3.2">Mon panier</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item style = {{backgroundColor:'black', color:'white'}} href="/logout">Deconnexion</NavDropdown.Item>
