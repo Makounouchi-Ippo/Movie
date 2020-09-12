@@ -36,7 +36,7 @@ class toolbar extends Component {
                                 />
                             </div>}>
                             <div >
-                                <NavDropdown.Item  href="/compte">Mon compte</NavDropdown.Item>
+                                <NavDropdown.Item  href="/compte/infoPerso">Mon compte</NavDropdown.Item>
                                 <NavDropdown.Item  href="#action/3.2">Mon panier</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item style = {{backgroundColor:'black', color:'white'}} href="/logout">Deconnexion</NavDropdown.Item>

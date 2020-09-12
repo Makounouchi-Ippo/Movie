@@ -23,12 +23,14 @@ const FormUser = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        
+        if (mail.length===0){
+            setMail(localStorage.getItem('mail'))
+        }
        setIdToken(localStorage.getItem('token'))
        setId(localStorage.getItem('id'))
        let idLocal = localStorage.getItem('id')
-       const mail ={
-           mail:localStorage.getItem('mail')
-       }
+    
        axios.get(`https://movies-27cd5.firebaseio.com/${idLocal}/user.json/`)
        .then(response => {
             console.log('userrr//////',response.data)
@@ -40,7 +42,7 @@ const FormUser = () => {
        .catch(err => {
             //console.log('DIDMOUNT',err)
        })
-     axios.put(`https://movies-27cd5.firebaseio.com/${idLocal}/mail.json/`,mail)
+     axios.get(`https://movies-27cd5.firebaseio.com/${idLocal}/mail.json/`)
         .then(response => {
          console.log('MAIL//////',response.data)
          setMail(response.data.mail);
@@ -96,6 +98,8 @@ const FormUser = () => {
     }
 
   
+
+
    let inputMail = null;
    let msgError= null;
    let msgSuccess = null;
@@ -143,8 +147,7 @@ const FormUser = () => {
                     </div>    
              </div>
              <div>
-                   {inputMail}
-                   
+                   {inputMail}          
              </div>
         </div>
     )
