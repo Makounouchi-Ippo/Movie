@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 import { connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {Nav, NavDropdown, Navbar} from 'react-bootstrap';
-import firebase from '../../../fire'
+
 
 class toolbar extends Component {
     state= {
@@ -16,41 +16,17 @@ class toolbar extends Component {
         defaultImage: false
     }
 
-    componentDidMount () {
-        let that = this; 
-        let id = localStorage.getItem('id');
-        let fileName = 'image';
-        let newDirectory = id;
-        let fetchApi = localStorage.getItem('didmount')
-        if (fetchApi !== null && localStorage.getItem('photo') === null){
-            firebase.storage().ref(`images/${newDirectory}/${fileName}`).getDownloadURL()
-                    .then(function(url) {
-                            console.log('fklggOOOOOOOOOOOOOO=====')
-                            that.setState({imageMail:url}, ()=> console.log('stateeeee====',that.state.imageMail))
-                    })
-                    .catch(err => {
-                        console.log('333',err)
-                    })
-        }
-        if (localStorage.getItem('photo')===null && fetchApi===null)
-        {
-            console.log('DEFAULT IMAGGGGGEEEEE')
-           this.setState({defaultImage:true})
-        } 
-
-        
-    }
+    
 
     render () {
         let location = this.props.location.pathname
         const atHome = location === "/home";
+        const atLogin = location === "/register"
         let photo;
 
-        if (this.state.imageMail)
-            photo = this.state.imageMail
-        else if  (localStorage.getItem('photo'))
+        if  (localStorage.getItem('photo'))
             photo= localStorage.getItem('photo')
-        else if (this.state.defaultImage === true)
+        else 
             photo='https://lebackyard.fr/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png'
       
        
@@ -96,11 +72,11 @@ class toolbar extends Component {
                             <Logo/>
                         </Link> 
                     </div>
-                    <div className={classes.button}>
+                   {atLogin && <div className={classes.button}>
                         <a href="/login"> 
                             <button className={classes.button}>Login</button>
                         </a> 
-                    </div>
+                    </div>} 
                 </header>
             )
     

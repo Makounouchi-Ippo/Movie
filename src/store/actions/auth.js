@@ -32,6 +32,7 @@ export const authLogout = () => {
     localStorage.removeItem('id')
     localStorage.removeItem('token')
     localStorage.removeItem('name')
+    localStorage.removeItem('mail')
     localStorage.removeItem('photo')
     localStorage.removeItem('email')
     localStorage.removeItem('social')
@@ -165,10 +166,9 @@ export const  authLog = (email, password, history) => {
 export const authCheckState = () => {
     return (dispatch) => {
         localStorage.removeItem('show')
-       
         // localStorage.removeItem('animation');
        // localStorage.removeItem('toolbar')
-       localStorage.removeItem('mail')
+     
         const token = localStorage.getItem('token');
         const id = localStorage.getItem('id')
         if (!token)

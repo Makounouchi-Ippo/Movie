@@ -8,22 +8,21 @@ import firebase from '../../../../fire'
 
 const ImageProfil = () => {
 
-    const [image, setImage] = useState(null);
-    const [ good, setGood ] = useState(false);
-    const [photoSocial,setPhotosocial] = useState(false)
-    const [noPhoto,setNoPhoto] = useState(false)
+    const [image, setImage] = useState('');
+   // const [url, setUrl] = useState("");
+    const [good, setGood] = useState(false);
+  
 
     useEffect(() => {
+        if (image.length === 0)
+            setImage(localStorage.getItem('mail'))
         let id = localStorage.getItem('id');
         let fileName = 'image';
         let newDirectory = id;
-        let fetchApi = localStorage.getItem('didmount')
-        if (fetchApi !== null && localStorage.getItem('photo') === null){
+        if (localStorage.getItem('photo') === null){
             firebase.storage().ref(`images/${newDirectory}/${fileName}`).getDownloadURL()
                     .then(function(url) {
-                        if(url) {
                             setImage(url);
-                        }
                     })
                     .catch(err => {
                         console.log('333')
@@ -35,6 +34,10 @@ const ImageProfil = () => {
            setImage(localStorage.getItem('photo'))
         } 
     },[])
+
+
+    //let imageProfil = localStorage.getItem('photo');
+   // let imageee = imageProfil === null ?  <CgProfile style={{height:'140px', width:'140px'}}/> : <img src={url} alt='' style={{height:'140px', width:'140px',borderRadius:'10px'}}/>
     
     const handleChange = e => {
         if (e.target.files[0]) {
@@ -53,7 +56,7 @@ const ImageProfil = () => {
             let file = image
             let db =  firebase.storage().ref(`images/${newDirectory}/${fileName}`)
                 await db.put(file)
-                  .then( d =>  d.state === 'success'?localStorage.setItem('didmount',true) : null)
+                  .then( d => console.log("Diiid iitt"))
                   .catch( d => console.log("do something"))
             firebase.storage().ref(`images/${newDirectory}/${fileName}`).getDownloadURL().then(function(url) {
               setImage(url)})
@@ -62,8 +65,7 @@ const ImageProfil = () => {
         }
         else 
             return
-       
-    }
+      };
 
     return (
         <React.Fragment>
@@ -72,9 +74,9 @@ const ImageProfil = () => {
             <div className={classes.blockImage1}>
                 <div className={classes.TitreContainer}>
                     <h2 className={classes.titreInContainer}> Image Profil </h2>
-                      <form> 
+                    <form> 
                         <div className={classes.blockimage2}>
-                            <img src={image} alt=''/>
+                            <img src={image} alt='' style={{height:'140px', width:'140px',borderRadius:'50%'}}/>
                             {!localStorage.getItem('photo') && <div className={classes.blockButtonPhoto}>
                                 <input type ='file' required  accept="image/*" onChange={handleChange} />
                                  <button onClick={handleUpload}>Upload</button>
