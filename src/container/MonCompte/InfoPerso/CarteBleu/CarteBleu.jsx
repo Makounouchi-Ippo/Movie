@@ -157,7 +157,7 @@ const CarteBleu = () => {
                     </div>
             </div>
         </div>
-      { !localStorage.getItem('photo') && <p className='deleteCompte' style={{textAlign:'center'}} onClick={()=>setModal(true)}>Supprimer mon compte</p>}  
+      { localStorage.getItem('social') && <p className='deleteCompte' style={{textAlign:'center'}} onClick={()=>setModal(true)}>Supprimer mon compte</p>}  
         <MyVerticallyCenteredModal
         show={modal}
         onHide={() => setModal(false)}
