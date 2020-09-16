@@ -1,9 +1,9 @@
 import React from 'react'
-import Logo from '../../../../assets/images/netflix-logo.jpg'
-import classes from './Logo.css'
+import Logo from '../../../../assets/images/netflix-logo.png'
+import './Logo.css'
 
 const logo = () => (
-    <div className={classes.Logo}>
+    <div className='Logo'>
         <img src={Logo} alt="Logo"/>
     </div>
 

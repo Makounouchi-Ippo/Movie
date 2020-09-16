@@ -12,7 +12,6 @@
 
 .blockActeur {
     display: flex;
-    -ms-flex-direction: row;
     flex-direction: row;
     justify-content: space-evenly;
     width: 68%;
@@ -28,7 +27,7 @@
     margin-top: 0px;
 }
 
-.Card {
+.CardActeur {
     height: 320px; 
     border-radius:5%;
     overflow:hidden;
@@ -62,7 +61,7 @@
     }
 }
 
-.Card:hover {
+.CardActeur:hover {
     transform: scale(1.1);
     transition-duration: 0.5s;
     filter: brightness(1);

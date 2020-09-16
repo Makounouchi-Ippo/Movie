@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import classes from './Home.css'
-import 'react-notifications/lib/notifications.css';
-import 'react-toastify/dist/ReactToastify.css';
 import Carousel from './Carrousel/Carrousel'
 import Button from './ButtonSelect/ButtonSelect'
 import ListMovies from './ListMovies/ListMovies'
@@ -14,12 +11,12 @@ class Home extends Component {
     state ={
         user: {},
         show:true,
-        netflix: false
+        netflix: false,
     }
 
 
 componentDidMount () { 
-
+    this._isMounted = true;
     var user = {}, 
     keys = Object.keys(localStorage),
     i = keys.length;
@@ -29,6 +26,9 @@ componentDidMount () {
     this.setState({user})   
 }
 
+componentWillUnmount() {
+    this._isMounted = false;
+  }
 
     setShow = () =>{
         this.setState({show:false})
@@ -63,8 +63,8 @@ componentDidMount () {
                     </Toast>
                 )
         }  
-    if (localStorage.hasOwnProperty('animation') === true){
-        displayComponent = (<video className={classes.video} src={process.env.PUBLIC_URL + '/netflix.mp4'} autoPlay={true} type="video/mp4"/>) 
+    if (localStorage.hasOwnProperty('animation') === true &&  this._isMounted === true ){
+        displayComponent = (<video className='video' src={process.env.PUBLIC_URL + '/netflix.mp4'} autoPlay={true} type="video/mp4"/>) 
        setTimeout(() => {
         localStorage.removeItem('animation');
         this.setState({netflix:true})    
@@ -85,7 +85,7 @@ componentDidMount () {
 
 
         return (
-            <div className={classes.page}>
+            <div className='pageHome'>
                {displayComponent}
             </div>
         )

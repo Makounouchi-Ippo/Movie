@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 import {Alert} from 'react-bootstrap'
-
-
-
- 
-import classes from '../Register/Register.css'
+import '../Register/Register.css'
 import * as regex from "../../../component/Utility/Regex"
 import * as actions from '../../../store/actions/index'
 import Spinner from "../../../component/UI/Spinner/Spinner"
-
 
 class Login extends Component {
     state = {
@@ -59,7 +54,7 @@ class Login extends Component {
         let error;
         if (this.props.error!=null)
         {
-            error =  <Alert variant="danger">
+            error =  <Alert  style={{zIndex:'500'}} variant="danger">
             <Alert.Heading>Team Netflix</Alert.Heading>
             <p>
                  Identifiant incorrect, veuillez le modifier !
@@ -68,38 +63,35 @@ class Login extends Component {
         }
 
         let form = (
-            <form className={classes.Form} onSubmit={this.handleSubmit}>
-                        <div className={classes.title}>
-                            <p>Se connecter</p>
-                        </div>
-                        <div>
-                            <label className={classes.input}>                         
-                                <input type="text" name="mail" 
+            <form onSubmit={this.handleSubmit}>
+                <p className='titleForm'>Se connecter</p>
+                <label className='FormR'>                         
+                                <input className='input' type="text" name="mail" 
                                 minLength="7" maxLength="30"
                                 placeholder="mail" 
                                 onChange={(e)=>this.handleInput(e)} 
                                 required/>
-                                <p className={classes.error}> {this.state.error.mail}</p>
+                                <p className='error'> {this.state.error.mail}</p>
                             </label>
-                            <label className={classes.input}>
-                                <input type="password" name="password" 
+                            <label className='FormR'>
+                                <input className='input' type="password" name="password" 
                                 minLength="6" maxLength="20"
                                 placeholder="Password" 
                                 onChange={(e)=>this.handleInput(e)}
                                 required/>
-                                <p className={classes.error}> {this.state.error.password}</p>
+                                <p className='error'> {this.state.error.password}</p>
                             </label >
-                            <div className={classes.mdp}>
-                                <a href="/forget-password"> Mot de passe oubliee ? </a>
-                            </div>
-                            <label>
-                            <input type="submit" value="Se connecter" className={classes.button} disabled={this.state.disable}/>
-                            </label>
-                            <div className={classes.inscrire}>
-                                <p> Pas encore inscrit</p> <a href="/register"> S'inscrire</a>
+                            <div className='mdp'>
+                                <Link to='/forget-password'>Mot de passe oubliee ?</Link>
                             </div>
                            
-                        </div>
+                            <input type="submit" value="Se connecter" className='buttonForm' disabled={this.state.disable}/>
+                            
+                            <div className='inscrire'>
+                                <p style={{textAlign:'center'}}> Pas encore inscrit</p> <Link to="/register">S'inscrire</Link>
+                            </div>
+                           
+                   
 
             </form>
         )
@@ -113,22 +105,16 @@ class Login extends Component {
             )   
         }
 
-      
         return (
-            <div className={classes.page}>
+            <div className='page'>
                 {/* {authRedirect} */}
-                <div className={classes.gauche}>
-                      {error} 
-                    <h1 className={classes.titre_login}> Que le spectacle commence !</h1>
-                      
-                        <div className={classes.Login}>           
-                               
+                <div className='gauche'>
+                    {error} 
+                    <h1 className='titre_login'> Que le spectacle commence !</h1>
+                    <div className='Login'>                  
                         {form}  
-                        </div>
-                    </div>   
-                    
-              
-
+                     </div>
+                </div>   
             </div>
         )
     }

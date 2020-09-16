@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import classes from '../Register/Register.css'
+import '../Register/Register.css'
 import * as regex from "../../../component/Utility/Regex"
 import firebase from '../../../fire.js';
 import {Alert} from 'react-bootstrap'
-
-
 
 class ForgetPwd extends Component {
     state = {
@@ -67,7 +65,7 @@ class ForgetPwd extends Component {
         if (this.state.response === 'vous recevrez dans quelques instants un mail avec les instructons pour rétablir le mot de passe')
         {
             msg = (
-                <Alert variant="success">
+                <Alert variant="success" style={{zIndex:'500'}}>
                 <Alert.Heading>Team Netflix</Alert.Heading>
                 <p>
                 vous recevrez dans quelques instants un mail avec les instructons pour rétablir le mot de passe
@@ -80,7 +78,7 @@ class ForgetPwd extends Component {
         if (this.state.response === "Votre email ne correspond pas avec celui fournit a l'inscription")
         {
            msg=(
-            <Alert variant="danger">
+            <Alert variant="danger" style={{zIndex:'500'}}>
             <Alert.Heading>Team Netflix</Alert.Heading>
             <p>
                  Votre email ne correspond pas avec celui fournit a l'inscription, veuillez le modifier !
@@ -90,38 +88,32 @@ class ForgetPwd extends Component {
            ) 
 
            }  
-        
+        //    style={{width:'90%', margin:'auto'}}
         form = (
-                <div className={classes.fpwd}> 
-                <form className={classes.Form} onSubmit={this.handleSubmit}>
-                <div className={classes.title}>
-                    <p>veuillez saisir votre adresse e-mail </p>
-                </div>
-                <div>
-                    <label className={classes.input}>                         
-                        <input type="text" name="mail" 
+            
+                <form className='pwd' onSubmit={this.handleSubmit}>
+                <p className='titleForm'>Saisissez votre e-mail</p>
+                    <label className='FormR'>                         
+                        <input className='input' type="text" name="mail" 
                         minLength="7" maxLength="30"
                         placeholder="mail" 
                         onChange={(e)=>this.handleInput(e)} 
                         required/>
-                        <p className={classes.error}> {this.state.error.mail}</p>
+                        <p className='error'> {this.state.error.mail}</p>
                     </label>
-                    <label>
-                    <input type="submit" value="Envoyer mail" className={classes.button} disabled={this.state.disable} onClick={this.Notify}/>
-                    </label>
-                </div>
-                
-        
+                  
+                    <input type="submit" value="Envoyer mail" className='buttonForm' disabled={this.state.disable} onClick={this.Notify}/>
+          
                </form>
-               </div>
+  
             )
     
 
         return (
-            <div className={classes.page}>
-                <div className={classes.gauche}>
+            <div className='page'>
+                <div className='gauche'>
                      {msg}
-                <h1 className={classes.titre_login}> Mot de passe oubliée</h1>
+                <h1 className='titre_login'> Mot de passe oubliée</h1>
                         {form}
                    
                 </div>

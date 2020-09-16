@@ -1,4 +1,4 @@
-.images{ 
+.imagesFilm{ 
     position: relative;
     display: flex;
     flex-direction: row;
@@ -8,7 +8,7 @@
     margin-top: 45px;
 
 }
-.image{
+.imageFilm{
   width: 68%;
   height: auto;
 }
@@ -28,7 +28,7 @@
 }
 
 @media (max-width : 1250px){
-  .image{
+  .imageFilm{
    width: 100%;
   }}
 

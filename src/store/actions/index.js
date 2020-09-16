@@ -13,14 +13,13 @@ export {
 
 export { 
     movieFail,
-    movieSuccess,
     movieSearch,
     movieFiltres,
     InfiniteScroll,
     clearMovie,
     pageInitial,
     movieShowDetail,
-    youtubeKey
+    reset
 
 }from './movieSearch'
 

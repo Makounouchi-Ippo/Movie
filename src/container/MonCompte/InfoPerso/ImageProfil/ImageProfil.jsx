@@ -1,10 +1,9 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
-import classes from './ImageProfil.css'
+import './ImageProfil.css'
 // import {FaPlusCircle} from 'react-icons/fa'
-import { CgProfile } from 'react-icons/cg'
+//import { CgProfile } from 'react-icons/cg'
 import firebase from '../../../../fire'
-
 
 const ImageProfil = () => {
 
@@ -27,12 +26,9 @@ const ImageProfil = () => {
                     .catch(err => {
                         console.log('333')
                     })
-            console.log(1111111);
         }
         if (localStorage.getItem('photo'))
-        {
            setImage(localStorage.getItem('photo'))
-        } 
     },[])
 
 
@@ -70,17 +66,17 @@ const ImageProfil = () => {
     return (
         <React.Fragment>
             <h1 style={{fontWeight:'normal',marginTop:'25px'}}> Info persos </h1>
-            <p className={classes.titleMonCompte}> Renseignez vos coordonnées pour pouvoir passez commandes </p>
-            <div className={classes.blockImage1}>
-                <div className={classes.TitreContainer}>
-                    <h2 className={classes.titreInContainer}> Image Profil </h2>
+            <p>Renseignez vos coordonnées pour pouvoir passez commandes</p>
+            <div className='blockImage1'>
+                <div className='TitreContainer'>
+                    <h2 className='titreInContainer'> Image Profil </h2>
                     <form> 
-                        <div className={classes.blockimage2}>
+                        <div className='blockimage2Photo'>
                             <img src={image} alt='' style={{height:'140px', width:'140px',borderRadius:'50%'}}/>
-                            {!localStorage.getItem('photo') && <div className={classes.blockButtonPhoto}>
-                                <input type ='file' required  accept="image/*" onChange={handleChange} />
+                            {!localStorage.getItem('photo') && <div className='blockButtonPhoto'>
+                                {/* <input type ='file' required  accept="image/*" onChange={handleChange} /> */}
                                  <button onClick={handleUpload}>Upload</button>
-                                {/* <FaPlusCircle className={classes.ButtonPhoto} onClick={addPhoto}/> */}
+                                {/* <FaPlusCircle className='ButtonPhoto} onClick={addPhoto}/> */}
                             </div>  }    
                          </div>
                     </form>

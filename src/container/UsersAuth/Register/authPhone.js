@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Button, Form} from 'react-bootstrap'
 import firebase from '../../../fire'
 import * as regex from '../../../component/Utility/Regex'
-import classes from './Register.css'
+import './Register.css'
 import {Alert} from 'react-bootstrap'
 
 
@@ -130,7 +130,7 @@ class Phone extends Component {
         let msgCatch;
        
         msg=(
-            <p className={classes.error}> {this.state.error.phone}</p>);
+            <p className='error'> {this.state.error.phone}</p>);
 
 
         if (this.state.errorCatch && this.state.codeError===null)
@@ -188,7 +188,7 @@ class Phone extends Component {
             <h2> <Form.Label  className=' pt-3 pb-1' style={{fontFamily: 'Roboto',color:'#c71414',fontWeight: 'bold',fontSize:'25px',textShadow: '2px 4px 5px rgba(0,0,0,0.3)'}}>Connexion via Smarthpone</Form.Label>  </h2> 
                <Form.Control  id="codeVerification" style={{borderRadius: '3rem',fontFamily: 'Sulphur Point'}} className="w-90" type="tel" placeholder="Enter the code verification "  minLength="6" maxLength="6"  onChange={(e)=>this.handleInput(e)} />
                 <Form.Text className="text-muted"  style={{ marginTop: '4px',fontFamily: 'Roboto'}}>         
-                <p className={classes.error}> {this.state.error1.codeVerification}</p>   
+                <p className='error'> {this.state.error1.codeVerification}</p>   
                 </Form.Text>
             <Button  style={{borderRadius:'6rem'}}  id="code" className='mt-2'  variant="danger" type="danger" disabled={this.state.disable1} onClick={(e)=>this.receiveCode(e)}>
                 S'inscrire

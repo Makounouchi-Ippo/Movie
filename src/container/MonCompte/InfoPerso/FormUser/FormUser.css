@@ -8,7 +8,7 @@
     border-radius: 50%; 
 }
 
-.blockImage1 {
+.blockImage1User {
     background-color: white;
     box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
     border-radius: 10px;
@@ -58,7 +58,7 @@
 }
 
 
-.button{
+.buttonUser{
     width: 100%;
     margin-top: 40px;
     text-align: center;

@@ -1,19 +1,15 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom';
-import {Modal} from 'react-bootstrap'
+import React, { Component } from 'react';
+import { withRouter, NavLink } from 'react-router-dom';
+import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
-// import firebase from '../../../fire.js'
-import {providerG, providerF,providerT } from '../../../fire.js';
-import {Alert} from "react-bootstrap"
-
-import Authphone from './authPhone'
-import classes from "./Register.css"
-import * as actions from '../../../store/actions/index'
-import * as regex from "../../../component/Utility/Regex"
-import Spinner from '../../../component/UI/Spinner/Spinner'
+import { providerG, providerF,providerT } from '../../../fire.js';
+import {Alert} from "react-bootstrap";
+import Authphone from './authPhone';
+import * as actions from '../../../store/actions/index';
+import * as regex from "../../../component/Utility/Regex";
+import Spinner from '../../../component/UI/Spinner/Spinner';
 import { SocialIcon } from 'react-social-icons';
-
-
+import "./Register.css";
 
 class UsersAuth extends Component {
     state = {
@@ -28,11 +24,6 @@ class UsersAuth extends Component {
         redirect: false,
         show: false
     }
-            
-   componentWillUnmount () {
-        this.props.modalFalse();
-     
-   };
 
     handleFormValid = () => {
         let store = ''; 
@@ -43,9 +34,8 @@ class UsersAuth extends Component {
         Object.keys(error).length===2 && store.length===0? this.setState({disable:false}):this.setState({disable:true});
     }
 
-
     displayInput = () => (
-        this.setState((prevstate) =>{
+        this.setState((prevstate) => {
           return {show: !prevstate.show}
         })
     )
@@ -53,7 +43,6 @@ class UsersAuth extends Component {
     handleInputValid = (name_input,value_input) => {
         let error = {...this.state.error};
         switch(name_input){
-           
             case 'mail': value_input.match(regex.mail)   ? error[name_input]='' : error[name_input] = "*votre mail nest pas valid";
                 break;
            
@@ -86,102 +75,87 @@ class UsersAuth extends Component {
     }
     
     render() {
-
         let form;
         let modal;
 
         let errorMail;
-        if (this.props.error!=null)
-        {  
+        if (this.props.error!=null) {  
             errorMail = (
-            <Alert variant="danger" style={{marginTop:'60px'}}>
-            <Alert.Heading>Team Netflix</Alert.Heading>
-            <p>
-                 Cette email existe, veuillez le modifier !
-            </p>
-          </Alert>)
-            
+            <Alert variant="danger" style={{marginTop:'60px',zIndex:'500'}}>
+                <Alert.Heading>Team Netflix</Alert.Heading>
+                <p>
+                    Cette email existe, veuillez le modifier !
+                </p>
+            </Alert>)
         }
         
-
-        if (this.props.modal === true)
-        {
-         modal = (
-         <div className={classes.modal}>
-            <Modal.Dialog>
-                <Modal.Header>
-                <Modal.Title > Bienvenue Jeune Netflixeur </Modal.Title>
-                </Modal.Header>
-            
-                <Modal.Body >
-                <p>Dorenavent vous faites parties de la communauté Netflix :)</p>
-                <p> Cliquez sur le lien ci-dessous vous serez dirigez vers la page de connexion </p>
-                <a href="http://localhost:3000/login" style={{textAlign:'center'}}> connexion</a>
-                </Modal.Body>  
-            </Modal.Dialog>
-         </div>
-         )
+        if (this.props.modal === true) {
+            modal = (
+            <div className='modal2'>
+                <Modal.Dialog>
+                    <Modal.Header>
+                        <Modal.Title > Bienvenue Jeune Netflixeur </Modal.Title>
+                    </Modal.Header>    
+                    <Modal.Body >
+                        <p>Dorenavent vous faites parties de la communauté Netflix :)</p>
+                        <p>Cliquez sur le lien ci-dessous vous serez dirigez vers la page de connexion </p>
+                        <NavLink to="/login" onClick={() => this.props.modalFalse()}>Connexion</NavLink>
+                        {/* <a href="http://localhost:3000/login" style={{textAlign:'center'}}> connexion</a> */}
+                    </Modal.Body>  
+                </Modal.Dialog>
+            </div>
+            )
         }
        
-
         if (this.props.loading)
-        {
             form = <Spinner/>
-        }
-        else if(this.props.modal===false)
-        {
+
+        else if (this.props.modal === false) {
             form = (
-            <div className={classes.gauche}>
-
-                    {errorMail}
-                <h1 className={classes.gauche_h1}>NETFLIX </h1>
-                
-                <h2 className={classes.h2}>Films, séries TV et bien plus en illimité!</h2>
-                 
-                <div className={classes.UsersAuth}>   
-                <form className={classes.Form} onSubmit={this.handleSubmit}>
-                        <div className={classes.title}>
-                            <p>S'inscrire</p>
-                        </div>
-                        <div>
-                            <label className={classes.input}>                         
-                                <input type="text" name="mail" 
-                                minLength="7" maxLength="30"
-                                placeholder="mail" 
-                                onChange={(e)=>this.handleInput(e)} 
-                                required/>
-                                <p className={classes.error}> {this.state.error.mail}</p>
+            <div className='gauche'>
+                {errorMail}
+                <h1 className='gauche_h1'>NETFLIX </h1>
+                <h2 className='h2'>Films, séries TV et bien plus en illimité!</h2>
+                <div className='UsersAuth'>   
+                    <form  onSubmit={this.handleSubmit}>
+                        <p className='titleForm'>S'inscrire</p>
+                            <label className='FormR'>                         
+                                <input className='input' type="text" name="mail" 
+                                    minLength="7" maxLength="30"
+                                    placeholder="mail" 
+                                    onChange={(e)=>this.handleInput(e)} 
+                                    required/>
+                                <p className='error'> {this.state.error.mail}</p>
                             </label>
-                            <label className={classes.input}>
-                                <input type="password" name="password" 
-                                minLength="6" maxLength="20"
-                                placeholder="Password" 
-                                onChange={(e)=>this.handleInput(e)}
-                                required/>
-                                <p className={classes.error}> {this.state.error.password}</p>
+                            <label className='FormR'>
+                                <input className='input' type="password" name="password" 
+                                    minLength="6" maxLength="20"
+                                    placeholder="Password" 
+                                    onChange={(e)=>this.handleInput(e)}
+                                    required/>
+                                <p className='error'> {this.state.error.password}</p>
                             </label >
-                            <label>
-                            <input type="submit" value="S'inscrire" className={classes.button} disabled={this.state.disable}/>
-                            </label>
-                        </div>
-
-            </form>
+                            
+                                <input type="submit" value="S'inscrire" className='buttonForm' disabled={this.state.disable}/>
+                        
+                        
+                    </form> 
                 </div>
-                <div className={classes.social_button}>
+                <div className='social_button'>
                     <SocialIcon network="facebook" onClick={()=>this.authsocial(providerF)} />
                     <SocialIcon network="twitter" onClick={()=>this.authsocial(providerT)} />
                     <SocialIcon network="google" onClick={() =>this.authsocial(providerG)} />
                     <div style={{backgroundColor:'yellow', borderRadius:'50%', width:"50px", height:'50px', display:'flex', alignItems:'center', justifyContent:'center'}} onClick={this.displayInput}>
                         <i style={{fontSize:'40px', color:'black'}} className="fa fa-mobile-phone" ></i>
                     </div>
-                 </div>
-                 {this.state.show ? <Authphone/> : null}
+                </div>
+                {this.state.show ? <Authphone/> : null}
             </div>
             )             
         }
 
         return (
-            <div className={classes.page}>
+            <div className='page'>
                {form}
                {modal} 
             </div>
@@ -191,21 +165,19 @@ class UsersAuth extends Component {
 
 const mapStateToProps = state => {
     return {
-      loading: state.auth.loading,
-      error: state.auth.error,
-      modal: state.auth.modal,
+        loading: state.auth.loading,
+        error: state.auth.error,
+        modal: state.auth.modal,
     };
-  };
+};
 
 const mapDispatchToProps = dispatch => {
     return {
-      onAuth: (email, password) => dispatch(actions.auth(email, password)),
-      modalFalse : () => dispatch(actions.modalFalse()),
-      socialAuth:(provider,history) => dispatch(actions.socialAuth(provider,history)),
-      socialAuthTwitter:(provider,history) => dispatch(actions.socialTwitter(provider,history))
-  
+        onAuth: (email, password) => dispatch(actions.auth(email, password)),
+        modalFalse : () => dispatch(actions.modalFalse()),
+        socialAuth:(provider,history) => dispatch(actions.socialAuth(provider,history)),
+        socialAuthTwitter:(provider,history) => dispatch(actions.socialTwitter(provider,history))
     };
-  };
+};
   
-
-  export default withRouter(connect(mapStateToProps, mapDispatchToProps) (UsersAuth));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps) (UsersAuth));

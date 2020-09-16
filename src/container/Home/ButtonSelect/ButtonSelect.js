@@ -3,7 +3,7 @@ import Select from 'react-select';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/index'
-import classes from './ButtonSelect.css'
+import './ButtonSelect.css'
 
 const Genre = [
     { value: '28', label: 'Action'},
@@ -54,9 +54,7 @@ class ButtonSelect extends Component{
 
     componentDidUpdate (prevProps) {
         if (this.props.inputValue !== prevProps.inputValue)
-         
-
-        {this.setState({selectedOption:{ Genre: {value: null, label: 'Genre'}, Years: {value: null , label: 'Years'},SortBy: {value: null, label: 'SortBy'}}})}}
+            {this.setState({selectedOption:{ Genre: {value: null, label: 'Genre'}, Years: {value: null , label: 'Years'},SortBy: {value: null, label: 'SortBy'}}})}}
 
 
     handleInput = (value,id) => {
@@ -82,7 +80,7 @@ class ButtonSelect extends Component{
 
         return (
             <div style={{marginTop:'50px'}}> 
-                <div className={classes.blockButton}>
+                <div className='blockButtonSelect'>
                     <div style={{width:'230px', margin:'20px'}}>
                         <Select options={Genre} 
                             isSearchable={false}

@@ -1,4 +1,4 @@
-.blockimage2{
+.blockimage2Photo{
     position: relative;
     margin: auto;
     margin-top: 35px;
@@ -14,7 +14,7 @@
     background-color: white;
     width: 35px;
     height: 35px;
-    bottom: 36px;
+    bottom: -84px;
     right: -92px;
 }
 
@@ -27,16 +27,16 @@
 
 .blockImage1 {
     background-color: white;
-     box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
-     border-radius: 10px;
-     height: 300px;
-     margin-top: 45px;
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    height: 300px;
+    margin-top: 45px;
+    margin-bottom: 20px;
 }
 
 .TitreContainer {
     background-image: radial-gradient(circle at 50% 50%, #ae0000, #000000);
     border-radius: 10px 10px 0px 0px;
-    height: 26%;
     display: flex;
     flex-direction: column;
 }
@@ -47,11 +47,10 @@
     color: white;
 }
 
-
-@media (max-width : 305px){
-    .blockimage2{
+/* @media (max-width : 305px){
+    .blockimage2Photo{
         margin-top: 15px;
-    }}
+    }} */
 @media (max-width : 450px){
      .titreInContainer{
         font-size: 25px;

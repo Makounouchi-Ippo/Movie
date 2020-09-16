@@ -1,8 +1,8 @@
 import React from 'react'
-import classes from './ToggleButton.css'
+import './ToggleButton.css'
 
 const togglebutton = (props) => (
-    <div className={classes.Togglebutton} onClick={props.click}>
+    <div className='Togglebutton' onClick={props.click}>
         <div></div>
         <div></div>
         <div></div>

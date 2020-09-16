@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import Movie from './Movie/Movie';
-import classes from './ListMovies.css'
+import './ListMovies.css'
 import * as actions from '../../../store/actions/index'
 import Spinner from '../../../component/UI/Spinner/Spinner'
 import { useEffect,useCallback} from 'react';
@@ -57,7 +57,7 @@ const fetchInfiniteScroll =  () => dispatch(actions.InfiniteScroll(nameScrolling
                  next={fetchImages}
                  hasMore={hasmore}
               >
-                <div className={classes.listmovie}>
+                <div className='listmovie'>
                   {movie && movie.map((data) => (
                     <div data-aos="zoom-in" data-aos-duration='2000' key={data.id}>
                           <Movie  image={data.poster_path} data={data.original_title} id={data.id}  title={data.title} click={() => clickShowMovieDetail(data.id)} />

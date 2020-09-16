@@ -1,22 +1,22 @@
 import React from 'react'
-import classes from './Social.css'
+import './Social.css'
 import Switch from "react-switch";
 
 const Achat = () => {
     return (
-    <div className={classes.Achat}>
-            <div className={classes.blockAchat}>
-                <div className={classes.blockTitre}>
-                     <h1 className={classes.titreInBlock}> Social </h1>
+    <div className='Achat'>
+            <div className='blockAchat'>
+                <div className='blockTitre'>
+                     <h1 className='titreInBlock'> Social </h1>
                 </div>
-                <div className={classes.blockCarteAchat}>
-                    <div className={classes.blockHaut}>
-                        <div className={classes.HautblockHaut}>
-                            <h3 className={classes.h3}> Rejoignez-nous dès aujourd'hui </h3>
+                <div className='blockCarteAchat'>
+                    <div className='blockHaut'>
+                        <div className='HautblockHaut'>
+                            <h3 className='h3'> Rejoignez-nous dès aujourd'hui </h3>
                             <h4> Avantages à devenir membre :</h4>
                         </div>
-                        <div className={classes.BasblockHaut}>
-                            <div className={classes.BasGaucheblockHaut}>
+                        <div className='BasblockHaut'>
+                            <div className='BasGaucheblockHaut'>
                                   <ul>
                                     <li> Prenez part aux discussions sur les films et séries </li>
                                     <li> Contribuez à améliorer les informations de notre base de données.</li>
@@ -24,26 +24,26 @@ const Achat = () => {
                                     <li> Profitez des dernieres infos et exclu grace a un communauté reactive</li>
                                 </ul>
                             </div>
-                            <div className={classes.BasDroiteblockHaut}>
-                                <div className={classes.switch}>
+                            <div className='BasDroiteblockHaut'>
+                                <div className='switch'>
                                   <Switch  />
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className={classes.blockBas}>
-                        <div className={classes.HautblockHaut}>
+                    <div className='blockBas'>
+                        <div className='HautblockHaut'>
                                 <h3 > Newsletter </h3>
                         </div>
-                        <div className={classes.BasblockHaut1}>
-                            <div className={classes.BasGaucheblockHaut1}>
+                        <div className='BasblockHaut1'>
+                            <div className='BasGaucheblockHaut1'>
                                 <ul>
                                     <li> Info en exlusivité </li>
                                     <li> Profitez en exclu des info sur tout les film tendance</li>
                                 </ul>
                             </div>
-                            <div className={classes.BasDroiteblockHaut}>
-                                 <div className={classes.switch}>
+                            <div className='BasDroiteblockHaut'>
+                                 <div className='switch'>
                                     <Switch/>
                                 </div>
                             </div>

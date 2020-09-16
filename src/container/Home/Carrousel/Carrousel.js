@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Carousel } from 'react-bootstrap';
-import classes from '../Home.css'
+import '../Home.css'
 
 
 
@@ -14,7 +14,7 @@ class DemoCarousel extends Component {
 
               <Carousel.Item style={{ height:'520px'}}>
               <Carousel.Caption style={{top:'0',right:'0px'}}>
-                  <h3  className={classes.font} style={{fontWeight:'bold'}}>Films en exclusivite mondial </h3>
+                  <h3  className='font' style={{fontWeight:'bold'}}>Films en exclusivite mondial </h3>
                 </Carousel.Caption>
                 <img style={{ height:'520px'}}
                   className="d-block w-100"
@@ -32,7 +32,7 @@ class DemoCarousel extends Component {
                   alt="First slide"
                 />
                 <Carousel.Caption style={{top:'0',right:'0px'}}>
-                  <h3 style={{fontWeight:'bold'}} className={classes.font}>Profiter des meilleur dessins animé et manga </h3>
+                  <h3 style={{fontWeight:'bold'}} className='font'>Profiter des meilleur dessins animé et manga </h3>
                 </Carousel.Caption>
               </Carousel.Item>
 
@@ -46,7 +46,7 @@ class DemoCarousel extends Component {
                 />
 
                 <Carousel.Caption style={{top:'0',right:'-20'}}>
-                  <h3  className={classes.font} style={{fontWeight:'bold'}}>Toute les derniere series  en exclu</h3>
+                  <h3  className='font'style={{fontWeight:'bold'}}>Toute les derniere series  en exclu</h3>
               
                 </Carousel.Caption>
               </Carousel.Item>

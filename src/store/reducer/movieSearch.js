@@ -92,6 +92,20 @@ const initialState = {
     });
   }
 
+  const resetMovie = (state, action) => {
+    let filtres = {
+      Genre: {value: null, label: 'Genre'}, 
+      Years: {value: null , label: 'Years'},
+      SortBy: {value: null, label: 'SortBy'}
+    }
+    return updateObject( state, {
+     selectedOption: filtres,
+     inputValue:'',
+     movie: [],
+     page: 1
+    });
+  }
+
 
 
   const reducer = ( state = initialState, action ) => {
@@ -105,6 +119,7 @@ const initialState = {
         case actionTypes.CLEAR_MOVIE: return clearMovie(state,action);
         case actionTypes.PAGE_INITIAL: return pageInitial(state,action);
         case actionTypes.MOVIE_DETAIL: return movieDetail(state,action);
+        case actionTypes.RESET_MOVIE: return resetMovie(state,action);
         default:
             return state;
     }

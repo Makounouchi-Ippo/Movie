@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './ImagePlay.css'
+import './ImagePlay.css'
 import {useState}from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPlayCircle,faShoppingCart} from '@fortawesome/free-solid-svg-icons'
@@ -20,8 +20,8 @@ const ImagePlay = (props) => {
     {
         image = (
             <div >
-              <div className={classes.images} >
-              <img className={classes.image3} src={affiche} alt={props.id}/>
+              <div className='imagesFilm' > 
+              <img className='image3' src={affiche} alt={props.id}/>
                <FontAwesomeIcon style ={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} icon={faPlayCircle} onClick={handleShow} />
                <p style={{position:"absolute",color:'white',width:'200px',textAlign:'center',fontWeight:'bold',fontSize:'1,9em',bottom:'25px'}}> {props.titre} </p>
           </div> 
@@ -41,15 +41,14 @@ const ImagePlay = (props) => {
                 </Modal>
         </div>
         )
-        
     }
 
     if(props.afficheFilm === null && props.afficheFilm2 !== null){
         image = (
             <div >
                  <p style={{color:'white',textAlign:'center',fontWeight:'bold',fontSize:'1,9em'}}> {props.titre} </p>
-              <div className={classes.images} >
-              <img className={classes.image2} src={`https://image.tmdb.org/t/p/original/${props.afficheFilm2}`} alt={props.id}/>
+              <div className='imagesFilm' >
+              <img className='image2' src={`https://image.tmdb.org/t/p/original/${props.afficheFilm2}`} alt={props.id}/>
                <FontAwesomeIcon style ={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} icon={faPlayCircle} onClick={handleShow} />
           </div> 
           <Modal
@@ -73,8 +72,8 @@ const ImagePlay = (props) => {
         image = (
             <div>
                  <p style={{color:'white',textAlign:'center',fontWeight:'bold',fontSize:'1,9em'}}> {props.titre} - {props.date} </p>
-              <div className={classes.images} >
-                 <img className={classes.image} src={`https://image.tmdb.org/t/p/original/${props.afficheFilm}`} alt={props.id}/>
+              <div className='imagesFilm' >
+                 <img className='imageFilm' src={`https://image.tmdb.org/t/p/original/${props.afficheFilm}`} alt={props.id}/>
                  <FaPlay style={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} onClick={handleShow}/>
                  <p style ={{position:'absolute',color:'gold',textAlign: 'center',width: '400px',top: '55%',fontWeight: 'bold',fontSize:'x-large'}}> BANDE-ANNONCE</p>
                  <button style={{position:"absolute", right: '17%',color:'white',height:'40px',backgroundColor:'red',width:'200px',fontWeight:'bold',fontSize:'1,9em',bottom:'30px',borderRadius:'10px'}}> <FontAwesomeIcon  icon={faShoppingCart}/> Ajouter au panier   </button>
@@ -100,8 +99,8 @@ const ImagePlay = (props) => {
         image = (
             <div>
                  <p style={{color:'white',textAlign:'center',fontWeight:'bold',fontSize:'1,9em'}}> {props.titre} - {props.date} </p>
-              <div className={classes.images} >
-                 <img className={classes.image} src={`https://image.tmdb.org/t/p/original/${props.afficheFilm}`} alt={props.id}/>
+              <div className='imagesFilm' >
+                 <img className='imageFilm' src={`https://image.tmdb.org/t/p/original/${props.afficheFilm}`} alt={props.id}/>
                  <FaPlay style={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} onClick={handleShow}/>
                  <p style ={{position:'absolute',color:'gold',textAlign: 'center',width: '400px',top: '55%',fontWeight: 'bold',fontSize:'x-large'}}> BANDE-ANNONCE</p>
                  <button style={{position:"absolute", right: '17%',color:'white',height:'40px',backgroundColor:'red',width:'200px',fontWeight:'bold',fontSize:'1,9em',bottom:'30px',borderRadius:'10px'}}> <FontAwesomeIcon  icon={faShoppingCart}/> Ajouter au panier   </button>

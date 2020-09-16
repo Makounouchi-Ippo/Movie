@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 class Logout extends Component {
 
     componentDidMount() {
+        this.props.reset();
+        this.props.popular();
         this.props.onLogout();
          
     }
@@ -19,7 +21,9 @@ class Logout extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogout: () => dispatch(actions.authLogout())
+        onLogout: () => dispatch(actions.authLogout()),
+        reset: () => dispatch(actions.reset()),
+        popular: () => dispatch(actions.movieSearch('fetchDataPopular'))
       };
     }
 

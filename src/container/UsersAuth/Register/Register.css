@@ -5,8 +5,6 @@
 @import url('https://fonts.googleapis.com/css?family=Abel&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 
-
-
 .page {
     display: flex;
     background-image: url('https://cdn.pixabay.com/photo/2013/04/11/02/20/film-102681_1280.jpg');
@@ -15,7 +13,6 @@
     background-size: cover;
     width: 100%;
     min-height: 100vh;
-    
     z-index: 300;
 }
 
@@ -25,9 +22,7 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
-  
 }
-
 
 .titre_login{
     height: 100px;
@@ -40,7 +35,6 @@
     font-size: 60px;
     text-shadow: 2px 4px 5px rgba(0,0,0,0.3);
 }
-
 
 .gauche_h1 {
     height: 100px;
@@ -93,7 +87,7 @@
     display: flex;
     justify-content: center;
     width: 400px;
-    height: 420px;
+    height: 440px;
     border-radius: 50px;
     opacity: 0.7;
     margin-top: 160px;
@@ -102,19 +96,17 @@
     box-sizing: border-box;
 }
 
-.fpwd{
+.pwd{
     display: flex;
-    -ms-flex-pack: center;
-    justify-content: center;
-    width: 600px;
-    padding-top: 20px;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    padding: 20px;
     border-radius: 50px;
     opacity: 0.7;
-    margin-top: inherit;
-    -webkit-box-shadow: 3px 3px grey;
+    margin-top: 80px;
     box-shadow: 3px 3px grey;
     background-color: white;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
 
 }
@@ -134,10 +126,11 @@
     box-sizing: border-box;
 }
 
-.title{
+.titleForm{
     display: flex;
     font-weight: bold;
     justify-content: center;
+    text-align: center;
     font-family: 'Abel', sans-serif;
     text-shadow: 2px 4px 5px rgba(0,0,0,0.3);
     font-size: 45px;
@@ -145,20 +138,19 @@
     margin-top: 10px;
 }
 
-
-
-.Form label{
-    margin: 15px;
-    display: flex; 
+.FormR{
+    width: 100%;
+    margin: 25px 0;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: space-between;
     justify-content: space-around;
     font-size: 34px;
 }
 
-
-.input input{
-    width: 90%;
+.input{
+    width: 100%;
     font-family: 'Sulphur Point', sans-serif;
     font-size: 15px;
     padding-left: 12px;
@@ -168,12 +160,8 @@
     border: none;
     border-bottom: solid black 1px;
 }
-.input {
-    display: flex;
-    flex-direction: column;
-}
 
-.button{
+.buttonForm{
     width: 190px;
     height: 40px;
     color: #fff !important;
@@ -188,7 +176,7 @@
     transition: all 0.4s ease 0s;
     margin: 25px;
 }
-.button:disabled{
+.buttonForm:disabled{
     background: rgba(128, 128, 128, 0.657);
     color: white;
     cursor: not-allowed;
@@ -226,7 +214,7 @@
 
 }
 
-.modal{
+.modal2{
     font-family: 'Arvo', serif;
     -ms-flex-pack: justify;
     /* justify-content: space-between; */
@@ -304,13 +292,21 @@
     }
 }
 
+
+@media (max-width: 520px) {
+    .pwd {
+        width: 95%
+    }
+}
+
 @media(max-width: 462px)
 {
     .UsersAuth,
     .Login
     {
         width: 82%;
-        height: 350px;
+        margin-top: 35px;
+
     }
     .Forgetpwd {
         width: 82%;
@@ -329,7 +325,7 @@
 {
     .inscrire{
         display: flex;
-        flex-direction: column;
+        /* flex-direction: column; */
     }
     .mdp a{
         margin-right: 10px;

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import * as actions from '../../store/actions/index'
 import { useEffect} from 'react';
-import classes from './MovieDetail.css'
+import './MovieDetail.css'
 import ImagePlay from './ImagePlay/ImagePLay'
 import InfoMovie from './InfoMovie/InfoMovie'
 import Acteurs from './Acteurs/Acteurs'
@@ -18,7 +18,7 @@ const MovieDetail = (props) => {
   const fetchMovieDetail =  () => dispatch(actions.movieSearch('showMovieDetail',props.match.params.id))
   
   useEffect(() => {
-    AOS.init()
+    //AOS.init()
     window.scrollTo(0,0)
     fetchMovieDetail()
   },
@@ -26,7 +26,7 @@ const MovieDetail = (props) => {
 
    console.log('movieeeDetail==',moviedetail)
     return (
-      <div data-aos="zoom-out-up" data-aos-duration='2000' className={classes.MovieDetail}>
+      <div >
         {moviedetail && youtubeKey_release && <ImagePlay afficheFilm={moviedetail.backdrop_path} bandeAnnonce={youtubeKey_release.youtube} date={youtubeKey_release.date} titre={moviedetail.original_title} afficheFilm2={moviedetail.poster_path} id={moviedetail.id}/> } 
         {moviedetail && <InfoMovie duree={moviedetail.runtime} popularite={moviedetail.popularity} genre= {moviedetail.genres} vote={moviedetail.vote_average*10} synopsys={moviedetail.overview} pays ={moviedetail.production_countries} /> }
         {moviedetail && <Acteurs data={moviedetail.credits.cast} title="Acteurs" /> }

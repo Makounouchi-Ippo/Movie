@@ -1,7 +1,7 @@
 import React from 'react';
 import Coverflow from 'react-coverflow';
 import { withRouter } from 'react-router-dom';
-import classes from './SimilarMovie.css'
+import './SimilarMovie.css'
 
 const SimilarMovie = (props) => {
     console.log('similar',props.similarMovie.results.length)
@@ -17,10 +17,10 @@ const SimilarMovie = (props) => {
       ))}
     
     return (
-      <div className={classes.blockSimilarMovie} >
+      <div className='blockSimilarMovie' >
         <h5 style={{color:'white'}}> Films similaires: </h5>
         <Coverflow width="350" height="850" marginTop="80px"
-              className={classes.coverflow}
+              className='coverflow'
               displayQuantityOfSide={2}
               navigation
               infiniteScroll

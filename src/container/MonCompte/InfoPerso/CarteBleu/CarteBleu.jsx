@@ -1,26 +1,155 @@
 import React from 'react'
-import classes from './CarteBleu.css'
+import { useState,useEffect } from 'react'
+import axios from 'axios'
+import './CarteBleu.css'
 import Cards from 'react-credit-cards';
-import 'react-credit-cards/es/styles-compiled.css';
-
-
-
+import 'react-credit-cards/es/styles-compiled.css'
+import Input from 'muicss/lib/react/input';
+import Button from 'muicss/lib/react/button';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {Modal} from 'react-bootstrap'
+import { useHistory} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 const CarteBleu = () => {
+    const history = useHistory();
+    const [cvc, setCvc] = useState('')
+    const [focus, setFocus] = useState('')
+    const [name, setName] = useState('')
+    const [expiry, setExpiry] = useState('')
+    const [number, setNumber] = useState('')
+    const [modal, setModal] = useState(false);
+  
+   
+    useEffect(() => {
+       let idLocal = localStorage.getItem('id')
+       axios.get(`https://movies-27cd5.firebaseio.com/${idLocal}/CarteBleu.json/`)
+       .then(response => {
+            //console.log('userrr//////',response.data)
+            setCvc(response.data.cvc) 
+            setName(response.data.name)   
+            setExpiry(response.data.expiry)  
+            setNumber(response.data.number)  
+       })
+       .catch(err => {
+            //console.log('DIDMOUNT',err)
+       })
+      },[]) 
+
+
+    const handleSubmit =(event) => {
+        event.preventDefault(); 
+        console.log('STATE===',cvc,name,expiry,number)
+        const data = {
+            name:name,
+            number: number,
+            cvc: cvc,
+            expiry: expiry,
+        };
+        //setAlert(false)
+        axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/CarteBleu.json/`,data)
+        .then(response => {
+            console.log('data',response);  
+            toast.success('Votre profil a ete mis a jour😀')
+          
+        })
+        .catch(err => {
+            console.log('data',err.response)
+            toast.error('Erreur, veuillez ressayer plus tard😮')
+     
+        })    
+    }
+
+    const deleteAccount = () => {
+        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:delete?key=AIzaSyDJQ2C-WHsJXu5xVCG5Z98XQ31gRJrSV_E',{
+        "idToken": localStorage.getItem('token')
+      }) 
+      .then(res =>{
+          toast.info('Votre compte a bien ete supprimer!')
+          localStorage.removeItem('token')
+          localStorage.removeItem('social')
+          localStorage.removeItem('id')
+          localStorage.removeItem('mail')
+          localStorage.removeItem('show')
+          console.log('REPONSE DELETE ACCOUNT ===== ',res)
+          setModal(false);
+          })
+      .catch(err => {
+                console.log('REPONSE DELETE ACCOUNT ===== ',err)
+                toast.error('Erreur, veuillez vous reconnectez😮')
+
+        })
+    }
+
+    
+    function MyVerticallyCenteredModal(props) {
+        return (
+          <Modal
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+          >
+             <Modal.Body  style={{backgroundColor:'black',color:'white'}}>
+            <p>
+              Nous sommes triste de vous voir partir <img src='😭' alt=''/> <br/>
+              Etes vous sur de vouloir supprimer votre compte ?<br/>
+              Cette action entrainera une supression definitive de vos données
+            </p>
+
+            </Modal.Body>
+            <Modal.Footer style={{backgroundColor:'black',color:'white',display:'flex',justifyContent:'space-between'}}>
+              <Button onClick={props.onHide} style={{backgroundColor:'grey',color:'white'}}>Close</Button>
+              <Button style={{backgroundColor:'red',color:'white'}} onClick={deleteAccount}>Confirmer suppression</Button>
+            </Modal.Footer>
+          </Modal>
+        );
+      }
+
+      if (localStorage.getItem('token')=== null){
+        setTimeout(() => {
+          return(history.push('/home'))
+        }, 5000);
+        
+      }
     return (
-        <div className={classes.blockImage1}>
-             <div className={classes.TitreContainer}>
-                <h2 className={classes.titreInContainer}> Carte Bleue </h2>   
-                <Cards
-                        cvc={'this.state.cvc'}
-                        expiry={'this.state.expiry'}
-                        focused={'this.state.focus'}
-                        name={'this.state.name'}
-                        number={'this.state.number'}
-                />         
+    <>
+        <div className='blockImage100'>
+           <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover/>
+            <div id="PaymentForm" className='TitreContainerCarte'>
+                <h2 className='titreInContainerCarte'> Carte Bleue </h2>   
+                    <div className='blockCartebleu'>
+                        <div className='Cartebleu'>
+                        <Cards 
+                            cvc={cvc}
+                            expiry={expiry}
+                            focused={focus}
+                            name={name}
+                            number={number}
+                            />
+                        </div>
+                        <form className='InputCartebleu' onSubmit={handleSubmit}>
+                                <Input  label="Card Number" minLength="16" maxLength="16"  value={number} onChange={(e) => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} pattern ="[0-9]+" title="please enter number only" required type='tel'  name='number' floatingLabel={true} />
+                                <Input  label="Name" minLength="2" maxLength="25"  value={name} onChange={(e) => setName(e.target.value)} onFocus={e => setFocus(e.target.name)}  pattern="^[A-Za-z -]+$" title="please enter letters only" type="text" required  floatingLabel={true} />
+                                <div className='cvcDateCartebleu'>
+                                    <Input  label="Date expiry" minLength="4" maxLength="4"  value={expiry} onChange={(e) => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} pattern ="[0-9]+" title="please enter number only"  required  type="text" name ='expiry' floatingLabel={true} />
+                                    <Input  label="CVC" minLength="3" maxLength="3"  value={cvc} onChange={(e) => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} pattern ="[0-9]+" title="please enter number only"  type="tel" name='cvc' required  floatingLabel={true} />
+                                </div>
+                                <div className='buttonUserCarteBleu'>
+                                    <Button  className='buttonCarteBleu' variant="raised" style={{textAlign:'center'}}>Submit</Button>
+                                </div>
+                       </form>
+                    </div>
             </div>
         </div>
+      { !localStorage.getItem('photo') && <Button  className='buttonCarteBleu' variant="raised" style={{textAlign:'center'}} onClick={()=>setModal(true)}>Supprimer son compte</Button>}  
+        <MyVerticallyCenteredModal
+        show={modal}
+        onHide={() => setModal(false)}
+      />
+      </>
     )
 }
 
-export default CarteBleu;
+export default  withRouter((CarteBleu));

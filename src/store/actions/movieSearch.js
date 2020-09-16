@@ -77,12 +77,18 @@ export const movieFail = (error) => {
 };
 
 
+export const reset = () => {
+    return {
+        type: actionTypes.RESET_MOVIE
+    };
+};
 
 
 export const  movieSearch = (inputValue,idMovie) => {
     return dispatch => {
         dispatch(movieBegin());
             if (inputValue === "fetchDataPopular"){
+                console.log('787878787878787')
                 axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=1e32f5c452c2267d5367589e9864ab1c&language=fr&page=1&include_adult=false`)
                     .then(response => {
                         //console.log('serchBUttun',response.data)
@@ -130,8 +136,8 @@ export const movieFiltres = (filtreValue) => {
     let fetchApi=`https://api.themoviedb.org/3/discover/movie?api_key=1e32f5c452c2267d5367589e9864ab1c&language=fr&include_adult=false&vote_count.gte=200`
 
     if (filtreValue.Genre.value) {fetchApi = fetchApi +`&with_genres=${filtreValue.Genre.value}`}
-   if  (filtreValue.SortBy.value) {fetchApi = fetchApi +`&sort_by=${filtreValue.SortBy.value}`}
-   if (filtreValue.Years.value) {fetchApi = fetchApi +`&primary_release_year=${filtreValue.Years.value}`}
+    if  (filtreValue.SortBy.value) {fetchApi = fetchApi +`&sort_by=${filtreValue.SortBy.value}`}
+    if (filtreValue.Years.value) {fetchApi = fetchApi +`&primary_release_year=${filtreValue.Years.value}`}
 
     return dispatch => {
         dispatch(movieBegin());

@@ -1,12 +1,12 @@
 import React from 'react'
-import classes from './InfoPerso.css'
+import'./InfoPerso.css'
 import ImageProfil from '../InfoPerso/ImageProfil/ImageProfil'
 import FormUser from './FormUser/FormUser'
 import CarteBleu from './CarteBleu/CarteBleu'
 
 const InfoPerso = () => {
     return (
-        <div className={classes.InfoPersos}>
+        <div className='InfoPersos'>
            <ImageProfil/>
            <FormUser/>
            <CarteBleu/>

@@ -1,12 +1,12 @@
 import React from 'react';
 
-import classes from './Spinner.css';
+import './Spinner.css';
 
 const spinner = (props) => {
 return (
-    <div className={classes.position}>
+    <div className='position'>
          <p style={{color:"white",textAlign:'center'}}>  {props.text} </p>        
-        <div className={classes.Loader} >     
+        <div className='Loader' >     
        
         </div>
     </div>

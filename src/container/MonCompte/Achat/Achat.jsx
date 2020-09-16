@@ -1,32 +1,30 @@
 import React from 'react'
-import classes from './Achat.css'
+import './Achat.css'
 import {Card} from 'react-bootstrap'
 import photo from '../../../assets/images/netflix-logo.jpg'
 
 const Achat = () => {
     return (
-    <div className={classes.Achat}>
-            <div className={classes.blockAchat}>
-                <div className={classes.blockTitre}>
-                     <h1 className={classes.titreInBlock}> Achats </h1>
+    <div className='Achat'>
+            <div className='blockAchat'>
+                <div className='blockTitre'>
+                     <h1 className='titreInBlock'> Achats </h1>
                 </div>
-                <div className={classes.blockCarteAchat}>
-                    <div className={classes.blockCarte}>
-                           <Card.Img  className={classes.card} src={photo} alt='card movie' />
-                           <Card.Img  className={classes.card} src={photo} alt='card movie' />
-                           <Card.Img  className={classes.card} src={photo} alt='card movie' />
-                           <Card.Img  className={classes.card} src={photo} alt='card movie' />
-                           <Card.Img  className={classes.card} src={photo} alt='card movie' />
-                           <Card.Img  className={classes.card} src={photo} alt='card movie' />
-                           <Card.Img  className={classes.card} src={photo} alt='card movie' />
-                           <Card.Img  className={classes.card} src={photo} alt='card movie' />
-                           <Card.Img  className={classes.card} src={photo} alt='card movie' />
-                           <Card.Img  className={classes.card} src={photo} alt='card movie' />
-                           <Card.Img  className={classes.card} src={photo} alt='card movie' />
-                           <Card.Img  className={classes.card} src={photo} alt='card movie' />
-                           
+                <div className='blockCarteAchat'>
+                    <div className='blockCarte'>
+                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
+                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
+                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
+                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
+                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
+                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
+                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
+                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
+                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
+                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
+                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
+                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
                     </div>
-
                 </div>
             </div>
     </div>

@@ -1,13 +1,11 @@
 import React, {Component} from 'react'
-import classes from './Toolbar.css'
+import './Toolbar.css'
 import Logo from './Logo/Logo'
-import ToggleButton from './ToggleButton/ToggleButton';
 import SearchButton from './SearchButton/SearchButton'
-import {Link} from 'react-router-dom';
-import { connect} from 'react-redux';
+import {NavLink, Link} from 'react-router-dom';
+//import { connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {Nav, NavDropdown, Navbar} from 'react-bootstrap';
-
 
 class toolbar extends Component {
     state= {
@@ -15,8 +13,6 @@ class toolbar extends Component {
         imageMail: null,
         defaultImage: false
     }
-
-    
 
     render () {
         let location = this.props.location.pathname
@@ -31,68 +27,66 @@ class toolbar extends Component {
       
        
          let items;
-         if (this.props.isAuth){
+         if (localStorage.getItem('token')){
                 items = (
-                    <Navbar style={{backgroundColor:'black',height:'90px'}}  variant='dark' expand="lg" >
-                        <NavDropdown  title={
-                            <div>
+                    <Navbar  bg="black" variant="dark" expand="lg" >
+                        <NavDropdown title={
+                            <>
                                 <img className="thumbnail-image" 
                                     src={photo} 
                                     alt="user pic"
                                     style={{borderRadius:'30px',marginTop:'5px',marginRight:'5px', height:'50px'}}
                                 />
-                            </div>}>
-                            <div >
-                                <NavDropdown.Item  href="/compte/InfoPerso">Mon compte</NavDropdown.Item>
-                                <NavDropdown.Item  href="#action/3.2">Mon panier</NavDropdown.Item>
+                            </>}>
+                            <div className='MenuDeroulantToolbar'>
+                                <NavLink to="/compte/InfoPerso" style={{textDecoration:'none', color:'black'}}>Mon Compte</NavLink> 
+                                 <NavLink to="/compte/InfoPerso" style={{textDecoration:'none', color:'black',marginTop:'8px'}}>Mon Panier</NavLink>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item style = {{backgroundColor:'black', color:'white'}} href="/logout">Deconnexion</NavDropdown.Item>
+                            
+                                    <NavLink to="/logout"  style={{textDecoration:'none',color:'white',textAlign:'center',width:'100%',backgroundColor:'black'}}>Deconnexion</NavLink>
+                             
                             </div>                        
                         </NavDropdown>
-                        <Navbar.Toggle style={{color:'dark'}}aria-controls="responsive-navbar-nav" />
+                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
     
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="mr-auto" />
                            {atHome && <SearchButton/>} 
-                            <Navbar.Brand href="/home"> 
-                                <img className="thumbnail-image" alt='ddd'
-                                    src= '  https://www.numerama.com/content/uploads/2018/10/netflix-logo.jpg'
-                                    style={{right:'0px',height:'60px'}}/> 
+                            <Navbar.Brand href="/home" style={{display:'flex', alignItems:'center'}}> 
+                                <img className="thumbnail-image" alt='ddd' 
+                                    src= 'https://www.numerama.com/content/uploads/2018/10/netflix-logo.jpg'
+                                    style={{right:'0px',height:'60px', margin:'auto'}}/> 
                             </Navbar.Brand>
                         </Navbar.Collapse>
                     </Navbar>
                 )
          }   
-        if (!this.props.isAuth) {
+        if (localStorage.getItem('token') === null) {
              items = (
-                <header className={classes.Toolbar}>
-                    <ToggleButton click={this.props.open}/>
-                    <div className={classes.Logo}>
+                <header className='Toolbar'>
+                    {/* <ToggleButton click={this.props.open}/> */}
+                    <div className='Logo'>
                         <Link to="/register">
                             <Logo/>
                         </Link> 
                     </div>
-                   {atLogin && <div className={classes.button}>
-                        <a href="/login"> 
-                            <button className={classes.button}>Login</button>
-                        </a> 
+                   {atLogin && <div className='buttonToolbar'>
+                     <Link to='/login'>
+                        <button className='buttonToolbar'>Login</button>
+                     </Link>
                     </div>} 
                 </header>
             )
-    
         }
 
         return (
-            <div>
+            <>
                 {items}
-            </div>
+            </>
         )
     }
 }
 
-const mapStateToProps = state => ({
-    isAuth: state.auth.token !== null,
-    loading: state.auth.loading
-});
 
-export default withRouter(connect(mapStateToProps)(toolbar));
+
+export default withRouter((toolbar));

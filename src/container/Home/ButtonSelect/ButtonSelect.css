@@ -1,12 +1,11 @@
-
-.blockButton{
+.blockButtonSelect{
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
 @media(max-width:800px) {
-    .blockButton{
+    .blockButtonSelect{
         align-items: center;
         flex-direction: column;
     }
