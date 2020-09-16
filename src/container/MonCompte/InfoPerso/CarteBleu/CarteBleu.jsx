@@ -51,12 +51,18 @@ const CarteBleu = () => {
         axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/CarteBleu.json/`,data)
         .then(response => {
             console.log('data',response);  
-            toast.success('Votre profil a ete mis a jour😀')
+            toast.success('Votre profil a ete mis a jour😀', {
+              autoClose: 3000,
+              closeButton:false
+          })
           
         })
         .catch(err => {
             console.log('data',err.response)
-            toast.error('Erreur, veuillez ressayer plus tard😮')
+            toast.error('Erreur, veuillez ressayer plus tard😮', {
+              autoClose: 3000,
+              closeButton:false
+          })
      
         })    
     }
@@ -66,7 +72,10 @@ const CarteBleu = () => {
         "idToken": localStorage.getItem('token')
       }) 
       .then(res =>{
-          toast.info('Votre compte a bien ete supprimer!')
+        toast.info('Votre a bien ete supprimer A bientot .', {
+          autoClose: 3000,
+          closeButton:false
+      })
           localStorage.removeItem('token')
           localStorage.removeItem('social')
           localStorage.removeItem('id')
@@ -77,7 +86,10 @@ const CarteBleu = () => {
           })
       .catch(err => {
                 console.log('REPONSE DELETE ACCOUNT ===== ',err)
-                toast.error('Erreur, veuillez vous reconnectez😮')
+                toast.error('Erreur, veuillez vous reconnectez 😮.',  {
+                  autoClose: 3000,
+                  closeButton:false
+              })
 
         })
     }
@@ -87,21 +99,23 @@ const CarteBleu = () => {
         return (
           <Modal
             {...props}
-            size="lg"
+            size="md"
             aria-labelledby="contained-modal-title-vcenter"
             centered
-          >
+          >  <Modal.Header  style={{backgroundColor:'black',color:'white'}}>
+               <Modal.Title>Team Netflix</Modal.Title>
+            </Modal.Header>
              <Modal.Body  style={{backgroundColor:'black',color:'white'}}>
             <p>
-              Nous sommes triste de vous voir partir <img src='😭' alt=''/> <br/>
+              Nous sommes triste de vous voir partir 😭 <br/>
               Etes vous sur de vouloir supprimer votre compte ?<br/>
               Cette action entrainera une supression definitive de vos données
             </p>
 
             </Modal.Body>
-            <Modal.Footer style={{backgroundColor:'black',color:'white',display:'flex',justifyContent:'space-between'}}>
-              <Button onClick={props.onHide} style={{backgroundColor:'grey',color:'white'}}>Close</Button>
-              <Button style={{backgroundColor:'red',color:'white'}} onClick={deleteAccount}>Confirmer suppression</Button>
+            <Modal.Footer style={{backgroundColor:'black',color:'white',display:'flex',justifyContent:'space-around'}}>
+            <Button style={{backgroundColor:'grey',color:'white'}} onClick={ () => setModal(false)} >Annuler</Button>
+              <Button style={{backgroundColor:'red',color:'white'}} onClick={deleteAccount}>Confirmer</Button>
             </Modal.Footer>
           </Modal>
         );
@@ -116,7 +130,7 @@ const CarteBleu = () => {
     return (
     <>
         <div className='blockImage100'>
-           <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover/>
+        <ToastContainer position='top-center'/>
             <div id="PaymentForm" className='TitreContainerCarte'>
                 <h2 className='titreInContainerCarte'> Carte Bleue </h2>   
                     <div className='blockCartebleu'>
@@ -143,7 +157,7 @@ const CarteBleu = () => {
                     </div>
             </div>
         </div>
-      { !localStorage.getItem('photo') && <Button  className='buttonCarteBleu' variant="raised" style={{textAlign:'center'}} onClick={()=>setModal(true)}>Supprimer son compte</Button>}  
+      { !localStorage.getItem('photo') && <p className='deleteCompte' style={{textAlign:'center'}} onClick={()=>setModal(true)}>Supprimer mon compte</p>}  
         <MyVerticallyCenteredModal
         show={modal}
         onHide={() => setModal(false)}

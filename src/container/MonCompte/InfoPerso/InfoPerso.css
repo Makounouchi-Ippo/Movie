@@ -6,6 +6,10 @@
     margin: auto;
 }
 
+.toast1 {
+    text-align: center;
+}
+
 @media (max-width : 975px){
     .InfoPersos{
         width: 90%;

@@ -62,7 +62,11 @@ const FormUser = () => {
         };
         axios.post('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDJQ2C-WHsJXu5xVCG5Z98XQ31gRJrSV_E',authData)
         .then(response => {
-            toast.success('Votre profil a ete mis a jour                     😀')
+            toast.success('Votre profil a ete mis a jour                     😀', {
+                autoClose: 3000,
+                closeButton:false,
+                className:'toast1'
+            })
             const mail = { mail:response.data.email };
             axios.put(`https://movies-27cd5.firebaseio.com/${id}/mail.json/`,mail)
             .then(response =>{ console.log('MailResponse',response) })
@@ -71,7 +75,11 @@ const FormUser = () => {
         .catch(err => {
             console.log('maillllll',err.response.data.error.message)
            // setError('Mail deja utilisé veuilleur le modifier')
-           toast.error('Erreur, Veuillez vous reconnectez                     😮')
+           toast.error('Erreur, Veuillez vous reconnectez                     😮', {
+            autoClose: 3000,
+            closeButton:false,
+            className:'toast1'
+        })
         })      
     }
 
@@ -89,11 +97,19 @@ const FormUser = () => {
         axios.put(`https://movies-27cd5.firebaseio.com/${id}/user.json/`,data)
         .then(response => {
             console.log('data',response);  
-            toast.success('Votre profil a ete mis a jour                     😀')    
+            toast.success('Votre profil a ete mis a jour                     😀', {
+                autoClose: 3000,
+                closeButton:false,
+                className:'toast1'
+            })   
         })
         .catch(err => {
             console.log('data',err.response)
-            toast.error('Erreur, Veuillez vous reconnectez                        😮')
+            toast.error('Erreur, Veuillez vous reconnectez                        😮', {
+                autoClose: 3000,
+                closeButton:false,
+                className:'toast1'
+            })
         })    
     }
 

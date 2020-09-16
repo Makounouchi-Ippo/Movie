@@ -18,7 +18,7 @@ class DemoCarousel extends Component {
                 </Carousel.Caption>
                 <img style={{ height:'520px'}}
                   className="d-block w-100"
-                  src="https://images3.alphacoders.com/837/thumb-1920-837671.jpg"
+                  src="https://wallpapermemory.com/uploads/505/itachi-uchiha-background-hd-1920x1200-396200.jpg"
                   alt="Third slide"
                 />
 
@@ -41,7 +41,7 @@ class DemoCarousel extends Component {
               <Carousel.Item style={{ height:'520px',right:'0px'}} >
                 <img style={{ height:'520px'}}
                   className="d-block w-100"
-                  src="https://images3.alphacoders.com/837/thumb-1920-837671.jpg"
+                  src="https://wallpapermemory.com/uploads/505/itachi-uchiha-background-hd-1920x1200-396200.jpg"
                   alt="Third slide"
                 />
 

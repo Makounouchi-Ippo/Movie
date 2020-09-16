@@ -12,7 +12,19 @@
     flex-direction: row;
     width: auto;
 }
+.deleteCompte{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 200px;
+    margin: auto;
+    height: 100px;
+}
 
+.deleteCompte:hover{
+    color: #ae0000;
+}
 .Cartebleu{
     margin-top: 50px;
     width: 50%;
