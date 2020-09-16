@@ -20,7 +20,7 @@ export const formUser = (dataform,datamail, mail) => {
     let id;
     id = localStorage.getItem('id')
     return dispatch => {
-        if (mail = "mail")
+        if (mail === "mail")
         {  
             axios.put(`https://movies-27cd5.firebaseio.com/${id}/user.json/`,dataform)
             .then(response => {

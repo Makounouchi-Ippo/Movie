@@ -1,0 +1,202 @@
+.PageCart {
+    width: 100%;
+    min-height: 100vh;
+    top: 0;
+    right: 0;
+    background-color: #f3f3f3;
+    font-family: 'Helvetica Neue';
+}
+
+.Cart {
+    padding: 60px 0 0;
+    margin: auto;
+    width: 1050px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.titleRecap, .titlePanier {
+    font-size: 22px;
+    font-weight: 500;
+    padding-left: 8px;
+}
+
+/* ---------- GAUCHE ----------*/
+
+.GaucheCart {
+    width: 675px;
+    margin: 0;
+}
+
+.cartEmpty {
+    color: black;
+    padding: 8px;
+    font-style: italic;
+}
+
+.liMovie {
+    display: flex;
+    flex-direction: row;
+    padding: 24px 8px;
+    border-bottom: 1px solid black;
+    content: none;
+}
+
+.imgMovie {
+    cursor: pointer;
+    width: 150px;
+    height: 180px;
+}
+
+.infoMovie {
+    padding-left: 30px;
+    width: 320px;
+    height: 180px;
+}
+
+.titleMovie {
+    font-weight: 500;
+}
+
+.pMovie {
+    margin: 3px;
+}
+
+.qteMovie {
+    display: flex;
+    flex-direction: row;
+}
+
+.qteIcon {
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.priceMovie {
+    width: 184px;
+    text-align: right;
+}
+
+.price {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.deleteMovie {
+    cursor: pointer;
+    margin: 3px;
+    margin-top: 30px;
+    width: 75px;
+    border-bottom: 1px solid black;
+
+}
+
+/* ---------- DROITE ----------*/
+
+.DroiteCart {
+    width: 350px;
+}
+
+.Recapitulatif {
+    width: 100%;
+    padding: 24px 8px;
+}
+
+.rubriqueRecapitulatif {
+    display: flex;
+    flex-direction: row;
+}
+
+.infoGauche {
+    width:70%
+}
+
+.infoDroite {
+    width: 30%;
+    text-align: right;
+}
+
+.totalPrice {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 19px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.totalPriceGauche, .totalPriceDroite {
+    width: 50%;
+    margin-top: 16px;
+    font-weight: bold;
+}
+
+.totalPriceDroite {
+    text-align: right;
+}
+
+.buttonPaiment {
+    width: 318px;
+    height: 60px;
+    margin: 0 0 12px;
+    padding: 18px 24px;
+    border: none;
+    border-radius: 30px;
+    background-color: black;
+    color: white;
+}
+
+.buttonPaiment:disabled {
+    background-color:#c5c5c5c5;
+    color: rgb(177, 177, 177);
+    cursor: not-allowed;
+    /* cursor: disabled; */
+}
+
+.blockButtons {
+    display: flex;
+    justify-content: center;
+}
+
+.buttonClear {
+    cursor: pointer;
+    width: 105px;
+    font-style: italic;
+    margin-top: 35px;
+    color: black;
+    border-bottom: 1px solid black;
+}
+
+
+@media (max-width: 1050px) {
+    .Cart {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .GaucheCart {
+        width: 90%;
+        margin: auto;
+    }
+
+    .titlePanier {
+        text-align: center;
+    }
+
+    .totalPrice {
+        border-top: none;
+    }
+
+    .DroiteCart {
+        width: 90%;
+        margin: 30px auto 0;
+    }
+
+    .cartEmpty {
+        margin-top: 50px;
+        border-top: 1px solid black;
+        padding-top: 15px;
+    }
+}

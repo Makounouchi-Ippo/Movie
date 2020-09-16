@@ -8,7 +8,7 @@ import ImagePlay from './ImagePlay/ImagePLay'
 import InfoMovie from './InfoMovie/InfoMovie'
 import Acteurs from './Acteurs/Acteurs'
 import SimilarMovie from './SimilarMovie/SimilarMovie'
-import AOS from 'aos'
+//import AOS from 'aos'
 
 const MovieDetail = (props) => {
 

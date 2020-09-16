@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import './Toolbar.css'
 import Logo from './Logo/Logo'
 import SearchButton from './SearchButton/SearchButton'
-import {NavLink, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 //import { connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {Nav, NavDropdown, Navbar} from 'react-bootstrap';
@@ -39,16 +39,15 @@ class toolbar extends Component {
                                 />
                             </>}>
                             <div className='MenuDeroulantToolbar'>
-                                <NavLink to="/compte/InfoPerso" style={{textDecoration:'none', color:'black'}}>Mon Compte</NavLink> 
-                                 <NavLink to="/compte/InfoPerso" style={{textDecoration:'none', color:'black',marginTop:'8px'}}>Mon Panier</NavLink>
+                                 <NavDropdown.Item href="/compte/InfoPerso" style={{textDecoration:'none', color:'black'}}>Mon Compte </NavDropdown.Item> 
+                                 <NavDropdown.Item href="/mika" style={{textDecoration:'none', color:'black',marginTop:'8px'}}>Mon Panier</NavDropdown.Item>
+                                 <Link to="/mika">Mikaaa</Link>
                                 <NavDropdown.Divider />
-                            
-                                    <NavLink to="/logout"  style={{textDecoration:'none',color:'white',textAlign:'center',width:'100%',backgroundColor:'black'}}>Deconnexion</NavLink>
+                                    <NavDropdown.Item href="/logout"  style={{textDecoration:'none',color:'white',textAlign:'center',width:'100%',backgroundColor:'black'}}>Deconnexion</NavDropdown.Item>
                              
                             </div>                        
                         </NavDropdown>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-    
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="mr-auto" />
                            {atHome && <SearchButton/>} 

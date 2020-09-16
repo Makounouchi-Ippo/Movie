@@ -16,6 +16,8 @@ import Achat from './container/MonCompte/Achat/Achat'
 import InfoPerso from './container/MonCompte/InfoPerso/InfoPerso'
 import Social from './container/MonCompte/Social/Social'
 
+import MIKA from './container/ShoppingCart/ShoppingCart';
+
 class App extends Component {
   
   componentDidMount () { 
@@ -35,9 +37,11 @@ class App extends Component {
     if (localStorage.getItem('token')) {
       routes = (
         <Switch>
+          <Route path="/mika" component={MIKA}/>
           <Route path="/home" component={Home}/>
           <Route path="/logout" component={Logout}/>
           <Route  path="/movie/:id"  component={MovieDetail}/>
+          <Route path="/home" component={Home}/>
           <Route
             path="/compte/"
             render={({ match: {url} }) => (
@@ -46,6 +50,7 @@ class App extends Component {
                 <Route path={`${url}/InfoPerso`} render={()=> <MonCompte child={<InfoPerso/>}/>}  />
                 <Route path={`${url}/achats`} render={()=> <MonCompte child={<Achat/>}/>}  />
                 <Route path={`${url}/social`} render={()=> <MonCompte child={<Social/>}/>} />
+
               </div>
             )}
           />
