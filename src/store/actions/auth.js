@@ -143,6 +143,7 @@ export const  authLog = (email, password, history) => {
             localStorage.setItem('show', true)
             localStorage.setItem('animation', true)
             //localStorage.setItem('toolbar', true)
+            dispatch(photo(response.data.localId))
             dispatch(authSuccess(response.data.idToken, response.data.localId));
             dispatch(checkAuthTimeout(response.data.expiresIn))  
              
@@ -174,7 +175,29 @@ export const authCheckState = () => {
         if (!token)
             dispatch(authLogout());
            
-        else
-            dispatch(authSuccess(token,id));        
+        else {
+            if (!localStorage.getItem('photo') || !localStorage.getItem('photoPhone')) 
+                dispatch(photo(id))
+            dispatch(authSuccess(token,id));  
+        }
+    };
+};
+
+
+export const photoUrl = (url) => {
+    return {
+        type: actionTypes.PHOTO,
+        photo: url
+    }
+}
+
+export const photo = (id) => {
+    return dispatch => {
+        dispatch(authStart());
+        firebase.storage().ref(`images/${id}/image`).getDownloadURL()
+            .then(function(url) {
+                dispatch(photoUrl(url))
+            })
+            .catch(err => { console.log(err) })
     };
 };

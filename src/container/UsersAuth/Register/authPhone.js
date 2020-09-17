@@ -106,9 +106,9 @@ class Phone extends Component {
           .confirm(verificationId)
           .then(result => {
             // User signed in successfully.
-            localStorage.setItem('social',false)
             localStorage.setItem('id',result.user.uid)
             localStorage.setItem('token', result.user.ma)
+            localStorage.setItem('photoPhone', 'https://img.over-blog-kiwi.com/2/71/08/42/20190322/ob_3e6dd6_f4f45f93-efae-4acd-a7c7-0fefe62c85dd.png')
             localStorage.setItem('show', true)
             localStorage.setItem('animation', true)
             this.props.onPhone(result.user.ma,result.user.uid);

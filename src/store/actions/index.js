@@ -7,7 +7,9 @@ export {
     authCheckState ,
     modalFalse,
     socialAuth,
-    socialTwitter
+    socialTwitter,
+    photo,
+    photoUrl
 }from './auth'
 
 
@@ -29,3 +31,13 @@ export {
     infoUserFail,
     formUser
 }from './infoUser'
+
+
+export {
+    resetCart,
+    addToCart,
+    removeToCart,
+    increase,
+    decrease,
+    getTotals
+} from './cart';

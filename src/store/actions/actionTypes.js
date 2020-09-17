@@ -7,6 +7,7 @@ export const AUTH_FAIL = 'AUTH_FAIL'
 export const AUTH_LOGOUT = 'AUTH_LOGOUT'
 export const MODAL_FALSE = 'MODAL_FALSE'
 export const SOCIAL_AUTH = 'SOCIAL_AUTH'
+export const PHOTO = 'PHOTO';
 
 /////////////////MOVIEEE-SEARCHH/////////////////////
 
@@ -27,3 +28,12 @@ export const RESET_MOVIE = 'RESET_MOVIE'
 
 export const INFO_USER_SUCCESS = 'INFO_USER_SUCCESS'
 export const INFO_USER_FAIL = 'INFO_USER_FAIL'
+
+
+////////// CART //////////
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_TO_CART = "REMOVE_TO_CART";
+export const INCREASE = "INCREASE";
+export const DECREASE = "DECREASE";
+export const RESET_CART = "RESET_CART";
+export const GET_TOTAL = "GET_TOTAL";

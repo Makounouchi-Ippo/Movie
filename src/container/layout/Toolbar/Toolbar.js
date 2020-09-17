@@ -3,7 +3,7 @@ import './Toolbar.css'
 import Logo from './Logo/Logo'
 import SearchButton from './SearchButton/SearchButton'
 import {Link} from 'react-router-dom';
-//import { connect} from 'react-redux';
+import { connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {Nav, NavDropdown, Navbar} from 'react-bootstrap';
 
@@ -22,6 +22,11 @@ class toolbar extends Component {
 
         if  (localStorage.getItem('photo'))
             photo= localStorage.getItem('photo')
+        else if (localStorage.getItem('photoPhone')){
+            photo= localStorage.getItem('photoPhone')
+            }
+        else if (this.props.url !== null)
+             photo = this.props.url
         else 
             photo='https://lebackyard.fr/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png'
       
@@ -35,7 +40,7 @@ class toolbar extends Component {
                                 <img className="thumbnail-image" 
                                     src={photo} 
                                     alt="user pic"
-                                    style={{borderRadius:'30px',marginTop:'5px',marginRight:'5px', height:'50px'}}
+                                    style={{borderRadius:'50%',marginTop:'5px',marginRight:'5px', height:'50px', width:'50px'}}
                                 />
                             </>}>
                             <div className='MenuDeroulantToolbar'>
@@ -87,5 +92,8 @@ class toolbar extends Component {
 }
 
 
+const mapStateToProps = state => ({
+    url: state.auth.photo
+});
 
-export default withRouter((toolbar));
+export default withRouter(connect(mapStateToProps)(toolbar));

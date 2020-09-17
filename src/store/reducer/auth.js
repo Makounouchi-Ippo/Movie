@@ -7,6 +7,7 @@ const initialState = {
     error: null,
     loading: false,
     modal: false,
+    photo: null
   };
   const authStart = ( state, action ) => {
     return updateObject( state, { error: null, loading: true } );
@@ -41,7 +42,11 @@ const modal_false = (state) => {
   });
 };
 
-
+const photo = (state, action) => {
+  return updateObject(state, {
+    photo : action.photo
+});
+}
 
 
   const reducer = ( state = initialState, action ) => {
@@ -51,6 +56,7 @@ const modal_false = (state) => {
         case actionTypes.AUTH_FAIL: return authFail(state, action);
         case actionTypes.AUTH_LOGOUT: return authLogout(state);
         case actionTypes.MODAL_FALSE: return modal_false(state);
+        case actionTypes.PHOTO: return photo(state, action);
         default:
             return state;
     }

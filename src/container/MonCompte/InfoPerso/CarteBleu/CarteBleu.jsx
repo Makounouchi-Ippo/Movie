@@ -10,7 +10,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Modal} from 'react-bootstrap'
 import { useHistory} from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
 
 const CarteBleu = () => {
     const history = useHistory();
@@ -53,7 +52,8 @@ const CarteBleu = () => {
             console.log('data',response);  
             toast.success('Votre profil a ete mis a jour😀', {
               autoClose: 3000,
-              closeButton:false
+              closeButton:false,
+              className:'toast1'
           })
           
         })
@@ -61,7 +61,8 @@ const CarteBleu = () => {
             console.log('data',err.response)
             toast.error('Erreur, veuillez ressayer plus tard😮', {
               autoClose: 3000,
-              closeButton:false
+              closeButton:false,
+              className:'toast1'
           })
      
         })    
@@ -72,9 +73,11 @@ const CarteBleu = () => {
         "idToken": localStorage.getItem('token')
       }) 
       .then(res =>{
-        toast.info('Votre a bien ete supprimer A bientot .', {
+        toast.info('Votre compte a bien ete supprimer A bientot .', {
           autoClose: 3000,
-          closeButton:false
+          closeButton:false,
+          className:'toast1'
+          
       })
           localStorage.removeItem('token')
           localStorage.removeItem('social')
@@ -88,7 +91,8 @@ const CarteBleu = () => {
                 console.log('REPONSE DELETE ACCOUNT ===== ',err)
                 toast.error('Erreur, veuillez vous reconnectez 😮.',  {
                   autoClose: 3000,
-                  closeButton:false
+                  closeButton:false,
+                  className:'toast1'
               })
 
         })
@@ -124,7 +128,7 @@ const CarteBleu = () => {
       if (localStorage.getItem('token')=== null){
         setTimeout(() => {
           return(history.push('/home'))
-        }, 5000);
+        },3000);
         
       }
     return (
@@ -157,7 +161,7 @@ const CarteBleu = () => {
                     </div>
             </div>
         </div>
-      { localStorage.getItem('social') && <p className='deleteCompte' style={{textAlign:'center'}} onClick={()=>setModal(true)}>Supprimer mon compte</p>}  
+      {localStorage.getItem('social') && <p className='deleteCompte'  onClick={()=>setModal(true)}>Supprimer mon compte</p>}  
         <MyVerticallyCenteredModal
         show={modal}
         onHide={() => setModal(false)}
@@ -166,4 +170,4 @@ const CarteBleu = () => {
     )
 }
 
-export default  withRouter((CarteBleu));
+export default CarteBleu;

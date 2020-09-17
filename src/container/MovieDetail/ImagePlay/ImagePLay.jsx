@@ -1,6 +1,8 @@
 import React from 'react';
 import './ImagePlay.css'
 import {useState}from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import * as actions from '../../../store/actions/index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPlayCircle,faShoppingCart} from '@fortawesome/free-solid-svg-icons'
 import affiche from '../../../assets/images/affiche_non_disponible.png'
@@ -9,7 +11,12 @@ import {FaPlay} from 'react-icons/fa'
 import BandeAnnonceNonDisponible from '../../../assets/images/bande-annonce_non_disponibe.jpg'
 
 const ImagePlay = (props) => {
-    
+
+    const moviedetail = useSelector(state => state.movie.movieDetail);
+    const dispatch = useDispatch();
+    const addcart =  () => dispatch(actions.addToCart(moviedetail))
+  
+
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -76,7 +83,7 @@ const ImagePlay = (props) => {
                  <img className='imageFilm' src={`https://image.tmdb.org/t/p/original/${props.afficheFilm}`} alt={props.id}/>
                  <FaPlay style={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} onClick={handleShow}/>
                  <p style ={{position:'absolute',color:'gold',textAlign: 'center',width: '400px',top: '55%',fontWeight: 'bold',fontSize:'x-large'}}> BANDE-ANNONCE</p>
-                 <button style={{position:"absolute", right: '17%',color:'white',height:'40px',backgroundColor:'red',width:'200px',fontWeight:'bold',fontSize:'1,9em',bottom:'30px',borderRadius:'10px'}}> <FontAwesomeIcon  icon={faShoppingCart}/> Ajouter au panier   </button>
+                 <button onClick={addcart} style={{position:"absolute", right: '17%',color:'white',height:'40px',backgroundColor:'red',width:'200px',fontWeight:'bold',fontSize:'1,9em',bottom:'30px',borderRadius:'10px'}}> <FontAwesomeIcon  icon={faShoppingCart}/> Ajouter au panier   </button>
               </div> 
           <Modal
                     style={{backgroundColor:'black'}}
@@ -103,7 +110,7 @@ const ImagePlay = (props) => {
                  <img className='imageFilm' src={`https://image.tmdb.org/t/p/original/${props.afficheFilm}`} alt={props.id}/>
                  <FaPlay style={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} onClick={handleShow}/>
                  <p style ={{position:'absolute',color:'gold',textAlign: 'center',width: '400px',top: '55%',fontWeight: 'bold',fontSize:'x-large'}}> BANDE-ANNONCE</p>
-                 <button style={{position:"absolute", right: '17%',color:'white',height:'40px',backgroundColor:'red',width:'200px',fontWeight:'bold',fontSize:'1,9em',bottom:'30px',borderRadius:'10px'}}> <FontAwesomeIcon  icon={faShoppingCart}/> Ajouter au panier   </button>
+                 <button onClick={addcart} style={{position:"absolute", right: '17%',color:'white',height:'40px',backgroundColor:'red',width:'200px',fontWeight:'bold',fontSize:'1,9em',bottom:'30px',borderRadius:'10px'}}> <FontAwesomeIcon  icon={faShoppingCart}/> Ajouter au panier   </button>
               </div> 
           <Modal
                     style={{backgroundColor:'black'}}

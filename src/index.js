@@ -9,6 +9,7 @@ import registerServiceWorker from './registerServiceWorker';
 import authreducer from './store/reducer/auth'
 import moviereducer from './store/reducer/movieSearch'
 import infoUserreducer from './store/reducer/infoUser'
+import cartReducer from './store/reducer/cart';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
@@ -17,7 +18,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
     auth: authreducer,
     movie: moviereducer,
-    infoUser: infoUserreducer
+    infoUser: infoUserreducer,
+    cart: cartReducer
 });
 
 const store = createStore(rootReducer,composeEnhancers(
