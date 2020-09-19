@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import '../Register/Register.css'
 import * as regex from "../../../component/Utility/Regex"
 import firebase from '../../../fire.js';
-import {Alert} from 'react-bootstrap'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class ForgetPwd extends Component {
     state = {
@@ -12,7 +13,7 @@ class ForgetPwd extends Component {
         response:'',
         formvalid: false,
         disable: true,
-        show: true,
+        show: true
     }
 
     handleFormValid = () => {
@@ -42,55 +43,27 @@ class ForgetPwd extends Component {
         });
     }
 
-  
-
-
     handleSubmit =  (event) => {
         event.preventDefault();
         console.log('FORgotPassword',this.state.mail)
         firebase.auth().sendPasswordResetEmail(this.state.mail).then(e =>{
-   
-            this.setState({response:"vous recevrez dans quelques instants un mail avec les instructons pour rétablir le mot de passe"})
+            toast.success('Vous aller recevoir un mail', {
+                autoClose: 3000,
+                closeButton:false,
+                className:'toast1' })
         })
         .catch(response => {
-            
-            this.setState({response:"Votre email ne correspond pas avec celui fournit a l'inscription"})
+            toast.error('Identifiants incorrect', {
+                autoClose: 3000,
+                closeButton:false,
+                className:'toast1' })
         })
     }
 
      render() {
         let form = null;
-        let msg;
-
-        if (this.state.response === 'vous recevrez dans quelques instants un mail avec les instructons pour rétablir le mot de passe')
-        {
-            msg = (
-                <Alert variant="success" style={{zIndex:'500'}}>
-                <Alert.Heading>Team Netflix</Alert.Heading>
-                <p>
-                vous recevrez dans quelques instants un mail avec les instructons pour rétablir le mot de passe
-                </p>
-                 </Alert>
-
-            ) 
-        }
-        
-        if (this.state.response === "Votre email ne correspond pas avec celui fournit a l'inscription")
-        {
-           msg=(
-            <Alert variant="danger" style={{zIndex:'500'}}>
-            <Alert.Heading>Team Netflix</Alert.Heading>
-            <p>
-                 Votre email ne correspond pas avec celui fournit a l'inscription, veuillez le modifier !
-            </p>
-          </Alert>
-
-           ) 
-
-           }  
-        //    style={{width:'90%', margin:'auto'}}
+      
         form = (
-            
                 <form className='pwd' onSubmit={this.handleSubmit}>
                 <p className='titleForm'>Saisissez votre e-mail</p>
                     <label className='FormR'>                         
@@ -112,12 +85,10 @@ class ForgetPwd extends Component {
         return (
             <div className='page'>
                 <div className='gauche'>
-                     {msg}
+                <ToastContainer position="top-center" autoClose={5000}/>
                 <h1 className='titre_login'> Mot de passe oubliée</h1>
                         {form}
-                   
                 </div>
-
             </div>
         )
     }

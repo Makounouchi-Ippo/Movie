@@ -29,13 +29,8 @@ export const modalFalse = () =>{
 }
 
 export const authLogout = () => {
-    localStorage.removeItem('id')
-    localStorage.removeItem('token')
-    localStorage.removeItem('name')
-    localStorage.removeItem('mail')
-    localStorage.removeItem('photo')
-    localStorage.removeItem('email')
-    localStorage.removeItem('social')
+  localStorage.clear()
+   
     return {
         type: actionTypes.AUTH_LOGOUT,
 
@@ -61,6 +56,31 @@ export const socialTwitter = (provider,history) => {
             localStorage.setItem('token', response.credential.accessToken)
             localStorage.setItem('name', response.user.displayName)
             localStorage.setItem('photo', response.additionalUserInfo.profile.profile_image_url)
+            localStorage.setItem('email', response.user.email)
+            localStorage.setItem('show', true)
+            localStorage.setItem('animation', true)
+            //localStorage.setItem('toolbar', true)
+            dispatch(authSuccess(response.credential.idToken, response.user.uid));
+            history.push('/home');
+        })
+        .catch(err => {
+            //console.log('eerrrr msg = ', err.message)
+            dispatch(authFail(err.message));
+        })
+    };
+}
+
+export const socialFacebook = (provider,history) => {
+    return dispatch => {
+        dispatch(authStart());
+        firebase.auth().signInWithPopup(provider)
+        .then(response => {
+            //console.log('socailllAUUUUTHHHHH',response)
+            //console.log('33',response.user)
+            localStorage.setItem('id', response.user.uid)
+            localStorage.setItem('token', response.credential.accessToken)
+            localStorage.setItem('name', response.user.displayName)
+            localStorage.setItem('photo','https://png.pngtree.com/png-clipart/20190927/ourlarge/pngtree-facebook-logo-png-in-golden-glitter-luxury-design-png-image_1762766.jpg')
             localStorage.setItem('email', response.user.email)
             localStorage.setItem('show', true)
             localStorage.setItem('animation', true)
@@ -167,18 +187,17 @@ export const  authLog = (email, password, history) => {
 export const authCheckState = () => {
     return (dispatch) => {
         localStorage.removeItem('show')
-        // localStorage.removeItem('animation');
-       // localStorage.removeItem('toolbar')
-     
         const token = localStorage.getItem('token');
         const id = localStorage.getItem('id')
         if (!token)
             dispatch(authLogout());
-           
         else {
-            if (!localStorage.getItem('photo') || !localStorage.getItem('photoPhone')) 
+            if (localStorage.getItem('photo') || localStorage.getItem('photoPhone'))
+                dispatch(authSuccess(token,id)); 
+            else {
+                dispatch(authSuccess(token,id)); 
                 dispatch(photo(id))
-            dispatch(authSuccess(token,id));  
+            }
         }
     };
 };
@@ -194,10 +213,11 @@ export const photoUrl = (url) => {
 export const photo = (id) => {
     return dispatch => {
         dispatch(authStart());
-        firebase.storage().ref(`images/${id}/image`).getDownloadURL()
+            firebase.storage().ref(`images/${id}/image`).getDownloadURL()
             .then(function(url) {
                 dispatch(photoUrl(url))
             })
             .catch(err => { console.log(err) })
-    };
+        }
+       
 };

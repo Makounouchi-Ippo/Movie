@@ -16,7 +16,7 @@ const ShoppingCart = () => {
     const removeProduct = (id) => { dispatch(actions.removeToCart(id)) };
     const decrease = (id) => { dispatch(actions.decrease(id)) };
     const increase = (id) => { dispatch(actions.increase(id)) };
-    const getTotals = () => { dispatch(actions.getTotals()) };
+    const getTotals = () => { dispatch(actions.getTotals())};
 
     useEffect(() => {
         getTotals();

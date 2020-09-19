@@ -33,7 +33,7 @@ const ImageProfil = () => {
             setImage(localStorage.getItem('photoPhone')) 
             photoProfil(localStorage.getItem('photoPhone'));
         }
-        else {
+        else{
                 storage.getDownloadURL()
                 .then(function(url) {
                     if (url) {
@@ -42,6 +42,7 @@ const ImageProfil = () => {
                     }
                 })
                 .catch(err => {
+                    setImage('https://lebackyard.fr/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png')
                     console.log(err)
                 })
         }

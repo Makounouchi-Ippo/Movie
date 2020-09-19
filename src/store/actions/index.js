@@ -8,6 +8,7 @@ export {
     modalFalse,
     socialAuth,
     socialTwitter,
+    socialFacebook,
     photo,
     photoUrl
 }from './auth'

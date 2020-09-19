@@ -6,6 +6,8 @@ import '../Register/Register.css'
 import * as regex from "../../../component/Utility/Regex"
 import * as actions from '../../../store/actions/index'
 import Spinner from "../../../component/UI/Spinner/Spinner"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Login extends Component {
     state = {
@@ -13,7 +15,8 @@ class Login extends Component {
         password: '',
         error: {},
         formvalid: false,
-        disable: true
+        disable: true,
+        aff:false
     }
 
     handleFormValid = () => {
@@ -46,6 +49,7 @@ class Login extends Component {
     }
 
     handleSubmit =(event) => {
+        this.setState({aff:true})
         event.preventDefault();
         this.props.authLog(this.state.mail, this.state.password,this.props.history) 
     }
@@ -54,12 +58,13 @@ class Login extends Component {
         let error;
         if (this.props.error!=null)
         {
-            error =  <Alert  style={{zIndex:'500'}} variant="danger">
-            <Alert.Heading>Team Netflix</Alert.Heading>
-            <p>
-                 Identifiant incorrect, veuillez le modifier !
-            </p>
-          </Alert>
+            if (this.state.aff === true ) {
+                toast.error('Identifiants incorrect', {
+                    autoClose: 3000,
+                    closeButton:false,
+                    className:'toast1' })
+                    this.setState({aff:false})
+            }
         }
 
         let form = (
@@ -109,7 +114,7 @@ class Login extends Component {
             <div className='page'>
                 {/* {authRedirect} */}
                 <div className='gauche'>
-                    {error} 
+                <ToastContainer position="top-center" autoClose={5000}/>
                     <h1 className='titre_login'> Que le spectacle commence !</h1>
                     <div className='Login'>                  
                         {form}  
