@@ -10,6 +10,7 @@ import * as regex from "../../../component/Utility/Regex";
 import Spinner from '../../../component/UI/Spinner/Spinner';
 import { SocialIcon } from 'react-social-icons';
 import "./Register.css";
+import AOS from 'aos'
 
 class UsersAuth extends Component {
     state = {
@@ -23,6 +24,10 @@ class UsersAuth extends Component {
         reponseServeur:null,
         redirect: false,
         show: false
+    }
+
+    componentDidMount  ()  {
+        AOS.init()
     }
 
     handleFormValid = () => {
@@ -83,7 +88,7 @@ class UsersAuth extends Component {
         let errorMail;
         if (this.props.error!=null) {  
             errorMail = (
-            <Alert variant="danger" style={{marginTop:'60px',zIndex:'500'}}>
+            <Alert  variant="danger" style={{marginTop:'60px',zIndex:'500'}}>
                 <Alert.Heading>Team Netflix</Alert.Heading>
                 <p>
                     Cette email existe, veuillez le modifier !
@@ -93,15 +98,15 @@ class UsersAuth extends Component {
         
         if (this.props.modal === true) {
             modal = (
-            <div className='modal2'>
-                <Modal.Dialog>
-                    <Modal.Header>
+            <div data-aos="zoom-in" data-aos-duration='2000' className='modal2'>
+                <Modal.Dialog style={{backgroundColor:'black',color:'white'}}>
+                    <Modal.Header style={{backgroundColor:'black',color:'white'}}>
                         <Modal.Title > Bienvenue Jeune Netflixeur </Modal.Title>
                     </Modal.Header>    
-                    <Modal.Body >
+                    <Modal.Body style={{backgroundColor:'black',color:'white'}}>
                         <p>Dorenavent vous faites parties de la communauté Netflix :)</p>
                         <p>Cliquez sur le lien ci-dessous vous serez dirigez vers la page de connexion </p>
-                        <a href="http://localhost:3000/login" style={{textAlign:'center'}}> connexion</a> 
+                        <a href="http://localhost:3000/login" style={{margin:'auto'}}> CONNEXION</a> 
                     </Modal.Body>  
                 </Modal.Dialog>
             </div>
@@ -113,7 +118,7 @@ class UsersAuth extends Component {
 
         else if (this.props.modal === false) {
             form = (
-            <div className='gauche'>
+            <div data-aos="zoom-in" data-aos-duration='2000'  className='gauche'>
                 {errorMail}
                 <h1 className='gauche_h1'>NETFLIX </h1>
                 <h2 className='h2'>Films, séries TV et bien plus en illimité!</h2>

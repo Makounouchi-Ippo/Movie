@@ -6,6 +6,7 @@ import '../Register/Register.css'
 import * as regex from "../../../component/Utility/Regex"
 import * as actions from '../../../store/actions/index'
 import Spinner from "../../../component/UI/Spinner/Spinner"
+import AOS from 'aos'
 
 class Login extends Component {
     state = {
@@ -16,6 +17,9 @@ class Login extends Component {
         disable: true
     }
 
+    componentDidMount  ()  {
+        AOS.init()
+    }
     handleFormValid = () => {
         let store = ''; 
         const error = {...this.state.error};
@@ -63,7 +67,7 @@ class Login extends Component {
         }
 
         let form = (
-            <form onSubmit={this.handleSubmit}>
+            <form   onSubmit={this.handleSubmit}>
                 <p className='titleForm'>Se connecter</p>
                 <label className='FormR'>                         
                                 <input className='input' type="text" name="mail" 
@@ -108,7 +112,7 @@ class Login extends Component {
         return (
             <div className='page'>
                 {/* {authRedirect} */}
-                <div className='gauche'>
+                <div data-aos="zoom-in" data-aos-duration='2000'  className='gauche'>
                     {error} 
                     <h1 className='titre_login'> Que le spectacle commence !</h1>
                     <div className='Login'>                  

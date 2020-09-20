@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import { connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {Nav, NavDropdown, Navbar} from 'react-bootstrap';
+import AOS from 'aos'
 
 class toolbar extends Component {
     state= {
@@ -13,6 +14,11 @@ class toolbar extends Component {
         imageMail: null,
         defaultImage: false
     }
+
+    componentDidMount  ()  {
+        AOS.init()
+    }
+
 
     render () {
         let location = this.props.location.pathname
@@ -69,12 +75,12 @@ class toolbar extends Component {
              items = (
                 <header className='Toolbar'>
                     {/* <ToggleButton click={this.props.open}/> */}
-                    <div className='Logo'>
+                    <div  data-aos="zoom-in" data-aos-duration='2000' className='Logo'>
                         <a href="/register">
                             <Logo/>
                         </a> 
                     </div>
-                   {atLogin && <div className='buttonToolbar'>
+                   {atLogin && <div  data-aos="zoom-in" data-aos-duration='2000'className='buttonToolbar'>
                      <a href='/login'>
                         <button className='buttonToolbar'>Login</button>
                      </a>

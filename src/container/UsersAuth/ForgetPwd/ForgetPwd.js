@@ -3,6 +3,7 @@ import '../Register/Register.css'
 import * as regex from "../../../component/Utility/Regex"
 import firebase from '../../../fire.js';
 import {Alert} from 'react-bootstrap'
+import AOS from 'aos'
 
 class ForgetPwd extends Component {
     state = {
@@ -13,6 +14,10 @@ class ForgetPwd extends Component {
         formvalid: false,
         disable: true,
         show: true,
+    }
+
+    componentDidMount  ()  {
+        AOS.init()
     }
 
     handleFormValid = () => {
@@ -111,7 +116,7 @@ class ForgetPwd extends Component {
 
         return (
             <div className='page'>
-                <div className='gauche'>
+                <div data-aos="zoom-in" data-aos-duration='2000' className='gauche'>
                      {msg}
                 <h1 className='titre_login'> Mot de passe oubliée</h1>
                         {form}
