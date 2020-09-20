@@ -70,14 +70,14 @@ class toolbar extends Component {
                 <header className='Toolbar'>
                     {/* <ToggleButton click={this.props.open}/> */}
                     <div className='Logo'>
-                        <Link to="/register">
+                        <a href="/register">
                             <Logo/>
-                        </Link> 
+                        </a> 
                     </div>
                    {atLogin && <div className='buttonToolbar'>
-                     <Link to='/login'>
+                     <a href='/login'>
                         <button className='buttonToolbar'>Login</button>
-                     </Link>
+                     </a>
                     </div>} 
                 </header>
             )

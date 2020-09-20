@@ -80,7 +80,6 @@ class Phone extends Component {
 
     sendCode = (e) => {  
         e.preventDefault();
-        window.scrollTo(0,3000)
         firebase.auth().languageCode = 'fr';
         window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier("recaptcha-container",
         {

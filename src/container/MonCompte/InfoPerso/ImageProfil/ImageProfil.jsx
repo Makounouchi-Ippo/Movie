@@ -23,6 +23,7 @@ const ImageProfil = () => {
     const photoProfil = (image) => dispatch(actions.photoUrl(image))
 
     let imageProfil = localStorage.getItem('photo');
+    let photoPhone = localStorage.getItem('photoPhone');
 
     useEffect (() => {
         if (localStorage.getItem('photo')) {
@@ -88,7 +89,7 @@ const ImageProfil = () => {
                             { image !== null ? 
                         <img src={image} alt='' style={{height:'140px', width:'140px',borderRadius:'50%'}}/>
                         : <CgProfile style={{height:'140px', width:'140px'}}/>}
-                        { !imageProfil && <div className='blockButtonPhoto'>
+                        { !imageProfil &&  !photoPhone && <div className='blockButtonPhoto'>
                             <input type='file' accept="image/*" onChange={handleChange}  />
                             <button onClick={handleUpload}>Upload</button>
                         </div> }  

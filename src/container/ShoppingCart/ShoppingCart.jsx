@@ -22,10 +22,8 @@ const ShoppingCart = () => {
         getTotals();
     })
 
-    
     let cart = (
          <>
-          
             {movies.map(movie => (
                 <li className="liMovie" key={movie.id}>
                     <img className="imgMovie" src={`https://image.tmdb.org/t/p/w500${movie.img}`} alt={movie.id}
@@ -67,7 +65,7 @@ const ShoppingCart = () => {
                 <div className="Recapitulatif">
                     <div className="rubriqueRecapitulatif">
                         <p className="infoGauche">Nombre d'articles</p>
-                        <p className="infoDroite">0</p>
+                        <p className="infoDroite">{qte}</p>
                     </div>
                     <div className="rubriqueRecapitulatif">
                         <p className="infoGauche">Date de prise en charge et d'expédition estimée</p>

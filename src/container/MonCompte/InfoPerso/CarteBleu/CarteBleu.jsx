@@ -127,7 +127,7 @@ const CarteBleu = () => {
 
       if (localStorage.getItem('token')=== null){
         setTimeout(() => {
-          return(history.push('/home'))
+          return(window.location.reload(false))
         },3000);
         
       }

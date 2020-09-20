@@ -27,9 +27,9 @@ class App extends Component {
   render() {
     let routes = (
       <Switch>
-        <Route  path="/register"  component={Register} /> 
-        <Route  path="/login" component={Login} /> 
-        <Route path="/forget-password"  component={ForgetPwd} />   
+        <Route  path="/register" exact component={Register} /> 
+        <Route  path="/login" exact component={Login} /> 
+        <Route path="/forget-password" exact component={ForgetPwd} />   
         <Redirect to="/login"/>
       </Switch>
     )

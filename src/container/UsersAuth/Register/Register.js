@@ -9,8 +9,6 @@ import * as actions from '../../../store/actions/index';
 import * as regex from "../../../component/Utility/Regex";
 import Spinner from '../../../component/UI/Spinner/Spinner';
 import { SocialIcon } from 'react-social-icons';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import "./Register.css";
 
 class UsersAuth extends Component {
@@ -24,8 +22,7 @@ class UsersAuth extends Component {
         loading: false,
         reponseServeur:null,
         redirect: false,
-        show: false,
-        aff: false
+        show: false
     }
 
     handleFormValid = () => {
@@ -59,11 +56,11 @@ class UsersAuth extends Component {
 
     authsocial= (provider) => {
         if (provider === providerT)
-         this.props.socialAuthTwitter(provider,this.props.history);
-        if (provider === providerF)
-         this.props.socialAuthFacebook(provider,this.props.history);
+            this.props.socialAuthTwitter(provider,this.props.history);
+        else if (provider === providerF)
+            this.props.socialAuthFacebook(provider,this.props.history);
         else
-        this.props.socialAuth(provider,this.props.history);
+            this.props.socialAuth(provider,this.props.history);
     }
 
     handleInput = (event) => {
@@ -75,7 +72,6 @@ class UsersAuth extends Component {
     }
 
     handleSubmit =(event) => {
-        this.setState({aff:true})
         event.preventDefault();   
         this.props.onAuth(this.state.mail, this.state.password);
     }
@@ -84,15 +80,15 @@ class UsersAuth extends Component {
         let form;
         let modal;
 
+        let errorMail;
         if (this.props.error!=null) {  
-            if (this.state.aff === true ) {
-                toast.error('Identifiants incorrect', {
-                    autoClose: 3000,
-                    closeButton:false,
-                    className:'toast1' })
-                    this.setState({aff:false})
-            }
-               
+            errorMail = (
+            <Alert variant="danger" style={{marginTop:'60px',zIndex:'500'}}>
+                <Alert.Heading>Team Netflix</Alert.Heading>
+                <p>
+                    Cette email existe, veuillez le modifier !
+                </p>
+            </Alert>)
         }
         
         if (this.props.modal === true) {
@@ -105,7 +101,7 @@ class UsersAuth extends Component {
                     <Modal.Body >
                         <p>Dorenavent vous faites parties de la communauté Netflix :)</p>
                         <p>Cliquez sur le lien ci-dessous vous serez dirigez vers la page de connexion </p>
-                         <a href="http://localhost:3000/login" style={{textAlign:'center',color:'grey'}}> connexion</a> 
+                        <a href="http://localhost:3000/login" style={{textAlign:'center'}}> connexion</a> 
                     </Modal.Body>  
                 </Modal.Dialog>
             </div>
@@ -118,8 +114,7 @@ class UsersAuth extends Component {
         else if (this.props.modal === false) {
             form = (
             <div className='gauche'>
-             <ToastContainer position="top-center" autoClose={5000}/>
-               
+                {errorMail}
                 <h1 className='gauche_h1'>NETFLIX </h1>
                 <h2 className='h2'>Films, séries TV et bien plus en illimité!</h2>
                 <div className='UsersAuth'>   
@@ -140,8 +135,11 @@ class UsersAuth extends Component {
                                     onChange={(e)=>this.handleInput(e)}
                                     required/>
                                 <p className='error'> {this.state.error.password}</p>
-                            </label >        
-                                <input type="submit" value="S'inscrire" className='buttonForm' disabled={this.state.disable}/> 
+                            </label >
+                            
+                                <input type="submit" value="S'inscrire" className='buttonForm' disabled={this.state.disable}/>
+                        
+                        
                     </form> 
                 </div>
                 <div className='social_button'>
