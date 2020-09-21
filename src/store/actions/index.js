@@ -22,6 +22,7 @@ export {
     clearMovie,
     pageInitial,
     movieShowDetail,
+    // resetFiltre,
     reset
 
 }from './movieSearch'

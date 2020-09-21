@@ -22,6 +22,7 @@ export const CLEAR_MOVIE = 'CLEAR_MOVIE'
 export const PAGE_INITIAL = 'PAGE_INITIAL'
 export const MOVIE_DETAIL = 'MOVIE_DETAIL'
 export const RESET_MOVIE = 'RESET_MOVIE'
+// export const RESET_FILTRE = 'RESET_FILTRE'
 
 
 /////////////////INFO--USER////////////////////

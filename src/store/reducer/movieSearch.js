@@ -92,6 +92,7 @@ const initialState = {
     });
   }
 
+
   const resetMovie = (state, action) => {
     let filtres = {
       Genre: {value: null, label: 'Genre'}, 

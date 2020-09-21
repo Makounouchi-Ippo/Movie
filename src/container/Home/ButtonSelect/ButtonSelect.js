@@ -68,15 +68,15 @@ class ButtonSelect extends Component{
        }) 
     }
 
-    
+  
 
     render() {
 
-        // let text;
+        let text;
         
-        // if (this.props.selectedOption.Genre.value !==null || this.props.selectedOption.SortBy.value !==null  || this.props.selectedOption.Years.value !==null ){
-        //     text =(<p> tttttttt </p>)
-        // }
+        if (this.state.selectedOption.Genre.value !==null || this.state.selectedOption.SortBy.value !==null  || this.state.selectedOption.Years.value !==null ){
+            text =(<button onClick={()=>window.location.reload(false)}> X </button>)
+        }
 
         return (
             <div style={{marginTop:'50px'}}> 
@@ -105,10 +105,11 @@ class ButtonSelect extends Component{
                             onChange={(value) => this.handleInput(value, 'Years')}
                         />
                     </div>
+                    <div className='blockButtonSelect'>
+                       {text}
+                    </div>
                 </div>
-                {/* <div>
-                    {text}
-                </div> */}
+               
           </div>
 
         )
@@ -128,7 +129,7 @@ const mapDispatchToProps = dispatch => {
     return {
       movieFiltres: (value) => dispatch(actions.movieFiltres(value)), 
       clearMovie: () => dispatch(actions.clearMovie()),
-      pageInitial:() =>  dispatch(actions.pageInitial())
+      pageInitial:() =>  dispatch(actions.pageInitial()),
     };
   };
   

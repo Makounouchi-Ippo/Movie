@@ -19,8 +19,26 @@ const ShoppingCart = () => {
     const getTotals = () => { dispatch(actions.getTotals())};
 
     useEffect(() => {
-        getTotals();
+       getTotals();
     })
+    
+   const  handleSubmit = () => {
+        const templateId = 'template_dfxnj1e';
+    
+        sendFeedback(templateId, {message_html: 'this.state.feedback', from_name: 'this.state.name', reply_to: 'mehdielkaddouri@gmail.com'})
+      }
+
+    const sendFeedback = (templateId, variables) => {
+        window.emailjs.send(
+          'user_sPd6aG1e3xdkcQxMwXU', templateId,
+          variables
+          ).then(res => {
+            console.log('Email successfully sent!')
+          })
+          // Handle errors here however you like, or use a React error boundary
+          .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
+      }
+
 
     let cart = (
          <>
@@ -43,7 +61,8 @@ const ShoppingCart = () => {
                     <div className="priceMovie">
                         <p className="price">{movie.price} €</p> 
                     </div>
-                </li>))
+                </li>)  
+                )
             }
         </>  
     )
@@ -78,7 +97,7 @@ const ShoppingCart = () => {
                     </div>
                 </div>
                 <div className='blockButtons'>
-                    <button className="buttonPaiment" disabled={qte === 0 ? true : false }>Paiement</button>
+                    <button className="buttonPaiment" disabled={qte === 0 ? true : false } onClick={()=>handleSubmit()}>Paiement</button>
                 </div>
             </div>
 
