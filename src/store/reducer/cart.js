@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
 
 const initialState = {
-    cart: JSON.parse(localStorage.getItem('Panier')),
+    cart: JSON.parse(localStorage.getItem('Panier')) || [],
     total: JSON.parse(localStorage.getItem('total')),
     qte: JSON.parse(localStorage.getItem('qte'))
 };
@@ -51,7 +51,8 @@ const resetCart = (state ) => {
     let temps = JSON.stringify(obj)
     localStorage.setItem('Panier',temps)
     return updateObject( state, { 
-      cart: obj
+      cart: obj,
+      
     })
 }
 

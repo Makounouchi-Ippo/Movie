@@ -5,8 +5,6 @@ import ListMovies from './ListMovies/ListMovies'
 import {Toast} from 'react-bootstrap';
 import './Home.css'
 
-
-
 class Home extends Component {
     state ={
         user: {},
@@ -14,8 +12,8 @@ class Home extends Component {
         netflix: false,
     }
 
-
 componentDidMount () { 
+   
     this._isMounted = true;
     var user = {}, 
     keys = Object.keys(localStorage),
@@ -27,6 +25,7 @@ componentDidMount () {
 }
 
 componentWillUnmount() {
+    localStorage.removeItem('show');
     this._isMounted = false;
   }
 
@@ -38,7 +37,6 @@ componentWillUnmount() {
     render () {
         let alert;
         let displayComponent;
-
        
         if (this.state.user.name && this.state.user.photo && localStorage.getItem('show') ){
            alert= (

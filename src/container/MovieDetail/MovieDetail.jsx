@@ -19,9 +19,6 @@ const MovieDetail = (props) => {
   
   useEffect(() => {
     //AOS.init()
-    if (localStorage.getItem('show')){
-      localStorage.removeItem('show')
-    }
     window.scrollTo(0,0)
     fetchMovieDetail()
   },

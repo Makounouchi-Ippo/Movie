@@ -14,6 +14,7 @@ import MovieDetail from './container/MovieDetail/MovieDetail'
 import * as actions from './store/actions/index'
 import Achat from './container/MonCompte/Achat/Achat'
 import InfoPerso from './container/MonCompte/InfoPerso/InfoPerso'
+import ConfirmOrder from './container/ConfirmOrder/ConfirmOrder'
 import Social from './container/MonCompte/Social/Social'
 
 import MIKA from './container/ShoppingCart/ShoppingCart';
@@ -42,6 +43,7 @@ class App extends Component {
           <Route path="/logout" component={Logout}/>
           <Route  path="/movie/:id"  component={MovieDetail}/>
           <Route path="/home" component={Home}/>
+          <Route path="/confirmorder" component={ConfirmOrder}/>
           <Route
             path="/compte/"
             render={({ match: {url} }) => (

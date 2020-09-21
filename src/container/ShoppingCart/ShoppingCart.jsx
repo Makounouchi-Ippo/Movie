@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RiArrowLeftSFill, RiArrowRightSFill } from 'react-icons/ri';
 import { useHistory } from 'react-router-dom';
 import * as actions from '../../store/actions/index';
 import './ShoppingCart.css';
+import axios from 'axios'
 
 const ShoppingCart = () => {
     
@@ -17,16 +18,43 @@ const ShoppingCart = () => {
     const decrease = (id) => { dispatch(actions.decrease(id)) };
     const increase = (id) => { dispatch(actions.increase(id)) };
     const getTotals = () => { dispatch(actions.getTotals())};
+    const [orderUser, setOrderUser] = useState([]);
+
+    useEffect(() => {
+        axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/Order.json/`)
+        .then(res =>setOrderUser(res.data))
+        .catch(err => console.log(err))
+    }, [])
 
     useEffect(() => {
        getTotals();
     })
-    
-   const  handleSubmit = () => {
-        const templateId = 'template_dfxnj1e';
-    
-        sendFeedback(templateId, {message_html: 'this.state.feedback', from_name: 'this.state.name', reply_to: 'mehdielkaddouri@gmail.com'})
-      }
+
+   const handleSubmit = () => {
+    let films = JSON.parse(localStorage.getItem('Panier'))
+    let total = JSON.parse(localStorage.getItem("total"))
+    let qte = JSON.parse(localStorage.getItem("qte"))
+    let tab = { films, total, qte };
+    let newOrder;
+    orderUser === null ? newOrder = [] : newOrder = orderUser;
+    newOrder.push(tab)
+    axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/Order.json/`,newOrder)
+    .then(response => {
+        resetCart();
+        localStorage.removeItem('qte');
+        localStorage.removeItem('Panier');
+        localStorage.removeItem('total');
+        history.push('/confirmorder')
+       
+         //console.log('userrr//////',response.data)
+    })
+    .catch(err => {
+         console.log('DIDMOUNT',err)
+    })
+     
+    const templateId = 'template_dfxnj1e';
+    sendFeedback(templateId, {message_html: 'this.state.feedback', from_name: 'this.state.name', reply_to: 'mehdielkaddouri@gmail.com'})
+    }
 
     const sendFeedback = (templateId, variables) => {
         window.emailjs.send(
@@ -35,10 +63,8 @@ const ShoppingCart = () => {
           ).then(res => {
             console.log('Email successfully sent!')
           })
-          // Handle errors here however you like, or use a React error boundary
           .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
       }
-
 
     let cart = (
          <>
