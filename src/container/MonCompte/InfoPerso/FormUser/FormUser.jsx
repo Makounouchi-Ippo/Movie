@@ -40,6 +40,7 @@ const FormUser = () => {
             setName(response.data.name)   
             setLastname(response.data.lastname)  
             setLogin(response.data.login)  
+            localStorage.setItem('form',true)
        })
        .catch(err => {
             //console.log('DIDMOUNT',err)
@@ -136,7 +137,7 @@ const FormUser = () => {
 
     return (
         <div> 
-             <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover/>
+             <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover/>
             <div className='blockImage1User'>
                     <div className='TitreContainer'>
                         <h2 className='titreInContainer'>Infos Utilisateurs </h2>

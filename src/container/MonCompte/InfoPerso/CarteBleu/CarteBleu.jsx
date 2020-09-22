@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Modal} from 'react-bootstrap'
 import { useHistory} from 'react-router-dom';
+import AOS from 'aos'
 
 const CarteBleu = () => {
     const history = useHistory();
@@ -22,6 +23,7 @@ const CarteBleu = () => {
   
    
     useEffect(() => {
+      AOS.init()
        let idLocal = localStorage.getItem('id')
        axios.get(`https://movies-27cd5.firebaseio.com/${idLocal}/CarteBleu.json/`)
        .then(response => {
@@ -29,11 +31,11 @@ const CarteBleu = () => {
             setCvc(response.data.cvc) 
             setName(response.data.name)   
             setExpiry(response.data.expiry)  
-            setNumber(response.data.number)  
+            setNumber(response.data.number)
        })
        .catch(err => {
             //console.log('DIDMOUNT',err)
-       })
+       })      
       },[]) 
 
 
@@ -73,7 +75,7 @@ const CarteBleu = () => {
         "idToken": localStorage.getItem('token')
       }) 
       .then(res =>{
-        toast.info('Votre compte a bien ete supprimer A bientot .', {
+        toast.info('Votre compte a bien ete supprimer a bientot .', {
           autoClose: 3000,
           closeButton:false,
           className:'toast1'
@@ -101,7 +103,7 @@ const CarteBleu = () => {
     
     function MyVerticallyCenteredModal(props) {
         return (
-          <Modal
+          <Modal 
             {...props}
             size="md"
             aria-labelledby="contained-modal-title-vcenter"
@@ -162,7 +164,7 @@ const CarteBleu = () => {
             </div>
         </div>
       {localStorage.getItem('social') && <p className='deleteCompte'  onClick={()=>setModal(true)}>Supprimer mon compte</p>}  
-        <MyVerticallyCenteredModal
+        <MyVerticallyCenteredModal data-aos="zoom-in" data-aos-duration='2000' 
         show={modal}
         onHide={() => setModal(false)}
       />

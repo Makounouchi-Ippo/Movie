@@ -26,24 +26,27 @@ class App extends Component {
   } 
   
   render() {
-    let routes = (
-      <Switch>
-        <Route  path="/register" exact component={Register} /> 
-        <Route  path="/login" exact component={Login} /> 
-        <Route path="/forget-password" exact component={ForgetPwd} />   
-        <Redirect to="/login"/>
-      </Switch>
-    )
-
-    if (localStorage.getItem('token')) {
-      routes = (
+    let routes;
+    let routess;
+    if (!localStorage.getItem('token')) {
+       routes = (
         <Switch>
-          <Route path="/mika" component={MIKA}/>
-          <Route path="/home" component={Home}/>
-          <Route path="/logout" component={Logout}/>
-          <Route  path="/movie/:id"  component={MovieDetail}/>
-          <Route path="/home" component={Home}/>
-          <Route path="/confirmorder" component={ConfirmOrder}/>
+          <Route  path="/register" exact component={Register} /> 
+          <Route  path="/login" exact component={Login} /> 
+          <Route path="/forget-password" exact component={ForgetPwd} />   
+          <Redirect to="/login"/>
+        </Switch>
+      )
+    }
+    else if (localStorage.getItem('token')) {
+       routess = (
+        <Switch>
+          <Route path="/home" exact component={Home}/>
+          <Route path="/logout" exact component={Logout}/>
+          <Route  path="/movie/:id"  exact component={MovieDetail}/>
+          <Route path="/home" exact component={Home}/>
+          <Route path="/mika" exact component={MIKA}/>
+          {localStorage.getItem('commandeSuccess') && <Route path="/confirmorder" component={ConfirmOrder}/> }
           <Route
             path="/compte/"
             render={({ match: {url} }) => (
@@ -64,6 +67,7 @@ class App extends Component {
       <div>
         <Layout>
           {routes}  
+          {routess}
         </Layout>
       </div>
     );

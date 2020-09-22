@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/index'
+import {AiOutlineCloseCircle }from 'react-icons/ai'
 import './ButtonSelect.css'
 
 const Genre = [
@@ -75,7 +76,7 @@ class ButtonSelect extends Component{
         let text;
         
         if (this.state.selectedOption.Genre.value !==null || this.state.selectedOption.SortBy.value !==null  || this.state.selectedOption.Years.value !==null ){
-            text =(<button onClick={()=>window.location.reload(false)}> X </button>)
+            text =(<AiOutlineCloseCircle style={{color:'red',height: '34px',width: '93px',marginTop: '20px',cursor:'pointer'}} onClick={()=>window.location.reload(false)}/>)
         }
 
         return (
@@ -105,9 +106,7 @@ class ButtonSelect extends Component{
                             onChange={(value) => this.handleInput(value, 'Years')}
                         />
                     </div>
-                    <div className='blockButtonSelect'>
                        {text}
-                    </div>
                 </div>
                
           </div>

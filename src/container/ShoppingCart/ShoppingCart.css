@@ -93,7 +93,9 @@
 }
 
 /* ---------- DROITE ----------*/
-
+.modalShopping{
+    width:360px
+}
 .DroiteCart {
     width: 350px;
 }
@@ -198,5 +200,13 @@
         margin-top: 50px;
         border-top: 1px solid black;
         padding-top: 15px;
+    }
+}
+@media (max-width: 580px) {
+    .modalShopping{
+        margin: auto;
+        width: 100%;
+        margin-bottom: 30px;
+        
     }
 }
