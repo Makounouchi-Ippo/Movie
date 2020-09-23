@@ -40,7 +40,7 @@ class toolbar extends Component {
          let items;
          if (localStorage.getItem('token')){
                 items = (
-                    <Navbar  bg="black" variant="dark" expand="lg" >
+                    <Navbar  bg="black" variant="dark" expand="sm" >
                         <NavDropdown title={
                             <>
                                 <img className="thumbnail-image" 

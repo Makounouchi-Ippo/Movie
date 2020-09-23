@@ -28,9 +28,11 @@ const initialState = {
   };
 
   const movieSearchInput = (state, action) => {
+    let a = [...state.movie, ...action.movie];
+  let movies = [...new Set(a.map(o => o.id))].map(id => a.find(i => i.id === id))
        return updateObject( state, {
         loading: false,
-        movie: action.movie,
+        movie: movies,
         searchBarNoResult: action.data,
         nameScrolling: 'searchInput',
         inputValue:action.inputValue
@@ -38,17 +40,21 @@ const initialState = {
   };
 
   const moviePopular = (state, action) => {
+    let a = [...state.movie, ...action.movie];
+  let movies = [...new Set(a.map(o => o.id))].map(id => a.find(i => i.id === id))
     return updateObject( state, {
         loading: false,
-        movie: [...state.movie,...action.movie],
+        movie: movies,
         nameScrolling: 'popular'
      } );
   };
 
   const movieFiltre = (state, action) => {
+    let a = [...state.movie, ...action.movie];
+    let movies = [...new Set(a.map(o => o.id))].map(id => a.find(i => i.id === id))
     return updateObject( state, {
         loading: false,
-        movie: action.movie,
+        movie: movies,
         searchBarNoResult: action.data,
         selectedOption: action.filtreValue,
         nameScrolling: 'filtre'
@@ -56,9 +62,11 @@ const initialState = {
   };
 
   const InfiniteScrollMovie = (state, action) => {
+    let a = [...state.movie, ...action.movie];
+    let movies = [...new Set(a.map(o => o.id))].map(id => a.find(i => i.id === id))
     return updateObject( state, {
       loading: false,
-      movie: [...state.movie,...action.movie],
+      movie: movies ,
       page: state.page+1,
      } );
   };

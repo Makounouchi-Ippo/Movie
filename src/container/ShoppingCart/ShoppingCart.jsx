@@ -6,6 +6,7 @@ import * as actions from '../../store/actions/index';
 import {Modal} from 'react-bootstrap'
 import './ShoppingCart.css';
 import axios from 'axios'
+import io from 'socket.io-client'
 
 const ShoppingCart = () => {
     
@@ -23,7 +24,15 @@ const ShoppingCart = () => {
     const [show, setShow] = useState(false);
     const [number,setNumber] = useState(null)
     const [name,setName] = useState(null)
+
+
+    useEffect (()=>{
+        const socket = io("http://localhost:3000")
+    })
+
     useEffect(() => {
+            localStorage.removeItem('commandeSuccess')
+            localStorage.removeItem('spinner')
         axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/Order.json/`)
         .then(res =>setOrderUser(res.data))
         .catch(err => console.log(err))
@@ -52,7 +61,7 @@ const ShoppingCart = () => {
     .then(response => {
         resetCart();
         localStorage.removeItem('qte');
-        localStorage.removeItem('Panier');
+        //localStorage.removeItem('Panier');
         localStorage.removeItem('total');
         localStorage.setItem('numOrder', Math.floor(Math.random() * Math.floor(1000000)))
         localStorage.setItem('commandeSuccess', true);
