@@ -3,10 +3,12 @@ import Toolbar from './Toolbar/Toolbar'
 import BackDrop from './Backdrop/Backdrop'
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import Chat from '../Chat/Chat'
 
 class Layout extends Component {
     state={
-        open: false
+        open: false,
+        chat: true
     }
 
     displaySidebar = () => (
@@ -35,6 +37,9 @@ class Layout extends Component {
                     <main>
                         {this.props.children}
                     </main>
+                    <footer style={{width:'80px',height:'80px',position:'fixed',bottom:'50px',right:'0',marginRight:'50px'}}>   
+                        <Chat/>
+                    </footer> 
             </React.Fragment>
         )
     }

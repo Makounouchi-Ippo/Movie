@@ -6,7 +6,6 @@ import * as actions from '../../store/actions/index';
 import {Modal} from 'react-bootstrap'
 import './ShoppingCart.css';
 import axios from 'axios'
-import io from 'socket.io-client'
 
 const ShoppingCart = () => {
     
@@ -24,11 +23,6 @@ const ShoppingCart = () => {
     const [show, setShow] = useState(false);
     const [number,setNumber] = useState(null)
     const [name,setName] = useState(null)
-
-
-    useEffect (()=>{
-        const socket = io("http://localhost:3000")
-    })
 
     useEffect(() => {
             localStorage.removeItem('commandeSuccess')
