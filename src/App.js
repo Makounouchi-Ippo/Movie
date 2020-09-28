@@ -16,8 +16,7 @@ import Achat from './container/MonCompte/Achat/Achat'
 import InfoPerso from './container/MonCompte/InfoPerso/InfoPerso'
 import ConfirmOrder from './container/ConfirmOrder/ConfirmOrder'
 import Social from './container/MonCompte/Social/Social'
-
-import MIKA from './container/ShoppingCart/ShoppingCart';
+import Panier from './container/ShoppingCart/ShoppingCart';
 
 class App extends Component {
   
@@ -45,7 +44,7 @@ class App extends Component {
           <Route path="/logout" exact component={Logout}/>
           <Route  path="/movie/:id"  exact component={MovieDetail}/>
           <Route path="/home" exact component={Home}/>
-          <Route path="/mika" exact component={MIKA}/>
+          <Route path="/panier" exact component={Panier}/>
           {localStorage.getItem('commandeSuccess') && <Route path="/confirmorder" component={ConfirmOrder}/> }
           <Route
             path="/compte/"

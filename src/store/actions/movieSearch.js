@@ -88,7 +88,6 @@ export const  movieSearch = (inputValue,idMovie) => {
     return dispatch => {
         dispatch(movieBegin());
             if (inputValue === "fetchDataPopular"){
-                console.log('787878787878787')
                 axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=1e32f5c452c2267d5367589e9864ab1c&language=fr&page=1&include_adult=false`)
                     .then(response => {
                         //console.log('serchBUttun',response.data)

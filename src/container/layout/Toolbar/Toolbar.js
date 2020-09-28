@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import './Toolbar.css'
-import Logo from './Logo/Logo'
+import Logo from './Logo/Logo';
+import N from '../../../assets/images/netflix-logo.png';
 import SearchButton from './SearchButton/SearchButton'
-import {Link} from 'react-router-dom';
 import { connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {Nav, NavDropdown, Navbar} from 'react-bootstrap';
@@ -18,7 +18,6 @@ class toolbar extends Component {
     componentDidMount  ()  {
         AOS.init()
     }
-
 
     render () {
         let location = this.props.location.pathname
@@ -40,33 +39,33 @@ class toolbar extends Component {
          let items;
          if (localStorage.getItem('token')){
                 items = (
-                    <Navbar  bg="black" variant="dark" expand="sm" >
-                        <NavDropdown title={
-                            <>
+                    <Navbar style={{padding: '0'}} bg="black" variant="dark" expand="sm" >
+                        <Navbar.Brand href="/home" style={{display:'flex', alignItems:'center'}}> 
+                                <img className="thumbnail-image" alt='ddd' 
+                                    src= {N}
+                                    style={{height:'75px', margin:'auto'}}/> 
+                            </Navbar.Brand>
+                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                        <Navbar.Collapse id="responsive-navbar-nav">
+                            <Nav className="mr-auto" />
+                           {atHome && <SearchButton/>} 
+                          
+                            <NavDropdown alignRight  style={{textAlign:'center'}} title={
+                            
                                 <img className="thumbnail-image" 
                                     src={photo} 
                                     alt="user pic"
                                     style={{borderRadius:'50%',marginTop:'5px',marginRight:'5px', height:'50px', width:'50px'}}
                                 />
-                            </>}>
+                            }>
                             <div className='MenuDeroulantToolbar'>
                                  <NavDropdown.Item href="/compte/InfoPerso" style={{textDecoration:'none', color:'black'}}>Mon Compte </NavDropdown.Item> 
-                                 <NavDropdown.Item href="/mika" style={{textDecoration:'none', color:'black',marginTop:'8px'}}>Mon Panier</NavDropdown.Item>
-                                 <Link to="/mika">Mikaaa</Link>
+                                 <NavDropdown.Item href="/panier" style={{textDecoration:'none', color:'black',marginTop:'8px'}}>Mon Panier</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                     <NavDropdown.Item href="/logout"  style={{textDecoration:'none',color:'white',textAlign:'center',width:'100%',backgroundColor:'black'}}>Deconnexion</NavDropdown.Item>
                              
                             </div>                        
                         </NavDropdown>
-                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                        <Navbar.Collapse id="responsive-navbar-nav">
-                            <Nav className="mr-auto" />
-                           {atHome && <SearchButton/>} 
-                            <Navbar.Brand href="/home" style={{display:'flex', alignItems:'center'}}> 
-                                <img className="thumbnail-image" alt='ddd' 
-                                    src= 'https://www.numerama.com/content/uploads/2018/10/netflix-logo.jpg'
-                                    style={{right:'0px',height:'60px', margin:'auto'}}/> 
-                            </Navbar.Brand>
                         </Navbar.Collapse>
                     </Navbar>
                 )
@@ -79,7 +78,7 @@ class toolbar extends Component {
                             <Logo/>
                         </a> 
                     </div>
-                   {atLogin && <div  data-aos="zoom-in" data-aos-duration='2000'className='buttonToolbar'>
+                    {atLogin && <div  data-aos="zoom-in" data-aos-duration='2000'className='buttonToolbar'>
                      <a href='/login'>
                         <button className='buttonToolbar'>Login</button>
                      </a>

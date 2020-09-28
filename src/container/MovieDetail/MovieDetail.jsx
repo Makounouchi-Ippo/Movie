@@ -25,7 +25,6 @@ const MovieDetail = (props) => {
   },
   [props.match.params.id, fetchMovieDetail])
 
-   console.log('movieeeDetail==',moviedetail)
     return (
       <div >
         {moviedetail && youtubeKey_release && <ImagePlay afficheFilm={moviedetail.backdrop_path} bandeAnnonce={youtubeKey_release.youtube} date={youtubeKey_release.date} titre={moviedetail.original_title} afficheFilm2={moviedetail.poster_path} id={moviedetail.id}/> } 

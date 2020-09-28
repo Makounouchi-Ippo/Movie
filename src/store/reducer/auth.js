@@ -44,7 +44,6 @@ const initialState = {
 // };
 
 const toolbar = (state,action) => {
-  console.log('REDUCER======',action.toolbar)
   return updateObject(state, {
       toolbar: action.toolbar
   });

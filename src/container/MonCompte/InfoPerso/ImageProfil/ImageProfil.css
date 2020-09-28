@@ -1,5 +1,5 @@
 .blockimage2Photo{
-    position: relative;
+ 
     margin: auto;
     margin-top: 35px;
     background-color: rgb(165, 153, 153);
@@ -14,7 +14,7 @@
     background-color: white;
     width: 35px;
     height: 35px;
-    bottom: -84px;
+    bottom: 30px;
     right: -92px;
 }
 

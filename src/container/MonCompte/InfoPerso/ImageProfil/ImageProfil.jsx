@@ -1,102 +1,114 @@
-import React, { useState,useEffect, useCallback } from 'react'
+import React, { Component } from 'react'
 import './ImageProfil.css'
 // import {FaPlusCircle} from 'react-icons/fa'
 //import { CgProfile } from 'react-icons/cg'
+import { connect } from 'react-redux';
 import firebase from '../../../../fire';
-import {useDispatch} from 'react-redux';
 import  * as actions from '../../../../store/actions/index';
-import { CgProfile } from 'react-icons/cg';
+import axios from 'axios';
+import { MdAddCircle } from 'react-icons/md';
 
-const ImageProfil = () => {
+let fileName = 'image';
+let newDirectory = localStorage.getItem('id');
+let id = localStorage.getItem('id');
+let storage = firebase.storage().ref(`images/${newDirectory}/${fileName}`);
 
-    let id = localStorage.getItem('id');
-    let fileName = 'image';
-    let newDirectory = id;
-    let storage = firebase.storage().ref(`images/${newDirectory}/${fileName}`);
-    
-    const [ image, setImage ] = useState(null);
-    const [ imageTmp, setImageTmp ] = useState(null);
-    const [ good, setGood ] = useState(false);
+class ImageProfil extends Component {
+    state = {
+        image: null,
+        imageTmp: null,
+        good: false
+    }
 
-    const dispatch = useDispatch();
-    const photoProfil = useCallback((image) => dispatch(actions.photoUrl(image)),[dispatch])
-
-    let imageProfil = localStorage.getItem('photo');
-    let photoPhone = localStorage.getItem('photoPhone');
-
-    useEffect (() => {
+    componentDidMount() {
         if (localStorage.getItem('photo')) {
-            setImage(localStorage.getItem('photo')) 
-            photoProfil(localStorage.getItem('photo'));
+            this.setState({image : localStorage.getItem('photo')})
+            this.props.photoProfil(localStorage.getItem('photo'));
         }
         else if (localStorage.getItem('photoPhone')){
-            setImage(localStorage.getItem('photoPhone')) 
-            photoProfil(localStorage.getItem('photoPhone'));
+            this.setState({image : localStorage.getItem('photoPhone')})
+            this.props.photoProfil(localStorage.getItem('photoPhone'));
         }
-        else{
-                storage.getDownloadURL()
-                .then(function(url) {
-                    if (url) {
-                        photoProfil(url);
-                        setImage(url);
-                    }
-                })
-                .catch(err => {
-                    setImage('https://lebackyard.fr/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png')
-                    console.log(err)
-                })
+        else {
+            let ref = this;
+            storage.getDownloadURL()
+            .then(function(url) {
+                if (url) {
+                    ref.setState({image: url});
+                    ref.props.photoProfil(url);
+                }
+            })
+            .catch(err => {
+                this.setState({image : 'https://lebackyard.fr/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png'})
+            })
         }
-    }, [ photoProfil, storage])
+    }
 
-    const handleChange = (e) => {
+    handleChange = (e) => {
         if (e.target.files[0]) {
-            if (e.target.files[0] !== image ) {
-                setImageTmp(e.target.files[0]);
-                setGood(true);
+            if (e.target.files[0] !== this.state.image ) {
+                this.setState({imageTmp: e.target.files[0], good: true}, () => {
+                    if(this.state.good) {
+                        if (this.state.image !== undefined) {
+                            storage.put(this.state.imageTmp)
+                                .then(res => { 
+                                    let ref = this
+                                    storage.getDownloadURL()
+                                        .then(function(url) {
+                                            ref.props.photoProfil(url);
+                                            ref.setState({image:url, good: false})
+                                            const photo = { photo : true };
+                                            axios.put(`https://movies-27cd5.firebaseio.com/${id}/photo.json/`, photo)
+                                                .then(res => {
+                                                    // console.log(res)
+                                                })
+                                                .catch(err => { 
+                                                    // console.log(err)
+                                                })
+                                        })
+                                        .catch(err => {
+                                            // console.log(err)
+                                        })
+                                //    console.log(res)
+                                })
+                                .catch(err => {
+                                    // console.log(err)
+                                })
+                        } 
+                    }        
+                })
             }            
         }         
     };
-    
-    const handleUpload = async (e) => {
-  
-        if(good) {
-            if (image !== undefined) {
-                await storage.put(imageTmp)
-                    .then(res => console.log(res))
-                    .catch(err => console.log(err))
-            }
-            await storage.getDownloadURL()
-                .then(function(url) {
-                    photoProfil(url);
-                    setImage(url);
-                    setGood(false);                
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-        }        
-    }
 
-    return (
-        <React.Fragment>
-            <h1 style={{fontWeight:'normal',marginTop:'25px'}}> Info persos </h1>
-            <p>Renseignez vos coordonnées pour pouvoir passez commandes</p>
-            <div className='blockImage1'>
-                <div className='TitreContainer'>
-                    <h2 className='titreInContainer'> Image Profil </h2>
-                        <div className='blockimage2Photo'>
-                            { image !== null ? 
-                        <img src={image} alt='' style={{height:'140px', width:'140px',borderRadius:'50%'}}/>
-                        : <CgProfile style={{height:'140px', width:'140px'}}/>}
-                        { !imageProfil &&  !photoPhone && <div className='blockButtonPhoto'>
-                            <input type='file' accept="image/*" onChange={handleChange}  />
-                            <button onClick={handleUpload}>Upload</button>
-                        </div> }  
-                         </div>
+    render() {
+        return (
+            <React.Fragment>
+                <h1 style={{fontWeight:'normal',marginTop:'25px'}}> Info persos </h1>
+                <p>Renseignez vos coordonnées pour pouvoir passez commandes</p>
+                <div className='blockImage1'>
+                    <div className='TitreContainer'>
+                        <h2 className='titreInContainer'> Image Profil </h2>
+                            <div className='blockimage2Photo'> 
+                                <img src={this.state.image} alt='' style={{height:'140px', width:'140px',borderRadius:'50%'}}/>
+                                {(!localStorage.getItem('photoPhone') && !localStorage.getItem('photo')) && 
+                                    <div className='blockButtonPhoto'>
+                                        <input style={{display: 'none'}} type='file' accept="image/*" onChange={this.handleChange} ref={fileInput => this.fileInput = fileInput}/>
+                                        <MdAddCircle className='ButtonPhoto' onClick={() => this.fileInput.click()}/>
+                                </div> }  
+                            </div>
+                    </div>
                 </div>
-            </div>
-        </React.Fragment>
-    )
+            </React.Fragment>
+        )
+    }
+   
 }
 
-export default ImageProfil;
+const mapDispatchToProps = dispatch => {
+    return {
+        photoProfil: (image) => dispatch(actions.photoUrl(image)),
+    };
+};
+
+export default connect(null, mapDispatchToProps) (ImageProfil);

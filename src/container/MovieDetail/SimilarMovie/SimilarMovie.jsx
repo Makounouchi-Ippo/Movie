@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import './SimilarMovie.css'
 
 const SimilarMovie = (props) => {
-    console.log('similar',props.similarMovie.results.length)
     let image;
 
     if (props.similarMovie.results.length === 0){
