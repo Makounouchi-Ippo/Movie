@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter, NavLink } from 'react-router-dom';
+import { withRouter} from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { providerG, providerF,providerT } from '../../../fire.js';

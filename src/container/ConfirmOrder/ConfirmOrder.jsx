@@ -27,7 +27,7 @@ const ConfirmOrder = () => {
         </div>
         : <div style={{height:'100vh', width:'50%', margin:'auto'}}>
             <div style={{textAlign:'center'}}>
-                <img src='https://www.welovebuzz.com/wp-content/uploads/2019/11/giphy-5-8.gif' style={{borderRadius:'50%',marginTop:'50px'}}/>
+                <img src='https://www.welovebuzz.com/wp-content/uploads/2019/11/giphy-5-8.gif' alt='' style={{borderRadius:'50%',marginTop:'50px'}}/>
             </div> 
             <h1 style={{marginTop:'50px', textAlign:'center'}}>Merci, nous avons reçu votre commande <br/>nᵒ {order}</h1>
             <p >Veuilez consulter votre messagerie pour obtenir la confirmation de commande, ainsi que tout les details correspond a votre achat.</p> 

@@ -25,8 +25,6 @@ const searchBarNoResult = useSelector(state =>  state.movie.searchBarNoResult)
 const nameScrolling = useSelector(state =>  state.movie.nameScrolling)
 const valueInput = useSelector(state =>  state.movie.inputValue)
 const optionSelect = useSelector(state =>  state.movie.selectedOption)
-
-
 const fetchData = useCallback(() => dispatch(actions.movieSearch("fetchDataPopular")),[dispatch])
 const fetchInfiniteScroll =  () => dispatch(actions.InfiniteScroll(nameScrolling,page+1,valueInput,optionSelect))
 
@@ -34,8 +32,7 @@ const fetchInfiniteScroll =  () => dispatch(actions.InfiniteScroll(nameScrolling
       AOS.init()
       if (movie.length === 0)
         fetchData()
-       
-    }, [])
+    }, [movie.length, fetchData])
     
 
     const fetchImages = () => {
@@ -45,13 +42,9 @@ const fetchInfiniteScroll =  () => dispatch(actions.InfiniteScroll(nameScrolling
     const clickShowMovieDetail = (id) => {
       history.push(`/movie/${id}`);
       // console.log(history)
-      // console.log(id)
-    
-    }
-    
-
+      // console.log(id)  
+    }  
     return (
-     
               <InfiniteScroll
                  dataLength={movie.length}
                  next={fetchImages}

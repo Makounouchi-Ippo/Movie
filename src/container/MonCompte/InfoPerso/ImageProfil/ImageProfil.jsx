@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState,useEffect } from 'react'
+import React, { useState,useEffect, useCallback } from 'react'
 import './ImageProfil.css'
 // import {FaPlusCircle} from 'react-icons/fa'
 //import { CgProfile } from 'react-icons/cg'
@@ -20,7 +19,7 @@ const ImageProfil = () => {
     const [ good, setGood ] = useState(false);
 
     const dispatch = useDispatch();
-    const photoProfil = (image) => dispatch(actions.photoUrl(image))
+    const photoProfil = useCallback((image) => dispatch(actions.photoUrl(image)),[dispatch])
 
     let imageProfil = localStorage.getItem('photo');
     let photoPhone = localStorage.getItem('photoPhone');
@@ -47,7 +46,7 @@ const ImageProfil = () => {
                     console.log(err)
                 })
         }
-    }, [])
+    }, [ photoProfil, storage])
 
     const handleChange = (e) => {
         if (e.target.files[0]) {

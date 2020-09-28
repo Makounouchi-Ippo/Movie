@@ -28,6 +28,14 @@ export const modalFalse = () =>{
     }
 }
 
+export const toolbar = () =>{
+    localStorage.setItem('toolbar',true)
+    return {
+        type: actionTypes.TOOLBAR,
+        toolbar:true
+    }
+}
+
 export const authLogout = () => {
   localStorage.clear()
    

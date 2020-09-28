@@ -7,7 +7,8 @@ const initialState = {
     error: null,
     loading: false,
     modal: false,
-    photo: null
+    photo: null,
+    toolbar:false
   };
   const authStart = ( state, action ) => {
     return updateObject( state, { error: null, loading: true } );
@@ -36,9 +37,16 @@ const initialState = {
 };
 
 
-const modal_false = (state) => {
+// const modal_false = (state) => {
+//   return updateObject(state, {
+//       toolbar: true
+//   });
+// };
+
+const toolbar = (state,action) => {
+  console.log('REDUCER======',action.toolbar)
   return updateObject(state, {
-      modal: false
+      toolbar: action.toolbar
   });
 };
 
@@ -55,8 +63,9 @@ const photo = (state, action) => {
         case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
         case actionTypes.AUTH_FAIL: return authFail(state, action);
         case actionTypes.AUTH_LOGOUT: return authLogout(state);
-        case actionTypes.MODAL_FALSE: return modal_false(state);
+        //case actionTypes.MODAL_FALSE: return modal_false(state);
         case actionTypes.PHOTO: return photo(state, action);
+        case actionTypes.TOOLBAR: return toolbar(state, action);
         default:
             return state;
     }

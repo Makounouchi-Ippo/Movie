@@ -3,6 +3,9 @@ import Carousel from './Carrousel/Carrousel'
 import Button from './ButtonSelect/ButtonSelect'
 import ListMovies from './ListMovies/ListMovies'
 import {Toast} from 'react-bootstrap';
+import {withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index'
 import './Home.css'
 
 class Home extends Component {
@@ -12,23 +15,19 @@ class Home extends Component {
         netflix: false,
     }
 
-componentDidMount () { 
-   
-    this._isMounted = true;
-    var user = {}, 
-    keys = Object.keys(localStorage),
-    i = keys.length;
-    while ( i-- ) {
-        user[ keys[i] ] = localStorage.getItem( keys[i] );
-}
-    this.setState({user})   
-}
+    componentDidMount () { 
+        var user = {}, 
+        keys = Object.keys(localStorage),
+        i = keys.length;
+        while ( i-- ) {
+            user[ keys[i] ] = localStorage.getItem( keys[i] );
+    }
+        this.setState({user})   
+    }
 
-componentWillUnmount() {
-    localStorage.removeItem('show');
-    this._isMounted = false;
-  }
-
+    componentWillUnmount () {
+        localStorage.removeItem('show')
+    }
     setShow = () =>{
         this.setState({show:false})
   
@@ -61,15 +60,15 @@ componentWillUnmount() {
                     </Toast>
                 )
         }  
-    if (localStorage.hasOwnProperty('animation') === true &&  this._isMounted === true ){
+    if (localStorage.hasOwnProperty('animation') === true ){
         displayComponent = (<video className='video' src={process.env.PUBLIC_URL + '/netflix.mp4'} autoPlay={true} type="video/mp4"/>) 
        setTimeout(() => {
         localStorage.removeItem('animation');
-        this.setState({netflix:true})    
-        localStorage.setItem('toolbar',true)
-       }, 6000);  
+        this.setState({netflix:true}) 
+        this.props.toolbar()
+    }, 4000);  
     }   
-   if (this.state.netflix === true || localStorage.hasOwnProperty('animation') === false)
+   if ( localStorage.hasOwnProperty('animation') === false)
     {
         displayComponent = (
             <div>       
@@ -89,5 +88,11 @@ componentWillUnmount() {
         )
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+      toolbar: () => dispatch(actions.toolbar())
+    };
+  };
   
-export default Home; 
+  export default withRouter(connect(null, mapDispatchToProps)(Home));

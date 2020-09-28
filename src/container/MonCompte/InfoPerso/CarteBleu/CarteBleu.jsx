@@ -9,11 +9,9 @@ import Button from 'muicss/lib/react/button';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Modal} from 'react-bootstrap'
-import { useHistory} from 'react-router-dom';
 import AOS from 'aos'
 
 const CarteBleu = () => {
-    const history = useHistory();
     const [cvc, setCvc] = useState('')
     const [focus, setFocus] = useState('')
     const [name, setName] = useState('')
@@ -52,7 +50,7 @@ const CarteBleu = () => {
         axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/CarteBleu.json/`,data)
         .then(response => {
             console.log('data',response);  
-            toast.success('Votre profil a ete mis a jour😀', {
+            toast.success('Votre profil a ete mis a jour', {
               autoClose: 3000,
               closeButton:false,
               className:'toast1'
@@ -61,7 +59,7 @@ const CarteBleu = () => {
         })
         .catch(err => {
             console.log('data',err.response)
-            toast.error('Erreur, veuillez ressayer plus tard😮', {
+            toast.error('Erreur, veuillez ressayer plus tard', {
               autoClose: 3000,
               closeButton:false,
               className:'toast1'
@@ -81,17 +79,12 @@ const CarteBleu = () => {
           className:'toast1'
           
       })
-          localStorage.removeItem('token')
-          localStorage.removeItem('social')
-          localStorage.removeItem('id')
-          localStorage.removeItem('mail')
-          localStorage.removeItem('show')
-          console.log('REPONSE DELETE ACCOUNT ===== ',res)
+          localStorage.clear();
           setModal(false);
           })
       .catch(err => {
                 console.log('REPONSE DELETE ACCOUNT ===== ',err)
-                toast.error('Erreur, veuillez vous reconnectez 😮.',  {
+                toast.error('Erreur, veuillez vous reconnectez .',  {
                   autoClose: 3000,
                   closeButton:false,
                   className:'toast1'
@@ -113,7 +106,7 @@ const CarteBleu = () => {
             </Modal.Header>
              <Modal.Body  style={{backgroundColor:'black',color:'white'}}>
             <p>
-              Nous sommes triste de vous voir partir 😭 <br/>
+              Nous sommes triste de vous voir partir  <br/>
               Etes vous sur de vouloir supprimer votre compte ?<br/>
               Cette action entrainera une supression definitive de vos données
             </p>

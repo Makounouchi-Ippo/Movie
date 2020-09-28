@@ -74,7 +74,6 @@ class toolbar extends Component {
         if (localStorage.getItem('token') === null) {
              items = (
                 <header className='Toolbar'>
-                    {/* <ToggleButton click={this.props.open}/> */}
                     <div  data-aos="zoom-in" data-aos-duration='2000' className='Logo'>
                         <a href="/register">
                             <Logo/>

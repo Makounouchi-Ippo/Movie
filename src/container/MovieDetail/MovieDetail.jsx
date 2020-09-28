@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useCallback} from 'react';
 import { withRouter } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import * as actions from '../../store/actions/index'
@@ -11,18 +11,19 @@ import SimilarMovie from './SimilarMovie/SimilarMovie'
 //import AOS from 'aos'
 
 const MovieDetail = (props) => {
-
   const dispatch = useDispatch();
   const moviedetail = useSelector(state => state.movie.movieDetail);
   const youtubeKey_release = useSelector(state => state.movie.youtubeKey_release);
-  const fetchMovieDetail =  () => dispatch(actions.movieSearch('showMovieDetail',props.match.params.id))
+  const fetchMovieDetail = useCallback(() => { 
+    dispatch(actions.movieSearch('showMovieDetail',props.match.params.id))
+}, [dispatch, props.match.params.id]);
   
   useEffect(() => {
     //AOS.init()
     window.scrollTo(0,0)
     fetchMovieDetail()
   },
-  [props.match.params.id])
+  [props.match.params.id, fetchMovieDetail])
 
    console.log('movieeeDetail==',moviedetail)
     return (

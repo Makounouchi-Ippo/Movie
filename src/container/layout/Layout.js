@@ -1,45 +1,32 @@
 import React, { Component } from 'react'
 import Toolbar from './Toolbar/Toolbar'
-import BackDrop from './Backdrop/Backdrop'
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import Chat from '../Chat/Chat'
 
 class Layout extends Component {
-    state={
-        open: false,
-        chat: true
+    state= {
+        open: false
     }
-
+    
     displaySidebar = () => (
         this.setState((prevstate) =>{
           return {open: !prevstate.open}
         })
     )
 
-    backDropClick = () => (
-        this.setState({open: false})
-    )
-
     render() {
-
-        let backdrop = null
-
-        if (!this.props.token){
-            backdrop = <BackDrop/>
-        }
+        let show = (localStorage.hasOwnProperty('toolbar') || localStorage.hasOwnProperty('token')===false)
+       
         return (
             <React.Fragment>
-                <Toolbar open={this.displaySidebar}/>
-                    <div>
-                        {backdrop}
-                    </div>
-                    <main>
-                        {this.props.children}
-                    </main>
-                    <footer style={{width:'80px',height:'80px',position:'fixed',bottom:'50px',right:'0',marginRight:'50px'}}>   
-                        <Chat/>
-                    </footer> 
+               { show && <Toolbar open={this.displaySidebar}/> } 
+                <main>
+                    {this.props.children}
+                </main>
+               { show && <footer style={{width:'80px',height:'80px',position:'fixed',bottom:'50px',right:'0',marginRight:'50px'}}>   
+                    <Chat/>
+                    </footer>} 
             </React.Fragment>
         )
     }
@@ -48,7 +35,7 @@ class Layout extends Component {
 
 const mapStateToProps = state => {
     return {
-      token: state.auth.token
+      toolbar: state.auth.toolbar
     };
   };
   
