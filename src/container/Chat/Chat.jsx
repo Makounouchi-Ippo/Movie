@@ -3,19 +3,21 @@ import React, { useEffect, useState } from 'react';
 // import * as actions from '../../store/actions/index';
 // import {Modal} from 'react-bootstrap'
 import './Chat.css';
-import AOS from 'aos'
+import N from '../../assets/images/netflix-logo.png';
 // import { Widget } from 'react-chat-widget';
 import io from 'socket.io-client'
-import {AiFillWechat} from 'react-icons/ai'
+import { Widget } from 'react-chat-widget';
+import 'react-chat-widget/lib/styles.css';
+
 
 
 const Chat = () => {
 
-    const [name,setName] = useState('')
-    const [room,setRoom] = useState('')
+    //const [user,setUser] = useState(';kjvkfvlfkj')
+    // const [name,setName] = useState('')
+    // const [room,setRoom] = useState('')
 
     useEffect (()=>{
-        AOS.init()
         //instauration de la connexion
         // const socket = io("http://localhost:3000")
         // socket.emit('join',{name:localStorage.getItem('name')},()=>{
@@ -34,12 +36,23 @@ const Chat = () => {
        //}
     },[])
 
-    useEffect (()=> {})
+    // const userMessage = () => {
+    //     setUser()
+  
+    //   };
+
+  
+    const handleNewUserMessage = (newMessage) => {
+        console.log(`New message incoming! ${newMessage}`);
+        // Now send the message throught the backend API
+        
+      };
 
     let chat;
     if (localStorage.hasOwnProperty('toolbar')){
-        chat = ( <div data-aos="zoom-in" data-aos-duration='2000' style={{backgroundColor:'gold', borderRadius:'50%', height:'80px', width:'80px',cursor:'pointer'}}>
-        <AiFillWechat style={{height:'70px', width:'70px', margin:'5px 0px 0px 5px'}}/>
+        chat = ( <div >
+        <Widget title="Netflix Chat"  subtitle={'Profiter'} handleNewUserMessage={handleNewUserMessage} senderPlaceHolder="ecrire un message" />
+        
          </div>)
     }
 

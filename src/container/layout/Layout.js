@@ -3,12 +3,17 @@ import Toolbar from './Toolbar/Toolbar'
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import Chat from '../Chat/Chat'
+import AOS from 'aos'
 
 class Layout extends Component {
     state= {
         open: false
     }
     
+    componentDidMount =()=>{
+        AOS.init()
+    }
+
     displaySidebar = () => (
         this.setState((prevstate) =>{
           return {open: !prevstate.open}
@@ -24,7 +29,7 @@ class Layout extends Component {
                 <main>
                     {this.props.children}
                 </main>
-               { show && <footer style={{width:'80px',height:'80px',position:'fixed',bottom:'50px',right:'0',marginRight:'50px'}}>   
+               { show && <footer style={{position:'fixed',bottom:'10px'}}>   
                     <Chat/>
                     </footer>} 
             </React.Fragment>

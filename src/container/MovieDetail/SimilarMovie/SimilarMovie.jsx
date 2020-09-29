@@ -11,8 +11,8 @@ const SimilarMovie = (props) => {
     }
 
    else {
-    image =  props.similarMovie.results.slice(0,5).filter(movie => movie.poster_path !== null).map((movie,index)=>( 
-         <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt='' key={index} onClick={(e) => {e.preventDefault(); props.history.push(`/movie/${movie.id}`)}}/> 
+    image =  props.similarMovie.results.slice(0,5).filter(movie => movie.poster_path !== null).map((movie)=>( 
+         <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt='' key={movie.id} onClick={(e) => {e.preventDefault(); props.history.push(`/movie/${movie.id}`)}}/> 
       ))}
     
     return (

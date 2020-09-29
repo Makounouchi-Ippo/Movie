@@ -62,10 +62,9 @@ class ButtonSelect extends Component{
         let copy = {...this.state.selectedOption}
         copy[id] = value 
        this.setState({selectedOption:copy}, () => {
-           
-        this.props.clearMovie();
-        this.props.pageInitial()
-           this.props.movieFiltres(this.state.selectedOption)
+            this.props.clearMovie();
+            this.props.pageInitial();
+            this.props.movieFiltres(this.state.selectedOption);
        }) 
     }
 
