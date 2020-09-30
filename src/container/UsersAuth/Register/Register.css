@@ -20,6 +20,7 @@
     margin-top: 40px;
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
     width: 100%;
 }
@@ -214,6 +215,10 @@
 
 }
 
+.button_social{
+    cursor: pointer;
+} 
+
 .modal2{
     font-family: 'Arvo', serif;
     -ms-flex-pack: justify;
@@ -345,8 +350,5 @@
     }
     .UsersAuth {
         height: 370px;
-    }
-    .gauche{
-        margin-top: 95px;
     }
 }

@@ -8,7 +8,8 @@ const initialState = {
     loading: false,
     modal: false,
     photo: null,
-    toolbar:false
+    toolbar:false,
+    chat: false
   };
   const authStart = ( state, action ) => {
     return updateObject( state, { error: null, loading: true } );
@@ -37,11 +38,11 @@ const initialState = {
 };
 
 
-// const modal_false = (state) => {
-//   return updateObject(state, {
-//       toolbar: true
-//   });
-// };
+const showchat = (state) => {
+  return updateObject(state, {
+      chat: true
+  });
+};
 
 const toolbar = (state,action) => {
   return updateObject(state, {
@@ -65,6 +66,7 @@ const photo = (state, action) => {
         //case actionTypes.MODAL_FALSE: return modal_false(state);
         case actionTypes.PHOTO: return photo(state, action);
         case actionTypes.TOOLBAR: return toolbar(state, action);
+        case actionTypes.SHOWCHAT: return showchat(state, action);
         default:
             return state;
     }

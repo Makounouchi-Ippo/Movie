@@ -10,8 +10,10 @@ export {
     socialTwitter,
     socialFacebook,
     photo,
+    showChat,
     photoUrl,
-    toolbar
+    toolbar,
+
 }from './auth'
 
 

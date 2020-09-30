@@ -1,3 +1,5 @@
-.rcw-widget-container1{
-    bottom:-68px;
+@media(max-width:800px){
+    .Chat{
+        display: none;
+    }
 }

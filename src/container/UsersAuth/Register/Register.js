@@ -148,10 +148,10 @@ class UsersAuth extends Component {
                     </form> 
                 </div>
                 <div className='social_button'>
-                    <SocialIcon network="facebook" onClick={()=>this.authsocial(providerF)} />
-                    <SocialIcon network="twitter" onClick={()=>this.authsocial(providerT)} />
-                    <SocialIcon network="google" onClick={() =>this.authsocial(providerG)} />
-                    <div style={{backgroundColor:'yellow', borderRadius:'50%', width:"50px", height:'50px', display:'flex', alignItems:'center', justifyContent:'center'}} onClick={this.displayInput}>
+                    <SocialIcon network="facebook" className='button_social' onClick={()=>this.authsocial(providerF)} />
+                    <SocialIcon network="twitter" className='button_social'  onClick={()=>this.authsocial(providerT)} />
+                    <SocialIcon network="google" className='button_social'  onClick={() =>this.authsocial(providerG)} />
+                    <div style={{backgroundColor:'yellow', borderRadius:'50%', width:"50px", height:'50px', display:'flex', alignItems:'center', justifyContent:'center',cursor:'pointer'}} onClick={this.displayInput}>
                         <i style={{fontSize:'40px', color:'black'}} className="fa fa-mobile-phone" ></i>
                     </div>
                 </div>

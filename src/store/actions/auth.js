@@ -45,6 +45,14 @@ export const authLogout = () => {
     }
 }
 
+export const showChat = () => {
+      return {
+          type: actionTypes.SHOWCHAT
+  
+      }
+  }
+  
+
 export const checkAuthTimeout = (expirationTime) => {
     return dispatch => {
         setTimeout(()=>{
