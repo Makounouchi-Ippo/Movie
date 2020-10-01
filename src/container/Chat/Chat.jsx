@@ -9,23 +9,32 @@ import io from 'socket.io-client'
 import {useDispatch, useSelector} from 'react-redux';
 import { Widget,addResponseMessage} from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
-const socket = io("http://localhost:3000")
+import axios from 'axios'
+//const socket = io("http://localhost:3000")
 
 const Chat = () => {
 
-    const chats = useSelector(state => state.auth.chat)
-    console.log('WHATTTTTT----->',chats)
+    const [form,setForm] = useState()
+    const [social,setSocial] = useState()
+    const chatS = useSelector(state => state.auth.chatS)
+    const chatF = useSelector(state => state.auth.chatF)
+    
+
+// console.log('CHATsssssSSSS',chatS)
+// console.log('CHATFFFfff',chatF)
+    
+
     useEffect (()=>{
-        socket.on('msg serveur:',msg=> {
-            console.log('msggg recu du serveur--->',msg) 
-            console.log(socket)
-            addResponseMessage(msg)
-        })
+        // socket.on('msg serveur:',msg=> {
+        //     console.log('msggg recu du serveur--->',msg) 
+        //     console.log(socket)
+            //addResponseMessage(msg)
+        //})
                
     })
 
     const handleNewUserMessage = (newMessage) => {
-        socket.emit('msg envoyer :',localStorage.getItem('name') ,newMessage)
+        //socket.emit('msg envoyer :',localStorage.getItem('name') ,newMessage)
         console.log(`New message incoming! ${newMessage}`);
       };
       
@@ -39,7 +48,7 @@ const Chat = () => {
 
     return(
     <>
-       {chats && chat}
+       {chat}
     </>
     )
 

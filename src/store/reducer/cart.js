@@ -3,8 +3,8 @@ import { updateObject } from '../utility';
 
 const initialState = {
     cart: JSON.parse(localStorage.getItem('Panier')) || [],
-    total: JSON.parse(localStorage.getItem('total')),
-    qte: JSON.parse(localStorage.getItem('qte'))
+    total: localStorage.getItem('total') || 0,
+    qte: JSON.parse(localStorage.getItem('qte')) || 0
 };
 
 const addToCart = (state, action) => {
@@ -24,21 +24,24 @@ const addToCart = (state, action) => {
             id: action.movie.id,
             qte: 1,
             img: action.movie.poster_path,
+            poster: action.movie.backdrop_path,
             duree: action.movie.runtime,
             note: action.movie.vote_average
         }
         tempCart.push(value)
     }
-    
+
     let temps = JSON.stringify(tempCart)
     localStorage.setItem('Panier',temps)
-    return { ...state, cart: tempCart }
+    localStorage.setItem('qte', state.qte + 1)
+    // let qte = {...state.qte}
+    // qte = qte.qte + 1
+    //regler pb qte chaine de char string number.
+    return { ...state, cart: tempCart, qte: state.qte + 1 }
 }
 
 const removeToCart = (state, action) => {
-
     let obj = state.cart.filter((cartItem) => cartItem.id !== action.id)
-
     let temps = JSON.stringify(obj)
     localStorage.setItem('Panier',temps)
     return updateObject( state, { 
@@ -51,8 +54,7 @@ const resetCart = (state ) => {
     let temps = JSON.stringify(obj)
     localStorage.setItem('Panier',temps)
     return updateObject( state, { 
-      cart: obj,
-      
+        cart: obj
     })
 }
 
@@ -100,17 +102,19 @@ const getTotals = (state) => {
 }
 
 
-
+const initCart = () => {
+    return {cart: [], qte: 0, total:0}
+}
 const reducer = ( state = initialState, action ) => {
-  switch ( action.type ) {
-    case actionTypes.ADD_TO_CART: return addToCart(state, action);
-    case actionTypes.REMOVE_TO_CART: return removeToCart(state, action);
-    case actionTypes.RESET_CART: return resetCart(state, action);
-    case actionTypes.INCREASE: return increase(state, action);
-    case actionTypes.DECREASE: return decrease(state, action);
-    case actionTypes.GET_TOTAL: return getTotals(state);
- 
-    default: return state;
+    switch ( action.type ) {
+        case actionTypes.ADD_TO_CART: return addToCart(state, action);
+        case actionTypes.REMOVE_TO_CART: return removeToCart(state, action);
+        case actionTypes.RESET_CART: return resetCart(state, action);
+        case actionTypes.INCREASE: return increase(state, action);
+        case actionTypes.DECREASE: return decrease(state, action);
+        case actionTypes.GET_TOTAL: return getTotals(state);
+        case actionTypes.INIT_CART: return initCart(state);
+        default: return state;
   }
 }; 
 

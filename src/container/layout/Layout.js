@@ -11,19 +11,21 @@ class Layout extends Component {
     state= {
         open: false,
     }
-    
+
     componentDidMount =()=>{
         AOS.init()
-        if (!localStorage.getItem('chat')){
+            axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/social.json/`)
+            .then(response => {
+                this.props.showChatS(response.data.social)
+            })
+            .catch(error => { console.log('FORM',error)}) 
             axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/user.json/`)
             .then(response => {
                 if (response.data.name){
-                    this.props.showChat()
-                    localStorage.SetItem('chat',true)
+                    this.props.showChatF(response.data.name)
                 }
-                console.log('PSGGGG->>>>',response.data.name)})
+            })
             .catch(err => {}) 
-        }
     }
     displaySidebar = () => (
         this.setState((prevstate) =>{
@@ -56,7 +58,8 @@ const mapStateToProps = state => {
   };
 const mapDispatchToProps = dispatch => {
     return {
-     showChat: () => dispatch(actions.showChat())
+     showChatF: () => dispatch(actions.showChatS()),
+     showChatS: () => dispatch(actions.showChatF())
     };
   };
   

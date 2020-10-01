@@ -3,7 +3,7 @@
     flex-direction: row;
     width: 100%;
     background-color: #eff0f1;
-    min-height: 120vh;
+    min-height: 100vh;
 }
 
 .BlockGauche{
@@ -49,15 +49,17 @@
     font-weight: bolder;
 }
 
-@media (max-width : 600px){
-    .titleMonCompte{
-        display: none;
-    }
+
+@media (max-width: 1100px) {
     .MonCompte{
         display: flex;
         flex-direction: column;
         margin: auto;
     }
+    .titleMonCompte{
+        display: none;
+    }
+ 
     .BlockGauche{
         background-color: rgb(254, 254, 255);
         width: 100%;
@@ -68,7 +70,6 @@
         margin-top: -45px;
         display: flex;
         flex-direction: row;
-
         justify-content: space-evenly;
     }
     .Button{
@@ -79,3 +80,4 @@
         display: none;
     }
 }
+

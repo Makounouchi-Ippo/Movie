@@ -1,0 +1,95 @@
+.Slider {
+    background-color: rgb(0, 0, 0);
+    width: 100%;
+    height: 395px;
+    overflow: hidden;
+}
+
+.SliderItem {
+    width: 100%;
+    position: relative;
+}
+
+.Slider img {
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    height: auto;
+}
+
+.Souris {
+    position: absolute;
+    top: 19%;
+    left: 39%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    background-color: transparent;
+}
+
+.Slider button {
+    position: absolute;
+    top: 15%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 25px;
+    text-align: center;
+    background-color: transparent;
+    border: 2px solid white;
+}
+
+.Slider button:focus {
+    outline: none;
+}
+
+.Slider button:hover {
+    background-color: red;
+}
+
+@media(max-width:1750px) {
+    .Slider img {
+        width: 64%;
+        margin-left: 18%;
+        margin-right: 18%;
+        height: 410px;
+    }
+}
+
+@media(max-width:1350px) {
+    .Slider {
+        height: 300px;
+    }
+
+    .Slider img {
+        width: 70%;
+        margin-left: 15%;
+        margin-right: 15%;
+        height: auto;
+    }
+}
+
+@media(max-width:800px) {
+    .Slider {
+        height: 270px;
+    }
+
+    .Slider img {
+        width: 100%;
+        margin-left: 0%;
+        margin-right: 0%;
+        height: auto;
+    }
+
+    .Slider button {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        color: rgb(255, 255, 255);
+        background-color: rgb(0, 0, 0);
+    }
+}

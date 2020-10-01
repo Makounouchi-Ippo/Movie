@@ -35,12 +35,12 @@
     font-style: italic;
 }
 
-.liMovie {
+.liMovieCart {
     display: flex;
+    content: inherit;
     flex-direction: row;
     padding: 24px 8px;
     border-bottom: 1px solid black;
-    content: none;
 }
 
 .imgMovie {
@@ -52,7 +52,6 @@
 .infoMovie {
     padding-left: 30px;
     width: 320px;
-    height: 180px;
 }
 
 .titleMovie {
@@ -88,14 +87,14 @@
     margin: 3px;
     margin-top: 30px;
     width: 75px;
-    border-bottom: 1px solid black;
+}
 
+.deleteMovie:hover {
+    color: red;
 }
 
 /* ---------- DROITE ----------*/
-.modalShopping{
-    width:360px
-}
+
 .DroiteCart {
     width: 350px;
 }
@@ -117,6 +116,15 @@
 .infoDroite {
     width: 30%;
     text-align: right;
+}
+
+.totalPriceRecap {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 19px;
+    margin-bottom: 12px;
+    padding: 8px;
 }
 
 .totalPrice {
@@ -157,7 +165,7 @@
     /* cursor: disabled; */
 }
 
-.blockButtons {
+.blockButtonCart {
     display: flex;
     justify-content: center;
 }
@@ -168,9 +176,15 @@
     font-style: italic;
     margin-top: 35px;
     color: black;
-    border-bottom: 1px solid black;
 }
 
+.buttonClear:hover {
+    color: red;
+}
+
+.window1100 {
+    display: none;
+}
 
 @media (max-width: 1050px) {
     .Cart {
@@ -187,6 +201,10 @@
         text-align: center;
     }
 
+    .window1100 {
+        display: contents;
+    }
+
     .totalPrice {
         border-top: none;
     }
@@ -196,17 +214,44 @@
         margin: 30px auto 0;
     }
 
+    .liMovieCart {
+        margin-top: 25px;
+    }
+
     .cartEmpty {
         margin-top: 50px;
         border-top: 1px solid black;
         padding-top: 15px;
     }
 }
-@media (max-width: 580px) {
-    .modalShopping{
-        margin: auto;
-        width: 100%;
-        margin-bottom: 30px;
-        
+
+@media (max-width: 450px) {
+    .liMovieCart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .infoMovie {
+        padding: 0;
+        text-align: center;
+    }
+
+    .titleMovie {
+        width: 90%;
+        margin: 20px auto 0;
+    }
+
+    .qteMovie {
+        justify-content: center;
+    }
+
+    .deleteMovie {
+        margin: 20px auto 10px;
+    }
+
+    .price {
+        margin: 20px 0 0;
+        text-align: center;
     }
 }

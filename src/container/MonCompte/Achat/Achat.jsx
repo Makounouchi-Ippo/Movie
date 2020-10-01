@@ -1,33 +1,47 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import './Achat.css'
 import {Card} from 'react-bootstrap'
-import photo from '../../../assets/images/netflix-logo.jpg'
+import axios from 'axios';
 
 const Achat = () => {
-    return (
-    <div className='Achat'>
-            <div className='blockAchat'>
+    const [orderUser, setOrderUser] = useState([]);
+    useEffect(() => {
+      axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/Order.json/`)
+        .then(res => {
+          res.data !== null && setOrderUser(res.data)
+        })
+        .catch(err => {})   
+    }, [])
+
+    let order;
+    if (orderUser.length === 0)
+        order = <p style={{fontStyle: 'italic', color: 'black'}}>Aucune commande.</p>
+
+    else {
+        order = orderUser.map((order, index) => (
+            <div key={index} className='blockOrder'>
                 <div className='blockTitre'>
-                     <h1 className='titreInBlock'> Achats </h1>
+                    <h4 style={{color: 'white', marginTop:'20px', marginLeft:'20px'}}>Commande nᵒ{order.numberOrder}</h4>
                 </div>
                 <div className='blockCarteAchat'>
                     <div className='blockCarte'>
-                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
-                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
-                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
-                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
-                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
-                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
-                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
-                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
-                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
-                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
-                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
-                           <Card.Img  className='cardAchat' src={photo} alt='card movie' />
+                        {
+                            order.films.map(movie => {
+                                return (
+                                        <Card.Img  key={movie.id} className='cardAchat'src={`https://image.tmdb.org/t/p/w500/${movie.img}`} alt={movie.title} />
+                                    )
+                                })
+                        }
                     </div>
                 </div>
-            </div>
-    </div>
+            </div>)
+        )
+    }  
+  
+    return (
+        <div className='Order'>   
+            {order}
+        </div>
     )
 }
 

@@ -9,7 +9,8 @@ const initialState = {
     modal: false,
     photo: null,
     toolbar:false,
-    chat: false
+    chatS: false,
+    chatF: false
   };
   const authStart = ( state, action ) => {
     return updateObject( state, { error: null, loading: true } );
@@ -38,9 +39,17 @@ const initialState = {
 };
 
 
-const showchat = (state) => {
+const showchat = (state,action) => {
+  //0console.log('ACTiommmmm********',action)
+  let chatS;
+  let chatF;
+  if (action.showS)
+     chatS= true
+  else if (action.showF)
+    chatF= true
   return updateObject(state, {
-      chat: true
+      chatS: chatS,
+      chatF: chatF
   });
 };
 
@@ -66,7 +75,7 @@ const photo = (state, action) => {
         //case actionTypes.MODAL_FALSE: return modal_false(state);
         case actionTypes.PHOTO: return photo(state, action);
         case actionTypes.TOOLBAR: return toolbar(state, action);
-        case actionTypes.SHOWCHAT: return showchat(state, action);
+        case actionTypes.SHOWCHATS: return showchat(state, action);
         default:
             return state;
     }

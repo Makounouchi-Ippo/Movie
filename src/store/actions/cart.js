@@ -1,7 +1,6 @@
 import * as actionTypes from './actionTypes';
 
 export const addToCart = (movie) => {
-    console.log('ppppp--',movie)
     return {
         type: actionTypes.ADD_TO_CART,
         movie: movie
@@ -38,5 +37,11 @@ export const decrease = (id, qte) => {
 export const getTotals = () => {
     return {
         type: actionTypes.GET_TOTAL
+    }
+}
+
+export const initCart = () => {
+    return {
+        type: actionTypes.INIT_CART
     }
 }

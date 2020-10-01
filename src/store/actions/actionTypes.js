@@ -9,7 +9,8 @@ export const MODAL_FALSE = 'MODAL_FALSE'
 export const SOCIAL_AUTH = 'SOCIAL_AUTH'
 export const PHOTO = 'PHOTO';
 export const TOOLBAR = 'TOOLBAR';
-export const SHOWCHAT = 'SHOWCHAT';
+export const SHOWCHATS = 'SHOWCHATS';
+export const SHOWCHATF = 'SHOWCHATF';
 
 /////////////////MOVIEEE-SEARCHH/////////////////////
 
@@ -40,3 +41,4 @@ export const INCREASE = "INCREASE";
 export const DECREASE = "DECREASE";
 export const RESET_CART = "RESET_CART";
 export const GET_TOTAL = "GET_TOTAL";
+export const INIT_CART= "INIT_CART";

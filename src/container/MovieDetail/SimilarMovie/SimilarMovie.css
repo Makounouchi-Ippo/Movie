@@ -7,6 +7,13 @@
     margin-bottom:10px;
 }
 
+.ImgSimilar {
+    padding: 20px;
+    border-radius: 40px;
+    cursor: pointer;
+    width: 120px;
+}
+
 @media (max-width : 1250px){
     .blockSimilarMovie {
         margin-top:10px;

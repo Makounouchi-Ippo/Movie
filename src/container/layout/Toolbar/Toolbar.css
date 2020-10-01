@@ -55,6 +55,43 @@
   }
 
 
+.NavIcon {
+  display:flex;
+  align-items: center;
+}
+
+.Icon {
+  margin: 10px;
+  width: 40px;
+  height: 40px;
+  color: white;
+}
+
+.Icon:hover {
+  color: red; 
+}
+
+.NumberCart {
+  width: 23px;
+  position: absolute;
+  top: 38px;
+  text-align: center;
+  right: 121px;
+  color: white;
+}
+
+@media (max-width: 575px) {
+  .NavUser, .NavIcon {
+      display: flex;
+      flex-direction: column;
+      margin: 10px auto 10px;
+  }  
+  .NumberCart {
+      position: inherit;
+  }
+}
+
+
   @media (max-width: 500px) {
     .hiddenDropdown {
       display: none;

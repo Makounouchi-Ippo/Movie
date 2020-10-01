@@ -4,7 +4,8 @@ import Logo from './Logo/Logo';
 import N from '../../../assets/images/netflix-logo.png';
 import SearchButton from './SearchButton/SearchButton'
 import { connect} from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter,NavLink } from 'react-router-dom';
+import { BsBag } from "react-icons/bs";
 import {Nav, NavDropdown, Navbar} from 'react-bootstrap';
 import AOS from 'aos'
 
@@ -49,7 +50,10 @@ class toolbar extends Component {
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="mr-auto" />
                            {atHome && <SearchButton/>} 
-                          
+                           <NavLink to="/panier" className='NavIcon'>
+                               <BsBag className="Icon"/>
+                             <p className="NumberCart">{this.props.number > 0 && this.props.number}</p>
+                            </NavLink>
                             <NavDropdown alignRight  style={{textAlign:'center'}} title={
                             
                                 <img className="thumbnail-image" 
@@ -97,6 +101,7 @@ class toolbar extends Component {
 
 
 const mapStateToProps = state => ({
+    number: state.cart.qte,
     url: state.auth.photo
 });
 

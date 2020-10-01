@@ -10,7 +10,8 @@ export {
     socialTwitter,
     socialFacebook,
     photo,
-    showChat,
+    showChatS,
+    showChatF,
     photoUrl,
     toolbar,
 
@@ -41,6 +42,7 @@ export {
 export {
     resetCart,
     addToCart,
+    initCart,
     removeToCart,
     increase,
     decrease,

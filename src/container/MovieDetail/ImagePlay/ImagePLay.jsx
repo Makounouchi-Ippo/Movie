@@ -83,7 +83,7 @@ const ImagePlay = (props) => {
                  <img className='imageFilm' src={`https://image.tmdb.org/t/p/original/${props.afficheFilm}`} alt={props.id}/>
                  <FaPlay style={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} onClick={handleShow}/>
                  <p style ={{position:'absolute',color:'gold',textAlign: 'center',width: '400px',top: '55%',fontWeight: 'bold',fontSize:'x-large'}}> BANDE-ANNONCE</p>
-                 <button onClick={addcart} style={{position:"absolute", right: '17%',color:'white',height:'40px',backgroundColor:'red',width:'200px',fontWeight:'bold',fontSize:'1,9em',bottom:'30px',borderRadius:'10px'}}> <FontAwesomeIcon  icon={faShoppingCart}/> Ajouter au panier   </button>
+                 <button onClick={addcart} className='buttonImagePLay'> <FontAwesomeIcon  icon={faShoppingCart}/> Ajouter au panier   </button>
               </div> 
           <Modal
                     style={{backgroundColor:'black'}}
@@ -110,7 +110,7 @@ const ImagePlay = (props) => {
                  <img className='imageFilm' src={`https://image.tmdb.org/t/p/original/${props.afficheFilm}`} alt={props.id}/>
                  <FaPlay style={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} onClick={handleShow}/>
                  <p style ={{position:'absolute',color:'gold',textAlign: 'center',width: '400px',top: '55%',fontWeight: 'bold',fontSize:'x-large'}}> BANDE-ANNONCE</p>
-                 <button onClick={addcart} style={{position:"absolute", right: '17%',color:'white',height:'40px',backgroundColor:'red',width:'200px',fontWeight:'bold',fontSize:'1,9em',bottom:'30px',borderRadius:'10px'}}> <FontAwesomeIcon  icon={faShoppingCart}/> Ajouter au panier   </button>
+                 <button onClick={addcart}  className='buttonImagePLay'> <FontAwesomeIcon  icon={faShoppingCart}/> Ajouter au panier   </button>
               </div> 
           <Modal
                     style={{backgroundColor:'black'}}
