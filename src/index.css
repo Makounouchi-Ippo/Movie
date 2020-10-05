@@ -7,3 +7,10 @@ body {
   background-color: black;
   min-height: 100vh;
 }
+
+@media screen and (max-width: 320px){ 
+  html,body {
+      min-width: 320px;
+      min-height: 568px;
+  }
+}

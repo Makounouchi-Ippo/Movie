@@ -9,8 +9,7 @@ export const MODAL_FALSE = 'MODAL_FALSE'
 export const SOCIAL_AUTH = 'SOCIAL_AUTH'
 export const PHOTO = 'PHOTO';
 export const TOOLBAR = 'TOOLBAR';
-export const SHOWCHATS = 'SHOWCHATS';
-export const SHOWCHATF = 'SHOWCHATF';
+export const TCHAT = 'TCHAT';
 
 /////////////////MOVIEEE-SEARCHH/////////////////////
 

@@ -25,7 +25,7 @@ const ConfirmOrder = () => {
         <ul className="GaucheCart" style={{padding:'0'}}>
             {command.map(movie => (
                 <li className="liMovieCart" key={movie.id}>
-                    <img className="imgMovie" src={`https://image.tmdb.org/t/p/w500${movie.img}`} alt={movie.id} />
+                    <img className="imgMovie" style={{cursor:'none'}} src={`https://image.tmdb.org/t/p/w500${movie.img}`} alt={movie.id} />
                     <div className="infoMovie">
                         <p className='titleMovie'>{movie.title}</p>
                         <p className='pMovie'>Note {movie.note}/10</p>

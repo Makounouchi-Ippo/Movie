@@ -16,6 +16,7 @@ class Home extends Component {
     }
 
     componentDidMount () { 
+        localStorage.removeItem('commandeSuccess');
         var user = {}, 
         keys = Object.keys(localStorage),
         i = keys.length;

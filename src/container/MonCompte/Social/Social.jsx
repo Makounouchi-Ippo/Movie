@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
+import { useDispatch } from 'react-redux';
 import './Social.css'
 import Switch from "react-switch";
 import {Modal} from 'react-bootstrap'
-import { useHistory,Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios'
+import  * as actions from '../../../store/actions/index';
+import { ToastContainer, toast, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Achat = () => {
 
@@ -11,37 +15,13 @@ const Achat = () => {
     const [checkSocial,setCheckSocial] = useState(false)
     const [name,setName] = useState(null)
     const [show,setShow] = useState(false)
+    const [ok, setOk] = useState(false);
+    const [ok1, setOk1] = useState(false)
 
-    //   const  handleSubmit = (val) => {
-    
-
-    //     if (val === true)
-    //     {
-    //         console.log('val--->',val)
-    //         setCheckSocial(false)
-    //     }
-
-    //     if (val === false){
-    //         console.log('val--->',val)
-    //         setCheckSocial(false)
-
-    //     }
-    //     // const templateId = 'template_8autyof';
-    
-    //     // sendFeedback(templateId, {message_html: 'this.state.feedback', from_name: 'this.state.name', reply_to: 'mehdielkaddouri@gmail.com'})
-
-    //   }
-
-    //   const sendFeedback = (templateId, variables) => {
-    //     window.emailjs.send(
-    //       'user_sPd6aG1e3xdkcQxMwXU', templateId,
-    //       variables
-    //       ).then(res => {
-    //         console.log('Email successfully sent!')
-    //       })
-    //       // Handle errors here however you like, or use a React error boundary
-    //       .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
-    //   }
+    const dispatch = useDispatch();
+    const tchat = useCallback((value) => { 
+        dispatch(actions.tchat(value));
+    }, [dispatch]);
 
     useEffect(()=>{
         console.log('DIDMOUNTTTTT-->')
@@ -64,37 +44,61 @@ const Achat = () => {
 
 
     useEffect(()=> {
-        console.log('DIDUPDATE->')
-        const dataTrue = {social:true};
-        const dataFalse = {social:false};
+        if (ok) {
+            console.log('DIDUPDATE->')
+            const dataTrue = {social:true};
+            const dataFalse = {social:false};
+          
+         checkSocial ? 
+         axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/social.json/`,dataTrue)
+         .then(res => {
+             toast.success("Nous sommes heureux de vous compter parmis nos membres.", {  className: "toastCss" })
+             tchat(true)
+         })
+         .catch(err => {})
+     : axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/social.json/`, dataFalse)
+         .then(res => {
+             toast.error("Nous sommes triste de ne plus vous compter parmis nos membres.", {  className: "toastCss" })
+             tchat(false)
+         })
+         .catch(err => {})
+
+        }
       
-     checkSocial ? axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/social.json/`,dataTrue) : axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/social.json/`,dataFalse);
     
-    },[checkSocial])
+    },[checkSocial, ok])
 
     useEffect(()=> {
-        console.log('DIDUPDATE-> 111')
-        const dataTrue1 = {newsletter:true};
-        const dataFalse1 = {newsletter:false};
-        checknews ? axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/newsletter.json/`,dataTrue1) : axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/newsletter.json/`,dataFalse1);
-
-    },[checknews])
-
-    
+        if (ok1) {
+            console.log('DIDUPDATE-> 111')
+            const dataTrue1 = {newsletter:true};
+            const dataFalse1 = {newsletter:false};
+            checknews ? 
+            axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/newsletter.json/`,dataTrue1)
+            .then(res => toast.success("Vous etes maintenant abonneer a notre newsletter", {  className: "toastCss" }))
+            .catch(err => {})
+            : axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/newsletter.json/`,dataFalse1)
+            .then(res => toast.error("Vous etes desabonner a notre newsletter", {  className: "toastCss" }))
+            .catch(err => {})
+        }
+    },[checknews, ok1])
 
     const handleChange = (id) => {
-    if(name){
-        if (id === 'social') {
-            setCheckSocial(prev => !prev);
+        if(name) {
+            setOk(true);
+            setOk1(true);
+            if (id === 'social') {
+                setOk1(false)
+               setCheckSocial(prev => !prev);
+            }
+            else if (id === 'news') {
+                setOk(false)
+                setCheckNews(prev => !prev);
+            }
         }
-        else if (id === 'news') {
-            setCheckNews(prev => !prev);
-        }
-    } 
-    else 
-        setShow(true)    
+        else 
+             setShow(true)    
     }
-        
       console.log('stattteeee-->',checkSocial)
 
     let modal;
@@ -117,6 +121,7 @@ const Achat = () => {
 
     return (
     <div className='Achat'>
+        <ToastContainer transition={Zoom} position="top-center" pauseOnFocusLoss type="dark"/>
             <div className='blockAchat'>
                 <div className='blockTitre'>
                      <h1 className='titreInBlock'> Social </h1>
@@ -134,7 +139,6 @@ const Achat = () => {
                                     <li className='liSocial'> Prenez part aux discussions sur les films et séries </li>
                                     <li className='liSocial'> Contribuez à améliorer les informations de notre base de données.</li>
                                     <li className='liSocial'> Contribuez à améliorer les informations de notre base de données.</li>
-                                    <li className='liSocial'> Profitez des dernieres infos et exclu grace a un communauté reactive</li>
                                     <li className='liSocial'> Profitez des dernieres infos et exclu grace a un communauté reactive</li>
                                 </ul>
                             </div>

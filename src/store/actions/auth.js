@@ -45,19 +45,12 @@ export const authLogout = () => {
     }
 }
 
-export const showChatS = (param) => {
-      return {
-          type: actionTypes.SHOWCHATS,
-          showS:param
-      }
-  }
-  
-  export const showChatF = (param) => {
+export const tchat = (value) => {
     return {
-        type: actionTypes.SHOWCHATF,
-        showS:param
-    }
-}
+        type: actionTypes.TCHAT,
+        value: value
+    };
+};
 
 export const checkAuthTimeout = (expirationTime) => {
     return dispatch => {
@@ -187,21 +180,16 @@ export const  authLog = (email, password, history) => {
             dispatch(photo(response.data.localId))
             dispatch(authSuccess(response.data.idToken, response.data.localId));
             dispatch(checkAuthTimeout(response.data.expiresIn))  
-             
+            axios.get(`https://movies-27cd5.firebaseio.com/${response.data.localId}/social.json/`)
+            .then(res => {
+                dispatch(tchat(res.data.social))
+            })
+            .catch(err => {})
             history.push('/home');
         })
         .catch(err => {
             dispatch(authFail(err.response.data.error.message));
         })
-
-        // const verify = {
-        //     requestType:"VERIFY_EMAIL",
-        //     idToken:localStorage.getItem('token')
-        // }
-        // console.log('verifier',verify)
-        // axios.post('https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDJQ2C-WHsJXu5xVCG5Z98XQ31gRJrSV_E',verify)
-        // .then(e=>{ console.log(e)})
-        // .catch(e=>{console.log(e)})
     };
 };
 
@@ -217,12 +205,16 @@ export const authCheckState = () => {
                 dispatch(authSuccess(token,id)); 
             else {
                 dispatch(authSuccess(token,id)); 
+                axios.get(`https://movies-27cd5.firebaseio.com/${id}/social.json/`)
+                .then(res => {
+                    dispatch(tchat(res.data.social))
+                })
+                .catch(err => {})
                 dispatch(photo(id))
             }
         }
     };
 };
-
 
 export const photoUrl = (url) => {
     return {

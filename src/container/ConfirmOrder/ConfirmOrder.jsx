@@ -6,10 +6,13 @@ const ConfirmOrder = () => {
     const [load,setLoad] = useState(true);
 
     useEffect(() => {
+        // console.log('useEffect')
         let timer;
         if (localStorage.getItem('spinner') === null){
+            // console.log('NUULL')
             timer = setTimeout(() => {
                 setLoad(false)
+                // console.log('TRUE')
                 localStorage.setItem('spinner',true)
             }, 3000);
         }

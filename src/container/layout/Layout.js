@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import Toolbar from './Toolbar/Toolbar'
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import * as actions from '../../store/actions/index';
-import axios from 'axios'
 import Chat from '../Chat/Chat'
 import AOS from 'aos'
 
@@ -14,18 +12,6 @@ class Layout extends Component {
 
     componentDidMount =()=>{
         AOS.init()
-            axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/social.json/`)
-            .then(response => {
-                this.props.showChatS(response.data.social)
-            })
-            .catch(error => { console.log('FORM',error)}) 
-            axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/user.json/`)
-            .then(response => {
-                if (response.data.name){
-                    this.props.showChatF(response.data.name)
-                }
-            })
-            .catch(err => {}) 
     }
     displaySidebar = () => (
         this.setState((prevstate) =>{
@@ -42,7 +28,7 @@ class Layout extends Component {
                 <main>
                     {this.props.children}
                 </main>
-               { show && <footer style={{bottom:'10px',zIndex:'100'}}>   
+               { show && this.props.showChat && <footer style={{bottom:'10px',zIndex:'100'}}>   
                     <Chat/>
                     </footer>} 
             </React.Fragment>
@@ -53,15 +39,10 @@ class Layout extends Component {
 
 const mapStateToProps = state => {
     return {
+        showChat: state.auth.tchat,
       toolbar: state.auth.toolbar
     };
   };
-const mapDispatchToProps = dispatch => {
-    return {
-     showChatF: () => dispatch(actions.showChatS()),
-     showChatS: () => dispatch(actions.showChatF())
-    };
-  };
-  
-  export default withRouter(connect(mapStateToProps,mapDispatchToProps) (Layout)); 
+
+  export default withRouter(connect(mapStateToProps) (Layout)); 
   

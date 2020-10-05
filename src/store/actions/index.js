@@ -10,8 +10,7 @@ export {
     socialTwitter,
     socialFacebook,
     photo,
-    showChatS,
-    showChatF,
+    tchat,
     photoUrl,
     toolbar,
 
