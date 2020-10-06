@@ -17,6 +17,7 @@ const Achat = () => {
     const [show,setShow] = useState(false)
     const [ok, setOk] = useState(false);
     const [ok1, setOk1] = useState(false)
+    const [mail, setMail] = useState('')
 
     const dispatch = useDispatch();
     const tchat = useCallback((value) => { 
@@ -36,6 +37,12 @@ const Achat = () => {
             setCheckNews(response.data.newsletter);
         }).catch(error => {
             //console.log('MAILL//',error)
+        })
+        axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/mail.json/`)
+        .then(response => {
+            setMail(response.data.mail);
+        }).catch(error => {
+            setMail(localStorage.getItem('mail'))
         })
         axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/user.json/`)
         .then(response => {setName(response.data.name) })
@@ -64,24 +71,28 @@ const Achat = () => {
          .catch(err => {})
 
         }
-      
-    
-    },[checkSocial, ok])
-
-    useEffect(()=> {
         if (ok1) {
             console.log('DIDUPDATE-> 111')
             const dataTrue1 = {newsletter:true};
             const dataFalse1 = {newsletter:false};
             checknews ? 
             axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/newsletter.json/`,dataTrue1)
-            .then(res => toast.success("Vous etes maintenant abonneer a notre newsletter", {  className: "toastCss" }))
-            .catch(err => {})
+            .then(res => {  
+                const templateId = 'template_8autyof';
+                sendFeedback(templateId, {message_html: 'message_html', from_name: name, reply_to: mail});
+                toast.success("Vous etes maintenant abonneer a notre newsletter", {  className: "toastCss" })})
+                .catch(err => {
+                   
+                })
             : axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/newsletter.json/`,dataFalse1)
             .then(res => toast.error("Vous etes desabonner a notre newsletter", {  className: "toastCss" }))
             .catch(err => {})
         }
-    },[checknews, ok1])
+      
+    
+    },[checkSocial, ok, checknews, ok1])
+
+  
 
     const handleChange = (id) => {
         if(name) {
@@ -100,6 +111,12 @@ const Achat = () => {
              setShow(true)    
     }
       console.log('stattteeee-->',checkSocial)
+
+    const sendFeedback = (templateId, variables) => {
+        window.emailjs.send('user_sPd6aG1e3xdkcQxMwXU', templateId,variables)
+        .then(res => {})
+        .catch(err => {})
+    }
 
     let modal;
     if (show === true){

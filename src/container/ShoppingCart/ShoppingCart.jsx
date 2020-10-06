@@ -30,8 +30,13 @@ const ShoppingCart = () => {
             .then(response => {setInfoUser(response.data.name) })
             .catch(err => {})
         axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/mail.json/`)
-            .then(response => {setMail(response.data.mail)})
-            .catch(err => {setMail(localStorage.getItem('email'))})
+            .then(response => {
+                setMail(response.data.mail)
+                console.log(response)
+            })
+            .catch(err => {
+                setMail(localStorage.getItem('mail'))
+            })
         axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/Order.json/`)
             .then(res => {res.data === null ? setOrderUser([]) : setOrderUser(res.data)})
             .catch(err => {})
@@ -66,7 +71,7 @@ const ShoppingCart = () => {
                 history.push('/confirmorder');
             }) 
             .catch(err => {})
-            const templateId = 'template_k9mcneq';
+            const templateId = 'template_dfxnj1e';
             sendFeedback(templateId, {message_html: 'message_html', from_name: infoUser, reply_to: mail});
         }
         else    
@@ -75,7 +80,7 @@ const ShoppingCart = () => {
 
 
     const sendFeedback = (templateId, variables) => {
-        window.emailjs.send('123456789', templateId,variables)
+        window.emailjs.send('user_sPd6aG1e3xdkcQxMwXU', templateId,variables)
         .then(res => {})
         .catch(err => {})
     }

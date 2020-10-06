@@ -44,7 +44,7 @@ class toolbar extends Component {
                         <Navbar.Brand href="/home" style={{display:'flex', alignItems:'center'}}> 
                                 <img className="thumbnail-image" alt='ddd' 
                                     src= {N}
-                                    style={{height:'75px', margin:'auto'}}/> 
+                                    style={{height:'75px', margin:'auto',marginLeft:'15px',zIndex:'3000'}}/> 
                             </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">

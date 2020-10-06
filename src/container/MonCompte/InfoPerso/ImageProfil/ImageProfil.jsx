@@ -94,7 +94,7 @@ class ImageProfil extends Component {
                                 {(!localStorage.getItem('photoPhone') && !localStorage.getItem('photo')) && 
                                     <div className='blockButtonPhoto'>
                                         <input style={{display: 'none'}} type='file' accept="image/*" onChange={this.handleChange} ref={fileInput => this.fileInput = fileInput}/>
-                                        <MdAddCircle className='ButtonPhoto' onClick={() => this.fileInput.click()}/>
+                                        <MdAddCircle className='ButtonPhoto' style={{cursor:'pointer'}}onClick={() => this.fileInput.click()}/>
                                 </div> }  
                             </div>
                     </div>
