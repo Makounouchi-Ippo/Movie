@@ -23,6 +23,7 @@ const ShoppingCart = () => {
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
+        localStorage.removeItem('spinner');
         axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/CarteBleu.json/`)
             .then(response => {setCbCompleted(response.data.number)})
             .catch(err => {})

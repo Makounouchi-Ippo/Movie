@@ -1,116 +1,73 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect, useCallback  } from 'react'
+import {useDispatch} from 'react-redux'
 import './Social.css'
 import Switch from "react-switch";
 import {Modal} from 'react-bootstrap'
-import { Link } from 'react-router-dom';
-import axios from 'axios'
 import  * as actions from '../../../store/actions/index';
-import { ToastContainer, toast, Zoom } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import {Link } from 'react-router-dom';
+import axios from 'axios'
 
 const Achat = () => {
-
     const [checknews,setCheckNews] = useState(false)
     const [checkSocial,setCheckSocial] = useState(false)
-    const [name,setName] = useState(null)
+    const [name,setName] = useState('')
+    const [mail,setMail] = useState('')
     const [show,setShow] = useState(false)
     const [ok, setOk] = useState(false);
-    const [ok1, setOk1] = useState(false)
-    const [mail, setMail] = useState('')
-
     const dispatch = useDispatch();
     const tchat = useCallback((value) => { 
         dispatch(actions.tchat(value));
     }, [dispatch]);
 
     useEffect(()=>{
-        console.log('DIDMOUNTTTTT-->')
         axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/social.json/`)
         .then(response => {
             setCheckSocial(response.data.social);
         }).catch(error => {
-            //console.log('MAILL//',error)
         })
         axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/newsletter.json/`)
         .then(response => {
             setCheckNews(response.data.newsletter);
         }).catch(error => {
-            //console.log('MAILL//',error)
-        })
-        axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/mail.json/`)
-        .then(response => {
-            setMail(response.data.mail);
-        }).catch(error => {
-            setMail(localStorage.getItem('mail'))
         })
         axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/user.json/`)
         .then(response => {setName(response.data.name) })
         .catch(err => {})  
+        axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/mail.json/`)
+    .then(res => {
+        console.log(res.data.mail)
+        setMail(res.data.mail);})
+    .catch(error => {
+        setMail(localStorage.getItem('mail'))
+    })
     },[])
 
 
+    useEffect(()=> { 
+    const dataTrue = {social:true};
+    const dataFalse = {social:false};    
+    checkSocial ? axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/social.json/`,dataTrue).then(res=>{
+        tchat(true)
+     }) : axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/social.json/`,dataFalse).then(res=>{
+        tchat(false)
+     });
+    
+    },[checkSocial,tchat])
+
     useEffect(()=> {
         if (ok) {
-            console.log('DIDUPDATE->')
-            const dataTrue = {social:true};
-            const dataFalse = {social:false};
-          
-         checkSocial ? 
-         axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/social.json/`,dataTrue)
-         .then(res => {
-             toast.success("Nous sommes heureux de vous compter parmis nos membres.", {  className: "toastCss" })
-             tchat(true)
-         })
-         .catch(err => {})
-     : axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/social.json/`, dataFalse)
-         .then(res => {
-             toast.error("Nous sommes triste de ne plus vous compter parmis nos membres.", {  className: "toastCss" })
-             tchat(false)
-         })
-         .catch(err => {})
-
-        }
-        if (ok1) {
-            console.log('DIDUPDATE-> 111')
             const dataTrue1 = {newsletter:true};
             const dataFalse1 = {newsletter:false};
-            checknews ? 
-            axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/newsletter.json/`,dataTrue1)
-            .then(res => {  
-                const templateId = 'template_8autyof';
-                sendFeedback(templateId, {message_html: 'message_html', from_name: name, reply_to: mail});
-                toast.success("Vous etes maintenant abonneer a notre newsletter", {  className: "toastCss" })})
-                .catch(err => {
-                   
-                })
-            : axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/newsletter.json/`,dataFalse1)
-            .then(res => toast.error("Vous etes desabonner a notre newsletter", {  className: "toastCss" }))
-            .catch(err => {})
+            checknews ? axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/newsletter.json/`,dataTrue1)
+            .then(res=>{
+            const templateId = 'template_8autyof';
+            sendFeedback(templateId, {message_html: 'message_html', from_name: name, reply_to: mail});
+            }): axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/newsletter.json/`,dataFalse1).then(res=>{
+            })
         }
-      
     
-    },[checkSocial, ok, checknews, ok1])
 
-  
-
-    const handleChange = (id) => {
-        if(name) {
-            setOk(true);
-            setOk1(true);
-            if (id === 'social') {
-                setOk1(false)
-               setCheckSocial(prev => !prev);
-            }
-            else if (id === 'news') {
-                setOk(false)
-                setCheckNews(prev => !prev);
-            }
-        }
-        else 
-             setShow(true)    
-    }
-      console.log('stattteeee-->',checkSocial)
+    },[checknews,ok,checknews])
 
     const sendFeedback = (templateId, variables) => {
         window.emailjs.send('user_sPd6aG1e3xdkcQxMwXU', templateId,variables)
@@ -118,6 +75,21 @@ const Achat = () => {
         .catch(err => {})
     }
 
+    const handleChange = (id) => {
+    if(name){
+        setOk(false)
+        if (id === 'social') {
+            setCheckSocial(prev => !prev);
+        }
+        else if (id === 'news') {
+            setOk(true)
+            setCheckNews(prev => !prev);
+        }
+    } 
+    else 
+        setShow(true)    
+    }
+        
     let modal;
     if (show === true){
         modal = (
@@ -135,10 +107,8 @@ const Achat = () => {
             </div>
             )
     }
-
     return (
     <div className='Achat'>
-        <ToastContainer transition={Zoom} position="top-center" pauseOnFocusLoss type="dark"/>
             <div className='blockAchat'>
                 <div className='blockTitre'>
                      <h1 className='titreInBlock'> Social </h1>
@@ -156,6 +126,7 @@ const Achat = () => {
                                     <li className='liSocial'> Prenez part aux discussions sur les films et séries </li>
                                     <li className='liSocial'> Contribuez à améliorer les informations de notre base de données.</li>
                                     <li className='liSocial'> Contribuez à améliorer les informations de notre base de données.</li>
+                                    <li className='liSocial'> Profitez des dernieres infos et exclu grace a un communauté reactive</li>
                                     <li className='liSocial'> Profitez des dernieres infos et exclu grace a un communauté reactive</li>
                                 </ul>
                             </div>
