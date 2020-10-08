@@ -100,15 +100,6 @@ class Login extends Component {
             </form>
         )
 
-        if (this.props.loading){
-            form = (
-            <div>
-                 <Spinner/>
-                <p> Attend Mageul, fait pas le presser</p>
-            </div>
-            )   
-        }
-
         return (
             <div className='page'>
                 {/* {authRedirect} */}

@@ -14,7 +14,7 @@ const SliderHome = () => (
         </Carousel.Item>
         <Carousel.Item className="SliderItem">
             <img className="ImgCarousel" src={SuperHeros} alt="Communaute" />
-            <NavLink to="/profil/Social">
+            <NavLink to="/compte/social">
                 <button>Rejoignez la communauté Netflix !</button>
                 <FaMousePointer className="Souris"/>
             </NavLink>
