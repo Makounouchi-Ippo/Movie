@@ -137,7 +137,7 @@ const Achat = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='blockBas'>
+                   {!localStorage.getItem('photoPhone')  && <div className='blockBas'>
                         <div className='HautblockHaut'>
                                 <h3 > Newsletter </h3>
                         </div>
@@ -154,7 +154,7 @@ const Achat = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>}
                 </div>
             </div>
     </div>

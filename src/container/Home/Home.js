@@ -40,7 +40,7 @@ class Home extends Component {
        
         if (this.state.user.name && this.state.user.photo && localStorage.getItem('show') ){
            alert= (
-                <Toast onClose={() => this.setShow()}  style={{position:'absolute',top:'10',right:'0',zIndex:'600'}} show={this.state.show} delay={5000} autohide>
+                <Toast onClose={() => this.setShow()}  style={{position:'absolute',top:'10',right:'0',zIndex:'600',marginTop:'20px'}} show={this.state.show} delay={4000} autohide>
                     <Toast.Header>
                         <img style={{width:'50px', height:'45px',borderRadius:'100px'}} src={this.state.user.photo} className="rounded mr-2" alt="" />
                         <strong className="mr-auto"> Team Netflix</strong>
@@ -62,7 +62,10 @@ class Home extends Component {
                 )
         }  
     if (localStorage.hasOwnProperty('animation') === true ){
-        displayComponent = (<video className='video' src={process.env.PUBLIC_URL + '/netflix.mp4'} autoPlay={true} type="video/mp4"/>) 
+        displayComponent = (
+         <>   
+        <audio src={process.env.PUBLIC_URL + '/netflix.mp3'} autoPlay/>
+        <video className='video'  muted src={process.env.PUBLIC_URL + '/netflix.mp4'} autoPlay={true} type="video/mp4"/> </>) 
        setTimeout(() => {
         localStorage.removeItem('animation');
         this.setState({netflix:true}) 

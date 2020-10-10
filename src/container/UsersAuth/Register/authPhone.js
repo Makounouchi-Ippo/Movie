@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Button, Form} from 'react-bootstrap'
 import firebase from '../../../fire'
+import axios from 'axios'
 import * as regex from '../../../component/Utility/Regex'
 import './Register.css'
 import {Alert} from 'react-bootstrap'
@@ -112,6 +113,16 @@ class Phone extends Component {
             localStorage.setItem('show', true)
             localStorage.setItem('animation', true)
             this.props.onPhone(result.user.ma,result.user.uid);
+            axios.get(`https://movies-27cd5.firebaseio.com/${result.user.uid}/user.json/`)
+            .then(res => {
+                localStorage.setItem('name',res.data.name)
+            })
+            .catch(err => {})
+            axios.get(`https://movies-27cd5.firebaseio.com/${result.user.uid}/social.json/`)
+            .then(res => {
+                this.props.tchat(res.data.social)
+            })
+            .catch(err => {})
             this.props.history.push('/home')
           })
           .catch(error => {
@@ -211,7 +222,8 @@ class Phone extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-      onPhone: (token, userId) => dispatch(actions.authSuccess(token, userId))
+      onPhone: (token, userId) => dispatch(actions.authSuccess(token, userId)),
+      tchat: (data) => dispatch(actions.tchat(data))
     
     };
   };

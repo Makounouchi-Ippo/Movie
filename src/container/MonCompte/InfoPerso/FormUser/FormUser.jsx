@@ -86,7 +86,7 @@ const FormUser = () => {
 
     const handleSubmit =(event) => {
         event.preventDefault(); 
-        console.log('STATE===',name,lastname,login,address)
+        localStorage.setItem('name',name)
         const data = {
             name:name,
             lastname: lastname,

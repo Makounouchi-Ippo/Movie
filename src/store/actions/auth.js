@@ -76,6 +76,11 @@ export const socialTwitter = (provider,history) => {
             localStorage.setItem('animation', true)
             //localStorage.setItem('toolbar', true)
             dispatch(authSuccess(response.credential.idToken, response.user.uid));
+            axios.get(`https://movies-27cd5.firebaseio.com/${response.user.uid}/social.json/`)
+            .then(res => {
+                dispatch(tchat(res.data.social))
+            })
+            .catch(err => {})
             history.push('/home');
         })
         .catch(err => {
@@ -101,6 +106,11 @@ export const socialFacebook = (provider,history) => {
             localStorage.setItem('animation', true)
             //localStorage.setItem('toolbar', true)
             dispatch(authSuccess(response.credential.idToken, response.user.uid));
+            axios.get(`https://movies-27cd5.firebaseio.com/${response.user.uid}/social.json/`)
+            .then(res => {
+                dispatch(tchat(res.data.social))
+            })
+            .catch(err => {})
             history.push('/home');
         })
         .catch(err => {
@@ -126,6 +136,11 @@ export const socialAuth = (provider,history) => {
             localStorage.setItem('animation', true)
             //localStorage.setItem('toolbar', true)
             dispatch(authSuccess(response.credential.idToken, response.user.uid));
+            axios.get(`https://movies-27cd5.firebaseio.com/${response.user.uid}/social.json/`)
+            .then(res => {
+                dispatch(tchat(res.data.social))
+            })
+            .catch(err => {})
            history.push('/home'); 
         })
         .catch(err => {
@@ -180,6 +195,11 @@ export const  authLog = (email, password, history) => {
             dispatch(photo(response.data.localId))
             dispatch(authSuccess(response.data.idToken, response.data.localId));
             dispatch(checkAuthTimeout(response.data.expiresIn))  
+            axios.get(`https://movies-27cd5.firebaseio.com/${response.data.localId}/user.json/`)
+            .then(res => {
+                localStorage.setItem('name',res.data.name)
+            })
+            .catch(err => {})
             axios.get(`https://movies-27cd5.firebaseio.com/${response.data.localId}/social.json/`)
             .then(res => {
                 dispatch(tchat(res.data.social))
@@ -201,8 +221,15 @@ export const authCheckState = () => {
         if (!token)
             dispatch(authLogout());
         else {
-            if (localStorage.getItem('photo') || localStorage.getItem('photoPhone'))
+            if (localStorage.getItem('photo') || localStorage.getItem('photoPhone')){
+                axios.get(`https://movies-27cd5.firebaseio.com/${id}/social.json/`)
+                .then(res => {
+                    dispatch(tchat(res.data.social))
+                })
+                .catch(err => {})
                 dispatch(authSuccess(token,id)); 
+            }
+                
             else {
                 dispatch(authSuccess(token,id)); 
                 axios.get(`https://movies-27cd5.firebaseio.com/${id}/social.json/`)
