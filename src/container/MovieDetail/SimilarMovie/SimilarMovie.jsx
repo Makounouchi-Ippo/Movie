@@ -52,7 +52,7 @@ const SimilarMovie = (props) => {
    else {
     image =  props.similarMovie.results.slice(0,10).filter(movie => movie.poster_path !== null).map((movie)=>( 
          <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className="ImgSimilar" alt='' key={movie.id} onClick={(e) => {e.preventDefault(); props.history.push(`/movie/${movie.id}`)}}/> 
-      ))}
+    ))}
     
     return (
       <div className='blockSimilarMovie' >

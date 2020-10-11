@@ -13,6 +13,7 @@
 .MenuDeroulantToolbar {
  display:flex;flex-direction:column;align-items:center;background-color:#eff0f1;margin: -4px 0;cursor: pointer;
 }
+
 .Toolbar2{
   z-index: 400;
   position: fixed;

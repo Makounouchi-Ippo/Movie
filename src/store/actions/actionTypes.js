@@ -26,13 +26,6 @@ export const MOVIE_DETAIL = 'MOVIE_DETAIL'
 export const RESET_MOVIE = 'RESET_MOVIE'
 // export const RESET_FILTRE = 'RESET_FILTRE'
 
-
-/////////////////INFO--USER////////////////////
-
-export const INFO_USER_SUCCESS = 'INFO_USER_SUCCESS'
-export const INFO_USER_FAIL = 'INFO_USER_FAIL'
-
-
 ////////// CART //////////
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_TO_CART = "REMOVE_TO_CART";

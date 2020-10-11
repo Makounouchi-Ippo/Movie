@@ -11,7 +11,7 @@ const Achat = () => {
           res.data !== null && setOrderUser(res.data)
         })
         .catch(err => {})   
-    }, [])
+    },[])
 
     let order;
     if (orderUser.length === 0)

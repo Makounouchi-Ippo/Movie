@@ -54,7 +54,7 @@ class UsersAuth extends Component {
             case 'password': value_input.match(regex.password)  ? error[name_input]='' : error[name_input] = "*Au moins: 1Min, 1Maj et 1chiffre ";
                 break;
             default:
-                console.log("NUMBER NOT FOUND");
+                //console.log("NUMBER NOT FOUND");
         }
         this.setState({error:error}, () => {this.handleFormValid()});
     }

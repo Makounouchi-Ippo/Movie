@@ -33,10 +33,10 @@ const ShoppingCart = () => {
         axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/mail.json/`)
             .then(response => {
                 setMail(response.data.mail)
-                console.log(response)
+                //console.log(response)
             })
             .catch(err => {
-                setMail(localStorage.getItem('mail'))
+                setMail(localStorage.getItem('email'))
             })
         axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/Order.json/`)
             .then(res => {res.data === null ? setOrderUser([]) : setOrderUser(res.data)})
@@ -81,6 +81,7 @@ const ShoppingCart = () => {
 
 
     const sendFeedback = (templateId, variables) => {
+        console.log(variables)
         window.emailjs.send('user_sPd6aG1e3xdkcQxMwXU', templateId,variables)
         .then(res => {})
         .catch(err => {})

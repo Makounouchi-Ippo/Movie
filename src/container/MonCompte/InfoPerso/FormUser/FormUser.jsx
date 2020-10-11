@@ -13,7 +13,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const FormUser = () => {
-
     const [id, setId] = useState('');
     const [idToken, setIdToken] = useState('');
     const [name, setName] = useState('');
@@ -21,38 +20,42 @@ const FormUser = () => {
     const [login, setLogin] = useState('');
     const [address, setAddress] = useState('');
     const [mail, setMail] = useState('');
+      //const [error, setError] = useState(null);
 
-    //const [error, setError] = useState(null);
 
-    useEffect(() => {
-        
+    const fetchMail= ()=>{
         if (mail.length === 0){
-            setMail(localStorage.getItem('mail'))
+            setMail(localStorage.getItem('email'))
         }
-       setIdToken(localStorage.getItem('token'))
-       setId(localStorage.getItem('id'))
-       let idLocal = localStorage.getItem('id')
-    
-       axios.get(`https://movies-27cd5.firebaseio.com/${idLocal}/user.json/`)
-       .then(response => {
-            //console.log('userrr//////',response.data)
-            setAddress(response.data.address) 
-            setName(response.data.name)   
-            setLastname(response.data.lastname)  
-            setLogin(response.data.login)  
-            localStorage.setItem('form',true)
-       })
-       .catch(err => {
-            //console.log('DIDMOUNT',err)
-       })
-     axios.get(`https://movies-27cd5.firebaseio.com/${idLocal}/mail.json/`)
-        .then(response => {
+    }
+
+    useEffect (fetchMail
+    ,[])
+
+    useEffect(() => {    
+    setIdToken(localStorage.getItem('token'))
+    setId(localStorage.getItem('id'))
+    let idLocal = localStorage.getItem('id')
+    axios.get(`https://movies-27cd5.firebaseio.com/${idLocal}/user.json/`)
+    .then(response => {
+        //console.log('userrr//////',response.data)
+        setAddress(response.data.address) 
+        setName(response.data.name)   
+        setLastname(response.data.lastname)  
+        setLogin(response.data.login)  
+        localStorage.setItem('form',true)
+    })
+    .catch(err => {
+         //console.log('DIDMOUNT',err)
+    })
+    axios.get(`https://movies-27cd5.firebaseio.com/${idLocal}/mail.json/`)
+    .then(response => {
          //console.log('MAIL//////',response.data)
-         setMail(response.data.mail);
-        }).catch(error => {
-            //console.log('MAILL//',error)
-        })
-      },[]) 
+        setMail(response.data.mail);
+    }).catch(error => {
+         //console.log('MAILL//',error)
+    })
+    },[]) 
 
     const handleSubmitMail =(event) => {
         event.preventDefault(); 
@@ -64,22 +67,26 @@ const FormUser = () => {
         axios.post('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDJQ2C-WHsJXu5xVCG5Z98XQ31gRJrSV_E',authData)
         .then(response => {
             toast.success('Votre profil a ete mis a jour                     😀', {
-                autoClose: 3000,
-                closeButton:false,
-                className:'toast1'
-            })
-            const mail = { mail:response.data.email };
-            axios.put(`https://movies-27cd5.firebaseio.com/${id}/mail.json/`,mail)
-            .then(response =>{ console.log('MailResponse',response) })
-            .catch(error => { console.log('MailResponse',error) })
-        })
-        .catch(err => {
-            console.log('maillllll',err.response.data.error.message)
-           // setError('Mail deja utilisé veuilleur le modifier')
-           toast.error('Erreur, Veuillez vous reconnectez                     😮', {
             autoClose: 3000,
             closeButton:false,
             className:'toast1'
+        })
+        const mail = { mail:response.data.email };
+        axios.put(`https://movies-27cd5.firebaseio.com/${id}/mail.json/`,mail)
+         .then(response =>{ 
+            //console.log('MailResponse',response)
+        })
+        .catch(error => { 
+            //console.log('MailResponse',error) 
+        })
+        })
+        .catch(err => {
+            //console.log('maillllll',err.response.data.error.message)
+           // setError('Mail deja utilisé veuilleur le modifier')
+        toast.error('Erreur, Veuillez vous reconnectez                     😮', {
+        autoClose: 3000,
+        closeButton:false,
+        className:'toast1'
         })
         })      
     }
@@ -97,25 +104,22 @@ const FormUser = () => {
         //setAlert(false)
         axios.put(`https://movies-27cd5.firebaseio.com/${id}/user.json/`,data)
         .then(response => {
-            console.log('data',response);  
+            //console.log('data',response);  
             toast.success('Votre profil a ete mis a jour                     😀', {
-                autoClose: 3000,
-                closeButton:false,
-                className:'toast1'
+            autoClose: 3000,
+            closeButton:false,
+            className:'toast1'
             })   
         })
         .catch(err => {
-            console.log('data',err.response)
+            //console.log('data',err.response)
             toast.error('Erreur, Veuillez vous reconnectez                        😮', {
-                autoClose: 3000,
-                closeButton:false,
-                className:'toast1'
+            autoClose: 3000,
+            closeButton:false,
+            className:'toast1'
             })
         })    
     }
-
-  
-
 
    let inputMail = null;
   
@@ -133,7 +137,6 @@ const FormUser = () => {
                     </div>     
                 </div>
             </div>) : inputMail = null;
-
 
     return (
         <div> 

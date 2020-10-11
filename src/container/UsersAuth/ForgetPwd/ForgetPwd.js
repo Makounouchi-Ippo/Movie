@@ -16,7 +16,7 @@ class ForgetPwd extends Component {
         show: true,
     }
 
-    componentDidMount  ()  {
+    componentDidMount ()  {
         AOS.init()
     }
 
@@ -34,7 +34,7 @@ class ForgetPwd extends Component {
             case 'mail': value_input.match(regex.mail)  || value_input === '' ? error[name_input]='' : error[name_input] = "*votre mail nest pas valid";
                 break;
             default:
-                console.log("NUMBER NOT FOUND");
+                //console.log("NUMBER NOT FOUND");
         }
         this.setState({error:error}, () => {this.handleFormValid()});
     }
@@ -47,18 +47,13 @@ class ForgetPwd extends Component {
         });
     }
 
-  
-
-
-    handleSubmit =  (event) => {
+    handleSubmit = (event) => {
         event.preventDefault();
-        console.log('FORgotPassword',this.state.mail)
+        //console.log('FORgotPassword',this.state.mail)
         firebase.auth().sendPasswordResetEmail(this.state.mail).then(e =>{
-   
             this.setState({response:"vous recevrez dans quelques instants un mail avec les instructons pour rétablir le mot de passe"})
         })
         .catch(response => {
-            
             this.setState({response:"Votre email ne correspond pas avec celui fournit a l'inscription"})
         })
     }
@@ -71,12 +66,11 @@ class ForgetPwd extends Component {
         {
             msg = (
                 <Alert variant="success" style={{zIndex:'500'}}>
-                <Alert.Heading>Team Netflix</Alert.Heading>
-                <p>
-                vous recevrez dans quelques instants un mail avec les instructons pour rétablir le mot de passe
-                </p>
+                    <Alert.Heading>Team Netflix</Alert.Heading>
+                    <p>
+                    vous recevrez dans quelques instants un mail avec les instructons pour rétablir le mot de passe
+                    </p>
                  </Alert>
-
             ) 
         }
         
@@ -84,32 +78,27 @@ class ForgetPwd extends Component {
         {
            msg=(
             <Alert variant="danger" style={{zIndex:'500'}}>
-            <Alert.Heading>Team Netflix</Alert.Heading>
-            <p>
-                 Votre email ne correspond pas avec celui fournit a l'inscription, veuillez le modifier !
-            </p>
-          </Alert>
-
+                <Alert.Heading>Team Netflix</Alert.Heading>
+                <p>
+                    Votre email ne correspond pas avec celui fournit a l'inscription, veuillez le modifier !
+                </p>
+            </Alert>
            ) 
+        }  
 
-           }  
-        //    style={{width:'90%', margin:'auto'}}
-        form = (
-            
-                <form className='pwd' onSubmit={this.handleSubmit}>
+        form = ( 
+            <form className='pwd' onSubmit={this.handleSubmit}>
                 <p className='titleForm'>Saisissez votre e-mail</p>
                     <label className='FormR'>                         
                         <input className='input' type="text" name="mail" 
-                        minLength="7" maxLength="30"
-                        placeholder="mail" 
-                        onChange={(e)=>this.handleInput(e)} 
-                        required/>
+                            minLength="7" maxLength="30"
+                            placeholder="mail" 
+                            onChange={(e)=>this.handleInput(e)} 
+                            required/>
                         <p className='error'> {this.state.error.mail}</p>
                     </label>
-                  
                     <input type="submit" value="Envoyer mail" className='buttonForm' disabled={this.state.disable} onClick={this.Notify}/>
-          
-               </form>
+            </form>
   
             )
     

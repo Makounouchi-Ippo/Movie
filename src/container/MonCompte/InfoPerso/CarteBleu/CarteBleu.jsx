@@ -18,7 +18,6 @@ const CarteBleu = () => {
     const [expiry, setExpiry] = useState('')
     const [number, setNumber] = useState('')
     const [modal, setModal] = useState(false);
-  
    
     useEffect(() => {
       AOS.init()
@@ -39,7 +38,7 @@ const CarteBleu = () => {
 
     const handleSubmit =(event) => {
         event.preventDefault(); 
-        console.log('STATE===',cvc,name,expiry,number)
+        //console.log('STATE===',cvc,name,expiry,number)
         const data = {
             name:name,
             number: number,
@@ -49,51 +48,46 @@ const CarteBleu = () => {
         //setAlert(false)
         axios.put(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/CarteBleu.json/`,data)
         .then(response => {
-            console.log('data',response);  
+            //console.log('data',response);  
             toast.success('Votre profil a ete mis a jour', {
-              autoClose: 3000,
-              closeButton:false,
-              className:'toast1'
-          })
-          
+            autoClose: 3000,
+            closeButton:false,
+            className:'toast1'
+          })         
         })
         .catch(err => {
-            console.log('data',err.response)
+            //console.log('data',err.response)
             toast.error('Erreur, veuillez ressayer plus tard', {
-              autoClose: 3000,
-              closeButton:false,
-              className:'toast1'
-          })
-     
+            autoClose: 3000,
+            closeButton:false,
+            className:'toast1'
+          }) 
         })    
     }
 
     const deleteAccount = () => {
-        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:delete?key=AIzaSyDJQ2C-WHsJXu5xVCG5Z98XQ31gRJrSV_E',{
+      axios.post('https://identitytoolkit.googleapis.com/v1/accounts:delete?key=AIzaSyDJQ2C-WHsJXu5xVCG5Z98XQ31gRJrSV_E',{
         "idToken": localStorage.getItem('token')
       }) 
       .then(res =>{
         toast.info('Votre compte a bien ete supprimer a bientot .', {
-          autoClose: 3000,
-          closeButton:false,
-          className:'toast1'
-          
+        autoClose: 3000,
+        closeButton:false,
+        className:'toast1'  
       })
-          localStorage.clear();
-          setModal(false);
-          })
+        localStorage.clear();
+        setModal(false);
+      })
       .catch(err => {
-                console.log('REPONSE DELETE ACCOUNT ===== ',err)
-                toast.error('Erreur, veuillez vous reconnectez .',  {
-                  autoClose: 3000,
-                  closeButton:false,
-                  className:'toast1'
-              })
-
+        //console.log('REPONSE DELETE ACCOUNT ===== ',err)
+        toast.error('Erreur, veuillez vous reconnectez .',  {
+        autoClose: 3000,
+        closeButton:false,
+        className:'toast1'
         })
+      })
     }
 
-    
     function MyVerticallyCenteredModal(props) {
         return (
           <Modal 
@@ -101,19 +95,19 @@ const CarteBleu = () => {
             size="md"
             aria-labelledby="contained-modal-title-vcenter"
             centered
-          >  <Modal.Header  style={{backgroundColor:'black',color:'white'}}>
+          >  
+          <Modal.Header  style={{backgroundColor:'black',color:'white'}}>
                <Modal.Title>Team Netflix</Modal.Title>
-            </Modal.Header>
+          </Modal.Header>
              <Modal.Body  style={{backgroundColor:'black',color:'white'}}>
-            <p>
-              Nous sommes triste de vous voir partir  <br/>
-              Etes vous sur de vouloir supprimer votre compte ?<br/>
-              Cette action entrainera une supression definitive de vos données
-            </p>
-
+              <p>
+                Nous sommes triste de vous voir partir  <br/>
+                Etes vous sur de vouloir supprimer votre compte ?<br/>
+                Cette action entrainera une supression definitive de vos données
+              </p>
             </Modal.Body>
             <Modal.Footer style={{backgroundColor:'black',color:'white',display:'flex',justifyContent:'space-around'}}>
-            <Button style={{backgroundColor:'grey',color:'white'}} onClick={ () => setModal(false)} >Annuler</Button>
+              <Button style={{backgroundColor:'grey',color:'white'}} onClick={ () => setModal(false)} >Annuler</Button>
               <Button style={{backgroundColor:'red',color:'white'}} onClick={deleteAccount}>Confirmer</Button>
             </Modal.Footer>
           </Modal>
@@ -123,13 +117,12 @@ const CarteBleu = () => {
       if (localStorage.getItem('token')=== null){
         setTimeout(() => {
           return(window.location.reload(false))
-        },3000);
-        
+        },3000);   
       }
     return (
     <>
         <div className='blockImage100'>
-        <ToastContainer position='top-center'/>
+          <ToastContainer position='top-center'/>
             <div id="PaymentForm" className='TitreContainerCarte'>
                 <h2 className='titreInContainerCarte'> Carte Bleue </h2>   
                     <div className='blockCartebleu'>

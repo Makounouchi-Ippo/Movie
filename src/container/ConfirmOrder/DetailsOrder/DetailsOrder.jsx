@@ -18,7 +18,9 @@ const ConfirmOrder = () => {
         .catch(err => {})   
         axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/user.json/`)
             .then(response => {setAdresse(response.data.address) })
-            .catch(err => console.log(err))  
+            .catch(err => {
+                //console.log(err)
+            })  
     }, [])
 
     let recapCommande = (

@@ -4,7 +4,6 @@ import ImageProfil from '../InfoPerso/ImageProfil/ImageProfil'
 import FormUser from './FormUser/FormUser'
 import CarteBleu from './CarteBleu/CarteBleu'
 
-
 const InfoPerso = () => {
     useEffect(()=> {
         localStorage.removeItem('commandeSuccess');

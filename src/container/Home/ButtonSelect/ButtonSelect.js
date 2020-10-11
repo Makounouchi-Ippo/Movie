@@ -39,7 +39,6 @@ const Genre = [
 
 
 class ButtonSelect extends Component{
-
     state={
         selectedOption: {
             Genre: {value: null, label: 'Genre'}, 
@@ -55,20 +54,18 @@ class ButtonSelect extends Component{
 
     componentDidUpdate (prevProps) {
         if (this.props.inputValue !== prevProps.inputValue)
-            {this.setState({selectedOption:{ Genre: {value: null, label: 'Genre'}, Years: {value: null , label: 'Years'},SortBy: {value: null, label: 'SortBy'}}})}}
-
+            {this.setState({selectedOption:{ Genre: {value: null, label: 'Genre'}, Years: {value: null , label: 'Years'},SortBy: {value: null, label: 'SortBy'}}})}
+    }
 
     handleInput = (value,id) => {
         let copy = {...this.state.selectedOption}
         copy[id] = value 
-       this.setState({selectedOption:copy}, () => {
+        this.setState({selectedOption:copy}, () => {
             this.props.clearMovie();
             this.props.pageInitial();
             this.props.movieFiltres(this.state.selectedOption);
        }) 
     }
-
-  
 
     render() {
 
@@ -106,12 +103,10 @@ class ButtonSelect extends Component{
                         />
                     </div>
                        {text}
-                </div>
-               
-          </div>
+                </div>     
+            </div>
 
         )
-
     }
 }
 
@@ -122,7 +117,6 @@ const mapStateToProps = state => {
     };
   };
 
-
 const mapDispatchToProps = dispatch => {
     return {
       movieFiltres: (value) => dispatch(actions.movieFiltres(value)), 
@@ -131,5 +125,4 @@ const mapDispatchToProps = dispatch => {
     };
   };
   
-
 export default withRouter(connect(mapStateToProps, mapDispatchToProps) (ButtonSelect));

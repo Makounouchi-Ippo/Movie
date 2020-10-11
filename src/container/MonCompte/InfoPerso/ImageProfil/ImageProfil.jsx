@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import './ImageProfil.css'
-// import {FaPlusCircle} from 'react-icons/fa'
-//import { CgProfile } from 'react-icons/cg'
 import { connect } from 'react-redux';
 import firebase from '../../../../fire';
 import  * as actions from '../../../../store/actions/index';

@@ -7,22 +7,22 @@ const Paiement = ({qte, total, submit, show}) => {
     if (show === true){
         modal = (
             <div data-aos="zoom-in" data-aos-duration='2000' className='modal2'>
-            <Modal.Dialog  className='modalShopping'style={{backgroundColor:'black',color:'white',borderRadius:'10px'}}>
-                <Modal.Header style={{backgroundColor:'black',color:'white'}}>
-                    <Modal.Title > Informations manquantes </Modal.Title>
-                </Modal.Header>    
-                <Modal.Body style={{backgroundColor:'black',color:'white'}}>
-                    <p>Vous devez completer vous information personnel dans votre profil avant de pouvoir profitez de nos services :)</p>
-                    <p>Cliquez sur le lien ci-dessous vous serez dirigez vers votre page de profil </p>
-                    <Link to='/compte/InfoPerso'style={{display:'flex',justifyContent:'center'}}> Mon Profil </Link>
-                </Modal.Body>  
-            </Modal.Dialog>
-        </div>
+                <Modal.Dialog  className='modalShopping'style={{backgroundColor:'black',color:'white',borderRadius:'10px'}}>
+                    <Modal.Header style={{backgroundColor:'black',color:'white'}}>
+                        <Modal.Title > Informations manquantes </Modal.Title>
+                    </Modal.Header>    
+                    <Modal.Body style={{backgroundColor:'black',color:'white'}}>
+                        <p>Vous devez completer vous information personnel dans votre profil avant de pouvoir profitez de nos services :)</p>
+                        <p>Cliquez sur le lien ci-dessous vous serez dirigez vers votre page de profil </p>
+                        <Link to='/compte/InfoPerso'style={{display:'flex',justifyContent:'center'}}> Mon Profil </Link>
+                    </Modal.Body>  
+                </Modal.Dialog>
+            </div>
         )
     }
     return (
         <div className="DroiteCart"> 
-        {modal}
+            {modal}
             <h4 className="titleRecap">Récapitulatif</h4>
             <div className="Recapitulatif">
                 <div className="rubriqueRecapitulatif">
@@ -45,6 +45,5 @@ const Paiement = ({qte, total, submit, show}) => {
         </div>
     )
 }
-
 
 export default Paiement;

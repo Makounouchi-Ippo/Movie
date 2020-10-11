@@ -10,7 +10,6 @@ const sideDrawer = (props) => (
       <div className='SideDrawer_link'> Confidentialité</div>
       <div className='SideDrawer_link'> CGV</div>
     </div>
-
 )
 
 export default sideDrawer;

@@ -25,10 +25,10 @@ class App extends Component {
   } 
   
   render() {
-    let routes;
-    let routess;
+    let routeWithoutToken;
+    let routesWithToken;
     if (!localStorage.getItem('token')) {
-       routes = (
+      routeWithoutToken = (
         <Switch>
           <Route  path="/register" exact component={Register} /> 
           <Route  path="/login" exact component={Login} /> 
@@ -38,7 +38,7 @@ class App extends Component {
       )
     }
     else if (localStorage.getItem('token')) {
-       routess = (
+      routesWithToken = (
         <Switch>
           <Route path="/home" exact component={Home}/>
           <Route path="/logout" exact component={Logout}/>
@@ -65,8 +65,8 @@ class App extends Component {
     return (
       <div>
         <Layout>
-          {routes}  
-          {routess}
+          {routeWithoutToken}  
+          {routesWithToken}
         </Layout>
       </div>
     );

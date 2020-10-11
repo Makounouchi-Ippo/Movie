@@ -8,7 +8,7 @@ import Spinner from '../../../component/UI/Spinner/Spinner'
 import { useEffect,useCallback} from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useHistory } from 'react-router-dom';
-import AOS from 'aos'
+//import AOS from 'aos'
 
 
 const Movielist = () => {
@@ -28,25 +28,23 @@ const optionSelect = useSelector(state =>  state.movie.selectedOption)
 const fetchData = useCallback(() =>  dispatch(actions.movieSearch("fetchDataPopular")),[dispatch])
 const fetchInfiniteScroll =  () => dispatch(actions.InfiniteScroll(nameScrolling,page+1,valueInput,optionSelect))
 
-    useEffect(() => {
-      AOS.init()
-     fetch()
-    },[])
-    
-    const fetch = () => {
-      if (movie.length === 0){
-        fetchData()
-      }     
-    }
+const fetch = () => {
+  if (movie.length === 0){
+  fetchData()
+  }     
+}
 
+    useEffect(
+      fetch
+    ,[])
+    
+    
     const fetchImages = () => {
       fetchInfiniteScroll()   
     }
 
     const clickShowMovieDetail = (id) => {
-      history.push(`/movie/${id}`);
-      // console.log(history)
-      // console.log(id)  
+      history.push(`/movie/${id}`); 
     }  
     return (
               <InfiniteScroll
@@ -54,19 +52,16 @@ const fetchInfiniteScroll =  () => dispatch(actions.InfiniteScroll(nameScrolling
                  next={fetchImages}
                  hasMore={hasmore}
               >
-                <div className='listmovie'>
+              <div className='listmovie'>
                   {movie && movie.map((data) => (
                     <div data-aos="zoom-in" data-aos-duration='2000' key={data.id}>
                           <Movie  image={data.poster_path} data={data.original_title} id={data.id}  title={data.title} click={() => clickShowMovieDetail(data.id)} />
-                          </div>
-                      ))
-                    }
-                    {loading? <Spinner text="Chargement en cours veuillez patientez ..."/> : null}
-                    {searchBarNoResult=== 0 ? <p style={{textAlign:'center',width:'100%', color:'white'}}> Aucun resultat ne correspond a votre recherche</p>: null}
-                </div>
-                </InfiniteScroll>
-            
-        )
+                    </div>))}
+                  {loading? <Spinner text="Chargement en cours veuillez patientez ..."/> : null}
+                  {searchBarNoResult=== 0 ? <p style={{textAlign:'center',width:'100%', color:'white'}}> Aucun resultat ne correspond a votre recherche</p>: null}
+              </div>
+              </InfiniteScroll>   
+    )
 }
 
 export default withRouter((Movielist));

@@ -15,7 +15,7 @@ const MovieDetail = (props) => {
   const moviedetail = useSelector(state => state.movie.movieDetail);
   const youtubeKey_release = useSelector(state => state.movie.youtubeKey_release);
   const fetchMovieDetail = useCallback(() => { 
-    dispatch(actions.movieSearch('showMovieDetail',props.match.params.id))
+  dispatch(actions.movieSearch('showMovieDetail',props.match.params.id))
 }, [dispatch, props.match.params.id]);
   
   useEffect(() => {
@@ -33,7 +33,7 @@ const MovieDetail = (props) => {
         {moviedetail && <Acteurs data={moviedetail.credits.crew} title="Equipe Technique" /> }
         {moviedetail &&  <SimilarMovie similarMovie={moviedetail.similar}/>}
       </div>
-      )
+    )
 }
 
 export default  withRouter((MovieDetail));

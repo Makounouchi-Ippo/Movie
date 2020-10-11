@@ -5,7 +5,6 @@ import {Alert} from 'react-bootstrap'
 import '../Register/Register.css'
 import * as regex from "../../../component/Utility/Regex"
 import * as actions from '../../../store/actions/index'
-import Spinner from "../../../component/UI/Spinner/Spinner"
 import AOS from 'aos'
 
 class Login extends Component {
@@ -17,9 +16,10 @@ class Login extends Component {
         disable: true
     }
 
-    componentDidMount  ()  {
+    componentDidMount () {
         AOS.init()
     }
+
     handleFormValid = () => {
         let store = ''; 
         const error = {...this.state.error};
@@ -28,6 +28,7 @@ class Login extends Component {
             store += key;
         Object.keys(error).length===2 && store.length===0? this.setState({disable:false}):this.setState({disable:true});
     }
+
     handleInputValid = (name_input,value_input) => {
         let error = {...this.state.error};
         switch(name_input){
@@ -36,7 +37,7 @@ class Login extends Component {
             case 'password': value_input.match(regex.password) || value_input === '' ? error[name_input]='' : error[name_input] = "Mot-de-passe ne correspond pas";
                 break;
             default:
-                console.log("Unknow value input");
+                //console.log("Unknow value input");
         }
         this.setState({error:error}, () => {this.handleFormValid()});
     }
@@ -53,23 +54,24 @@ class Login extends Component {
         event.preventDefault();
         this.props.authLog(this.state.mail, this.state.password,this.props.history) 
     }
-     render() {
 
+     render() {
         let error;
         if (this.props.error!=null)
         {
-            error =  <Alert  style={{zIndex:'500'}} variant="danger">
-            <Alert.Heading>Team Netflix</Alert.Heading>
-            <p>
-                 Identifiant incorrect, veuillez le modifier !
-            </p>
-          </Alert>
+            error = ( 
+            <Alert  style={{zIndex:'500'}} variant="danger">
+                <Alert.Heading>Team Netflix</Alert.Heading>
+                <p>
+                    Identifiant incorrect, veuillez le modifier !
+                </p>
+            </Alert>)
         }
 
         let form = (
-            <form   onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit}>
                 <p className='titleForm'>Se connecter</p>
-                <label className='FormR'>                         
+                            <label className='FormR'>                         
                                 <input className='input' type="text" name="mail" 
                                 minLength="7" maxLength="30"
                                 placeholder="mail" 
@@ -87,19 +89,13 @@ class Login extends Component {
                             </label >
                             <div className='mdp'>
                                 <a href='/forget-password'>Mot de passe oubliee ?</a>
-                            </div>
-                           
-                            <input type="submit" value="Se connecter" className='buttonForm' disabled={this.state.disable}/>
-                            
+                            </div>     
+                            <input type="submit" value="Se connecter" className='buttonForm' disabled={this.state.disable}/>                           
                             <div className='inscrire'>
                                 <p style={{textAlign:'center'}}> Pas encore inscrit</p> <Link to="/register">S'inscrire</Link>
-                            </div>
-                           
-                   
-
+                            </div>        
             </form>
         )
-
         return (
             <div className='page'>
                 {/* {authRedirect} */}
@@ -108,7 +104,7 @@ class Login extends Component {
                     <h1 className='titre_login'> Que le spectacle commence !</h1>
                     <div className='Login'>                  
                         {form}  
-                     </div>
+                    </div>
                 </div>   
             </div>
         )
@@ -120,7 +116,7 @@ const mapStateToProps = state => {
       loading: state.auth.loading,
       error: state.auth.error,
     };
-  };
+};
   
   const mapDispatchToProps = dispatch => {
     return {

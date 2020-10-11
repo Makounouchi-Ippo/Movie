@@ -16,7 +16,6 @@ const ImagePlay = (props) => {
     const dispatch = useDispatch();
     const addcart =  () => dispatch(actions.addToCart(moviedetail))
   
-
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -27,12 +26,12 @@ const ImagePlay = (props) => {
     {
         image = (
             <div >
-              <div className='imagesFilm' > 
-              <img className='image3' src={affiche} alt={props.id}/>
-               <FontAwesomeIcon style ={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} icon={faPlayCircle} onClick={handleShow} />
-               <p style={{position:"absolute",color:'white',width:'200px',textAlign:'center',fontWeight:'bold',fontSize:'1,9em',bottom:'25px'}}> {props.titre} </p>
-          </div> 
-          <Modal
+                <div className='imagesFilm' > 
+                    <img className='image3' src={affiche} alt={props.id}/>
+                    <FontAwesomeIcon style ={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} icon={faPlayCircle} onClick={handleShow} />
+                    <p style={{position:"absolute",color:'white',width:'200px',textAlign:'center',fontWeight:'bold',fontSize:'1,9em',bottom:'25px'}}> {props.titre} </p>
+                </div> 
+                <Modal
                     style={{backgroundColor:'black'}}
                     size="xl"
                     show={show}
@@ -40,25 +39,24 @@ const ImagePlay = (props) => {
                     backdrop="static"
                     keyboard={true}
                 >
-                    <Modal.Header  style={{backgroundColor:'black',border:'none'}} closeButton>
-                    </Modal.Header>
+                    <Modal.Header  style={{backgroundColor:'black',border:'none'}} closeButton></Modal.Header>
                     <Modal.Body style={{backgroundColor:'black'}}>
-                    <img style={{width:'100%'}}src={BandeAnnonceNonDisponible} alt={props.id}/>
+                        <img style={{width:'100%'}}src={BandeAnnonceNonDisponible} alt={props.id}/>
                     </Modal.Body>
                 </Modal>
-        </div>
+            </div>
         )
     }
 
     if(props.afficheFilm === null && props.afficheFilm2 !== null){
         image = (
             <div >
-                 <p style={{color:'white',textAlign:'center',fontWeight:'bold',fontSize:'1,9em'}}> {props.titre} </p>
-              <div className='imagesFilm' >
-              <img className='image2' src={`https://image.tmdb.org/t/p/original/${props.afficheFilm2}`} alt={props.id}/>
-               <FontAwesomeIcon style ={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} icon={faPlayCircle} onClick={handleShow} />
-          </div> 
-          <Modal
+                <p style={{color:'white',textAlign:'center',fontWeight:'bold',fontSize:'1,9em'}}> {props.titre} </p>
+                <div className='imagesFilm' >
+                    <img className='image2' src={`https://image.tmdb.org/t/p/original/${props.afficheFilm2}`} alt={props.id}/>
+                    <FontAwesomeIcon style ={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} icon={faPlayCircle} onClick={handleShow} />
+                </div> 
+                <Modal
                     style={{backgroundColor:'black'}}
                     size="xl"
                     show={show}
@@ -66,26 +64,25 @@ const ImagePlay = (props) => {
                     backdrop="static"
                     keyboard={true}
                 >
-                    <Modal.Header  style={{backgroundColor:'black',border:'none'}} closeButton>
-                    </Modal.Header>
+                    <Modal.Header  style={{backgroundColor:'black',border:'none'}} closeButton></Modal.Header>
                     <Modal.Body style={{backgroundColor:'black'}}>
-                    <img style={{width:'100%'}}src={BandeAnnonceNonDisponible} alt={props.id}/>
+                        <img style={{width:'100%'}}src={BandeAnnonceNonDisponible} alt={props.id}/>
                     </Modal.Body>
                 </Modal>
-        </div>
+            </div>
         )}
 
     if (props.afficheFilm !== null && props.bandeAnnonce !== undefined ){
         image = (
             <div>
-                 <p style={{color:'white',textAlign:'center',fontWeight:'bold',fontSize:'1,9em'}}> {props.titre} - {props.date} </p>
-              <div className='imagesFilm' >
-                 <img className='imageFilm' src={`https://image.tmdb.org/t/p/original/${props.afficheFilm}`} alt={props.id}/>
-                 <FaPlay style={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} onClick={handleShow}/>
-                 <p style ={{position:'absolute',color:'gold',textAlign: 'center',width: '400px',top: '55%',fontWeight: 'bold',fontSize:'x-large'}}> BANDE-ANNONCE</p>
-                 <button onClick={addcart} className='buttonImagePLay'> <FontAwesomeIcon  icon={faShoppingCart}/> Ajouter au panier   </button>
-              </div> 
-          <Modal
+                <p style={{color:'white',textAlign:'center',fontWeight:'bold',fontSize:'1,9em'}}> {props.titre} - {props.date} </p>
+                <div className='imagesFilm' >
+                    <img className='imageFilm' src={`https://image.tmdb.org/t/p/original/${props.afficheFilm}`} alt={props.id}/>
+                    <FaPlay style={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} onClick={handleShow}/>
+                    <p style ={{position:'absolute',color:'gold',textAlign: 'center',width: '400px',top: '55%',fontWeight: 'bold',fontSize:'x-large'}}> BANDE-ANNONCE</p>
+                    <button onClick={addcart} className='buttonImagePLay'> <FontAwesomeIcon  icon={faShoppingCart}/> Ajouter au panier   </button>
+                </div> 
+                <Modal
                     style={{backgroundColor:'black'}}
                     size="xl"
                     show={show}
@@ -93,26 +90,25 @@ const ImagePlay = (props) => {
                     backdrop="static"
                     keyboard={true}
                 >
-                    <Modal.Header  style={{backgroundColor:'black',border:'none',bordeTopLeftRadius:'black', borderTopRightRadius: 'black'}}  closeButton>
-                    </Modal.Header>
+                    <Modal.Header  style={{backgroundColor:'black',border:'none',bordeTopLeftRadius:'black', borderTopRightRadius: 'black'}}  closeButton></Modal.Header>
                     <Modal.Body style={{backgroundColor:'black'}}>
-                    <iframe width="100%" height="700px" src={`https://www.youtube.com/embed/${props.bandeAnnonce}?autoplay=1`} frameBorder="0" allowFullScreen  allow='autoplay' title='youtube'/>   
+                        <iframe width="100%" height="700px" src={`https://www.youtube.com/embed/${props.bandeAnnonce}?autoplay=1`} frameBorder="0" allowFullScreen  allow='autoplay' title='youtube'/>   
                     </Modal.Body>
-         </Modal>
-        </div>
+                </Modal>
+            </div>
         )
     }
     if (props.afficheFilm !== null && props.bandeAnnonce === undefined ) {
         image = (
             <div>
-                 <p style={{color:'white',textAlign:'center',fontWeight:'bold',fontSize:'1,9em'}}> {props.titre} - {props.date} </p>
-              <div className='imagesFilm' >
-                 <img className='imageFilm' src={`https://image.tmdb.org/t/p/original/${props.afficheFilm}`} alt={props.id}/>
-                 <FaPlay style={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} onClick={handleShow}/>
-                 <p style ={{position:'absolute',color:'gold',textAlign: 'center',width: '400px',top: '55%',fontWeight: 'bold',fontSize:'x-large'}}> BANDE-ANNONCE</p>
-                 <button onClick={addcart}  className='buttonImagePLay'> <FontAwesomeIcon  icon={faShoppingCart}/> Ajouter au panier   </button>
-              </div> 
-          <Modal
+                <p style={{color:'white',textAlign:'center',fontWeight:'bold',fontSize:'1,9em'}}> {props.titre} - {props.date} </p>
+                <div className='imagesFilm' >
+                    <img className='imageFilm' src={`https://image.tmdb.org/t/p/original/${props.afficheFilm}`} alt={props.id}/>
+                    <FaPlay style={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} onClick={handleShow}/>
+                    <p style ={{position:'absolute',color:'gold',textAlign: 'center',width: '400px',top: '55%',fontWeight: 'bold',fontSize:'x-large'}}> BANDE-ANNONCE</p>
+                    <button onClick={addcart}  className='buttonImagePLay'> <FontAwesomeIcon  icon={faShoppingCart}/> Ajouter au panier   </button>
+                </div> 
+                <Modal
                     style={{backgroundColor:'black'}}
                     size="xl"
                     show={show}
@@ -120,17 +116,14 @@ const ImagePlay = (props) => {
                     backdrop="static"
                     keyboard={true}
                 >
-                    <Modal.Header  style={{backgroundColor:'black',border:'none',bordeTopLeftRadius:'black', borderTopRightRadius: 'black'}}  closeButton>
-                    </Modal.Header>
+                    <Modal.Header  style={{backgroundColor:'black',border:'none',bordeTopLeftRadius:'black', borderTopRightRadius: 'black'}}  closeButton></Modal.Header>
                     <Modal.Body style={{backgroundColor:'black'}}>
-                    <img style={{width:'100%'}}src={BandeAnnonceNonDisponible} alt={props.id}/>
+                        <img style={{width:'100%'}}src={BandeAnnonceNonDisponible} alt={props.id}/>
                     </Modal.Body>
-         </Modal>
+                </Modal>
         </div>
         )
-
     }
-
 
     return (
         <div >
@@ -138,9 +131,6 @@ const ImagePlay = (props) => {
         </div>
         
     )
-
-
-
 }
 
 export default ImagePlay;

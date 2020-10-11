@@ -125,8 +125,8 @@ export const socialAuth = (provider,history) => {
         dispatch(authStart());
         firebase.auth().signInWithPopup(provider)
         .then(response => {
-            console.log('socailllAUUUUTHHHHH',response)
-            console.log('33',response.user)
+            //console.log('socailllAUUUUTHHHHH',response)
+            //console.log('33',response.user)
             localStorage.setItem('id', response.user.uid)
             localStorage.setItem('token', response.credential.accessToken)
             localStorage.setItem('name', response.user.displayName)
@@ -144,7 +144,7 @@ export const socialAuth = (provider,history) => {
            history.push('/home'); 
         })
         .catch(err => {
-            console.log('eerrrr msg = ', err.message)
+            //console.log('eerrrr msg = ', err.message)
             dispatch(authFail(err.message));
         })
     };
@@ -160,7 +160,7 @@ export const auth = (email, password) => {
         };
         axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDJQ2C-WHsJXu5xVCG5Z98XQ31gRJrSV_E',authData)
         .then(response => {
-            console.log('tokkkennnnnn',response);
+            //console.log('tokkkennnnnn',response);
             localStorage.setItem('id', response.data.localId)
             localStorage.setItem('show', true)
             localStorage.setItem('animation', true)
@@ -168,7 +168,7 @@ export const auth = (email, password) => {
             dispatch(authSuccess(null, response.data.localId));
         })
         .catch(err => {
-            console.log(err.response)
+            //console.log(err.response)
             dispatch(authFail(err.response.data.error.message));
         })
     };
@@ -185,7 +185,7 @@ export const  authLog = (email, password, history) => {
      
        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDJQ2C-WHsJXu5xVCG5Z98XQ31gRJrSV_E', authData)
         .then(response => {
-            localStorage.setItem('mail',response.data.email);
+            localStorage.setItem('email',response.data.email);
             localStorage.setItem('social',false)
             localStorage.setItem('token', response.data.idToken)
             localStorage.setItem('id', response.data.localId)
@@ -257,7 +257,7 @@ export const photo = (id) => {
             .then(function(url) {
                 dispatch(photoUrl(url))
             })
-            .catch(err => { console.log(err) })
+            .catch(err => {})
         }
        
 };

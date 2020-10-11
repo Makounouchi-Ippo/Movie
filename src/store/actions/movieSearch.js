@@ -10,7 +10,6 @@ export const movieBegin = () => {
     };
 };
 
-
 export const movieSearchInput = (value,data,inputValue) => {
     return {
         type: actionTypes.MOVIE_SEARCH_INPUT,
@@ -74,13 +73,11 @@ export const movieFail = (error) => {
     };
 };
 
-
 export const reset = () => {
     return {
         type: actionTypes.RESET_MOVIE
     };
 };
-
 
 export const  movieSearch = (inputValue,idMovie) => {
     return dispatch => {
@@ -124,7 +121,7 @@ export const  movieSearch = (inputValue,idMovie) => {
                 })
             }
                 
-        }
+    }
         
 };
 
@@ -139,15 +136,15 @@ export const movieFiltres = (filtreValue) => {
     return dispatch => {
         dispatch(movieBegin());
          axios.get(fetchApi)
-                    .then(response => {
-                        console.log('resposneFILTREEE', response)
-                        dispatch(movieFiltre(response.data.results,filtreValue,response.data.total_results))
-                    })
-                    .catch(err => {
-                        dispatch(movieFail(err))
-                        console.log('111',err.response)
-                    })
-        }      
+        .then(response => {
+               //console.log('resposneFILTREEE', response)
+               dispatch(movieFiltre(response.data.results,filtreValue,response.data.total_results))
+        })
+        .catch(err => {
+                dispatch(movieFail(err))
+                //console.log('111',err.response)
+        })
+    }      
 }
 
 export const InfiniteScroll = (nameScrolling,index,valueInput,filtreValue) => {
@@ -155,42 +152,31 @@ export const InfiniteScroll = (nameScrolling,index,valueInput,filtreValue) => {
      //console.log('iindex',index)
     // console.log('value',valueInput)
     // console.log('nameScrolling',nameScrolling);
-
     let fetchApi=`https://api.themoviedb.org/3/discover/movie?api_key=1e32f5c452c2267d5367589e9864ab1c&language=fr&page=${index}&include_adult=false&vote_count.gte=200`
 
     if (filtreValue.Genre.value) {fetchApi = fetchApi +`&with_genres=${filtreValue.Genre.value}`}
-   if  (filtreValue.SortBy.value) {fetchApi = fetchApi +`&sort_by=${filtreValue.SortBy.value}`}
-   if (filtreValue.Years.value) {fetchApi = fetchApi +`&primary_release_year=${filtreValue.Years.value}`}
-
+    if  (filtreValue.SortBy.value) {fetchApi = fetchApi +`&sort_by=${filtreValue.SortBy.value}`}
+    if (filtreValue.Years.value) {fetchApi = fetchApi +`&primary_release_year=${filtreValue.Years.value}`}
 
     return dispatch => {
         dispatch(movieBegin());
         switch(nameScrolling){
-
             case 'popular': axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=1e32f5c452c2267d5367589e9864ab1c&language=fr&page=${index}&include_adult=false`)
                 .then(response => {
-                    // console.log('page ====',index)
-                    // console.log('reponse page',response)
                     dispatch(InfiniteScrollMovie(response.data.results, index ))
                 })
                 .catch(err => {
                     dispatch(movieFail(err))
-                    //console.log(err.response)
                 })
                 break;
-
             case 'searchInput': axios.get(`${PATH_BASE}${PATH_SEARCH}${PATH_MOVIE}${API_KEY}${PATH_PAGE}${index}${PATH_LANGUE}fr${PATH_ADULT}"&query=${valueInput}&include_adult=false&vote_count.gte=200`)
                 .then(response => {
-                    // console.log('page ====',index)
-                    // console.log('reponse page',response)
                     dispatch(InfiniteScrollMovie(response.data.results, index ))
                 })
                 .catch(err => {
-                    // console.log('eeeeee')
                     dispatch(movieFail(err));
                  })
                  break;
-
             case 'filtre':  
                 axios.get(fetchApi)
                     .then(response => {
@@ -203,8 +189,6 @@ export const InfiniteScroll = (nameScrolling,index,valueInput,filtreValue) => {
                         //console.log(err.response)
                     })
                     break;
-                
-
             default:
                //  console.log("Type de recherche Inconnuuuuuuu");
         } 

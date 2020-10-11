@@ -16,7 +16,7 @@ class toolbar extends Component {
         defaultImage: false
     }
 
-    componentDidMount  ()  {
+    componentDidMount () {
         AOS.init()
     }
 
@@ -36,40 +36,38 @@ class toolbar extends Component {
         else 
             photo='https://lebackyard.fr/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png'
       
-       
          let items;
          if (localStorage.getItem('token')){
                 items = (
-                    <Navbar style={{padding: '0'}} bg="black" variant="dark" expand="sm" >
+                    <Navbar style={{padding: '0',zIndex:'200000000'}} bg="black" variant="dark" expand="sm" >
                         <Navbar.Brand href="/home" style={{display:'flex', alignItems:'center'}}> 
                                 <img className="thumbnail-image" alt='ddd' 
                                     src= {N}
                                     style={{height:'75px', margin:'auto',marginLeft:'15px',zIndex:'3000'}}/> 
-                            </Navbar.Brand>
+                        </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="mr-auto" />
-                           {atHome && <SearchButton/>} 
-                           <NavLink to="/panier" className='NavIcon'>
+                            {atHome && <SearchButton/>} 
+                            <NavLink to="/panier" className='NavIcon'>
                                <BsBag className="Icon"/>
                              <p className="NumberCart">{this.props.number > 0 && this.props.number}</p>
                             </NavLink>
                             <NavDropdown alignRight  style={{textAlign:'center'}} title={
-                            
                                 <img className="thumbnail-image" 
                                     src={photo} 
                                     alt="user pic"
                                     style={{borderRadius:'50%',marginTop:'5px',marginRight:'5px', height:'50px', width:'50px'}}
                                 />
-                            }>
-                            <div className='MenuDeroulantToolbar'>
-                                 <NavDropdown.Item href="/compte/InfoPerso" style={{textDecoration:'none', color:'black'}}>Mon Compte </NavDropdown.Item> 
-                                 <NavDropdown.Item href="/panier" style={{textDecoration:'none', color:'black',marginTop:'8px'}}>Mon Panier</NavDropdown.Item>
-                                <NavDropdown.Divider />
+                                }>
+                                <div className='MenuDeroulantToolbar'>
+                                    <NavDropdown.Item href="/compte/InfoPerso" style={{textDecoration:'none', color:'black'}}>Mon Compte </NavDropdown.Item> 
+                                    <NavDropdown.Item href="/panier" style={{textDecoration:'none', color:'black',marginTop:'8px'}}>Mon Panier</NavDropdown.Item>
+                                    <NavDropdown.Divider />
                                     <NavDropdown.Item href="/logout"  style={{textDecoration:'none',color:'white',textAlign:'center',width:'100%',backgroundColor:'black'}}>Deconnexion</NavDropdown.Item>
                              
-                            </div>                        
-                        </NavDropdown>
+                                </div>                        
+                            </NavDropdown>
                         </Navbar.Collapse>
                     </Navbar>
                 )
@@ -98,7 +96,6 @@ class toolbar extends Component {
         )
     }
 }
-
 
 const mapStateToProps = state => ({
     number: state.cart.qte,

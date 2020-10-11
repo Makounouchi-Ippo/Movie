@@ -30,14 +30,6 @@ export {
 
 }from './movieSearch'
 
-
-export { 
-    infoUserSuccess,
-    infoUserFail,
-    formUser
-}from './infoUser'
-
-
 export {
     resetCart,
     addToCart,

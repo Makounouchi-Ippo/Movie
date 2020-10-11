@@ -22,7 +22,7 @@ class Home extends Component {
         i = keys.length;
         while ( i-- ) {
             user[ keys[i] ] = localStorage.getItem( keys[i] );
-    }
+        }
         this.setState({user})   
     }
 
@@ -31,14 +31,13 @@ class Home extends Component {
     }
     setShow = () =>{
         this.setState({show:false})
-  
     }
 
     render () {
         let alert;
         let displayComponent;
        
-        if (this.state.user.name && this.state.user.photo && localStorage.getItem('show') ){
+        if (this.state.user.name && this.state.user.photo && localStorage.getItem('show')){
            alert= (
                 <Toast onClose={() => this.setShow()}  style={{position:'absolute',top:'10',right:'0',zIndex:'600',marginTop:'20px'}} show={this.state.show} delay={4000} autohide>
                     <Toast.Header>
@@ -51,15 +50,15 @@ class Home extends Component {
         }
         else if (localStorage.getItem('show'))
         { 
-                alert= (
-                    <Toast onClose={() => this.setShow(false)}  style={{position:'absolute',top:'10',right:'0',zIndex:'600'}} show={this.state.show} delay={5000} autohide>
-                        <Toast.Header>
-                            <img style={{width:'100px', height:'60px'}} src='https://img.over-blog-kiwi.com/2/71/08/42/20190322/ob_3e6dd6_f4f45f93-efae-4acd-a7c7-0fefe62c85dd.png' className="rounded mr-2" alt="" />
-                            <strong className="mr-auto"> Team Netflix</strong>
-                        </Toast.Header>
-                        <Toast.Body>Hello, jeune netflixeur, have fun;)</Toast.Body>
-                    </Toast>
-                )
+            alert= (
+                <Toast onClose={() => this.setShow(false)}  style={{position:'absolute',top:'10',right:'0',zIndex:'600'}} show={this.state.show} delay={5000} autohide>
+                    <Toast.Header>
+                        <img style={{width:'100px', height:'60px'}} src='https://img.over-blog-kiwi.com/2/71/08/42/20190322/ob_3e6dd6_f4f45f93-efae-4acd-a7c7-0fefe62c85dd.png' className="rounded mr-2" alt="" />
+                        <strong className="mr-auto"> Team Netflix</strong>
+                    </Toast.Header>
+                    <Toast.Body>Hello, jeune netflixeur, have fun;)</Toast.Body>
+                </Toast>
+            )
         }  
     if (localStorage.hasOwnProperty('animation') === true ){
         displayComponent = (
@@ -70,7 +69,7 @@ class Home extends Component {
         localStorage.removeItem('animation');
         this.setState({netflix:true}) 
         this.props.toolbar()
-    }, 4000);  
+        }, 4000);  
     }   
    if ( localStorage.hasOwnProperty('animation') === false)
     {
@@ -79,18 +78,15 @@ class Home extends Component {
                 {alert} 
                 <Carousel/> 
                 <Button/>
-               <ListMovies />
-               
+               <ListMovies />   
             </div>
         )
-            }
-
-
-        return (
+    }
+    return (
             <div className='pageHome'>
                {displayComponent}
             </div>
-        )
+    )
     }
 }
 
@@ -100,4 +96,4 @@ const mapDispatchToProps = dispatch => {
     };
   };
   
-  export default withRouter(connect(null, mapDispatchToProps)(Home));
+export default withRouter(connect(null, mapDispatchToProps)(Home));

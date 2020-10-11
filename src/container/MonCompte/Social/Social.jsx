@@ -31,14 +31,15 @@ const Achat = () => {
         }).catch(error => {
         })
         axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/user.json/`)
-        .then(response => {setName(response.data.name) })
+        .then(response => {setName(response.data.name)
+         })
         .catch(err => {})  
         axios.get(`https://movies-27cd5.firebaseio.com/${localStorage.getItem('id')}/mail.json/`)
     .then(res => {
-        console.log(res.data.mail)
+       // console.log(res.data.mail)
         setMail(res.data.mail);})
     .catch(error => {
-        setMail(localStorage.getItem('mail'))
+        setMail(localStorage.getItem('email'))
     })
     },[])
 
@@ -67,9 +68,10 @@ const Achat = () => {
         }
     
 
-    },[checknews,ok,checknews])
+    },[checknews,ok,name,mail])
 
     const sendFeedback = (templateId, variables) => {
+        //console.log(variables)
         window.emailjs.send('user_sPd6aG1e3xdkcQxMwXU', templateId,variables)
         .then(res => {})
         .catch(err => {})
@@ -118,7 +120,7 @@ const Achat = () => {
                     <div className='blockHaut'>
                         <div className='HautblockHaut'>
                             <h3 className='h3'> Rejoignez-nous dès aujourd'hui </h3>
-                            <h4> Avantages à devenir membre :</h4>
+                            <h4> Avantages à devenir membre :uniquement sur l'appli web</h4>
                         </div>
                         <div className='BasblockHaut'>
                             <div className='BasGaucheblockHaut'>
