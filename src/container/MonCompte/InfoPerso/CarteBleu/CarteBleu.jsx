@@ -138,10 +138,10 @@ const CarteBleu = () => {
                         <form className='InputCartebleu' onSubmit={handleSubmit}>
                                 <Input  label="Card Number" minLength="16" maxLength="16"  value={number} onChange={(e) => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} pattern ="[0-9]+" title="please enter number only" required type='tel'  name='number' floatingLabel={true} />
                                 <Input  label="Name" minLength="2" maxLength="25"  value={name} onChange={(e) => setName(e.target.value)} onFocus={e => setFocus(e.target.name)}  pattern="^[A-Za-z -]+$" title="please enter letters only" type="text" required  floatingLabel={true} />
-                                <div className='cvcDateCartebleu'>
+                        
                                     <Input  label="Date expiry" minLength="4" maxLength="4"  value={expiry} onChange={(e) => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} pattern ="[0-9]+" title="please enter number only"  required  type="text" name ='expiry' floatingLabel={true} />
                                     <Input  label="CVC" minLength="3" maxLength="3"  value={cvc} onChange={(e) => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} pattern ="[0-9]+" title="please enter number only"  type="tel" name='cvc' required  floatingLabel={true} />
-                                </div>
+                                
                                 <div className='buttonUserCarteBleu'>
                                     <Button  className='buttonCarteBleu' variant="raised" style={{textAlign:'center'}}>Submit</Button>
                                 </div>

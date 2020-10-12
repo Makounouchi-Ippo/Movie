@@ -120,7 +120,7 @@ const Achat = () => {
                     <div className='blockHaut'>
                         <div className='HautblockHaut'>
                             <h3 className='h3'> Rejoignez-nous dès aujourd'hui </h3>
-                            <h4> Avantages à devenir membre :uniquement sur l'appli web</h4>
+                            <h4> Avantages à devenir membre: dispo sur l'appli web</h4>
                         </div>
                         <div className='BasblockHaut'>
                             <div className='BasGaucheblockHaut'>

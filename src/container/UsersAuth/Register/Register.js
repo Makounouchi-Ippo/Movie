@@ -7,7 +7,6 @@ import {Alert} from "react-bootstrap";
 import Authphone from './authPhone';
 import * as actions from '../../../store/actions/index';
 import * as regex from "../../../component/Utility/Regex";
-import Spinner from '../../../component/UI/Spinner/Spinner';
 import { SocialIcon } from 'react-social-icons';
 import "./Register.css";
 import AOS from 'aos'
@@ -112,9 +111,6 @@ class UsersAuth extends Component {
             </div>
             )
         }
-       
-        if (this.props.loading)
-            form = <Spinner/>
 
         else if (this.props.modal === false) {
             form = (
@@ -141,10 +137,7 @@ class UsersAuth extends Component {
                                     required/>
                                 <p className='error'> {this.state.error.password}</p>
                             </label >
-                            
-                                <input type="submit" value="S'inscrire" className='buttonForm' disabled={this.state.disable}/>
-                        
-                        
+                             <input type="submit" value="S'inscrire" className='buttonForm' disabled={this.state.disable}/>
                     </form> 
                 </div>
                 <div className='social_button'>

@@ -182,7 +182,6 @@ export const  authLog = (email, password, history) => {
             password: password,
             returnSecureToken: true
         };
-     
        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDJQ2C-WHsJXu5xVCG5Z98XQ31gRJrSV_E', authData)
         .then(response => {
             localStorage.setItem('email',response.data.email);
