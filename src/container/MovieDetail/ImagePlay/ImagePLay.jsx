@@ -57,7 +57,7 @@ const ImagePlay = (props) => {
                     <FontAwesomeIcon style ={{position:'absolute',color:'gold',height:'100px',width:'100px',top:'38%', cursor:'pointer'}} icon={faPlayCircle} onClick={handleShow} />
                 </div> 
                 <Modal
-                    style={{backgroundColor:'black'}}
+                    style={{backgroundColor:'black',marginTop:'150px'}}
                     size="xl"
                     show={show}
                     onHide={handleClose}
@@ -83,7 +83,7 @@ const ImagePlay = (props) => {
                     <button onClick={addcart} className='buttonImagePLay'> <FontAwesomeIcon  icon={faShoppingCart}/> Ajouter au panier   </button>
                 </div> 
                 <Modal
-                    style={{backgroundColor:'black'}}
+                    style={{backgroundColor:'black',marginTop:'150px'}}
                     size="xl"
                     show={show}
                     onHide={handleClose}
@@ -109,7 +109,7 @@ const ImagePlay = (props) => {
                     <button onClick={addcart}  className='buttonImagePLay'> <FontAwesomeIcon  icon={faShoppingCart}/> Ajouter au panier   </button>
                 </div> 
                 <Modal
-                    style={{backgroundColor:'black'}}
+                    style={{backgroundColor:'black',marginTop:'150px'}}
                     size="xl"
                     show={show}
                     onHide={handleClose}

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Toolbar from './Toolbar/Toolbar'
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import Chat from '../Chat/Chat'
+//import Chat from '../Chat/Chat'
 import AOS from 'aos'
 
 class Layout extends Component {
@@ -29,7 +29,7 @@ class Layout extends Component {
                     {this.props.children}
                 </main>
                { show && this.props.showChat && <footer style={{bottom:'10px',zIndex:'100'}}>   
-                    <Chat/>
+                    {/* <Chat/> */}
                     </footer>} 
             </React.Fragment>
         )
